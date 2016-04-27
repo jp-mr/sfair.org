@@ -1,2 +1,1 @@
 # sfair.org
-sfair.org
