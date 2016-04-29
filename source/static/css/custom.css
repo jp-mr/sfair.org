@@ -11,19 +11,11 @@
     vertical-align: middle;
 }
 
-/* Tentativa de centralizar o conteúdo, só não funciona na resolução do netbook. 
+/* Tentativa de centralizar o conteúdo, só não funciona na resolução do netbook.
 
 body {
     padding-top: 80px;
     padding-bottom: 55px;
-}
-
-.padding-home {
-    padding-top: 150px;
-}
-
-.center-buttom {
-    text-align: center ;
 }
 
 .main-home {
@@ -33,7 +25,24 @@ body {
     right: 10%
 }
 
+.padding-home {
+    padding-top: 150px
+}
+
 */
+
+
+/* Ajusta a altura entre o primeiro botão e a barra superior em uma resolução pequena*/
+.padding-xs {
+    padding-bottom: 80px;
+}
+
+
+/* Alinha os textos com os botões */
+.center-buttom {
+    text-align: center ;
+}
+
 
 .home-btn:hover {
     color: #0C6FD5;
@@ -47,6 +56,7 @@ body {
     min-height: 40px;
     height: 40px;
 }
+
 
 /* Alinha verticalmente o elemento do rodapé em um resolução grande */
 
