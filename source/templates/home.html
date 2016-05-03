@@ -18,7 +18,7 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom-home.css' %}" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -30,125 +30,246 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-<body>
-    <!-- Centraliza o conteúdo -->
-    <div class="container container-table">
-        <div class="vertical-center-row">
-
-        <!-- 
-             Ajusta a distância entre o primeiro botão e a barra superior,
-             a div só fica visível em pequenas resoluções 
-        -->
-        <div class="visible-xs">
-            <div class="padding-xs"></div>
-        </div>
-
-
-            <!-- Barra superior -->
-            <div class="navbar navbar-default navbar-fixed-top">
-              <div class="container">
-                <div class="navbar-header">
-                  <a href="../" class="navbar-brand">Sfair.org</a>
-                  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                  </button>
-                </div>
-                <div class="navbar-collapse collapse" id="navbar-main">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" target="_blank">Contact</a></li>
-                  </ul>
-                </div>
-              </div>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Sfair.org</a>
             </div>
-            <!-- Fim da barra superior  -->
-        
-            <!-- Conteúdo -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                     <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                   <li>
+                        <a class="page-scroll" href="#research">Research</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#ensino">Ensino</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#cluster">Cluster</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#blog">Blog</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Section -->
+    <section id="intro" class="intro-section"></section>
+
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container container-table">
+        <div class="vertical-center-row">
             <div class="row">
-                <div class="col-md-1 col-sm-1"></div>
+                <h2 class="text-center">About Me</h2>
+            </div>
+            <div class="row">
                 <div class="col-md-2 col-sm-2">
                     <div class="center-buttom">
-                        <a class="home-btn" href="#">
-                            <span class="fa-stack fa-lg fa-3x">
-                                <i class="fa fa-search fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <h4>Pesquisa</h4>
-                        </a>
+                        <span class="fa-stack fa-lg fa-5x">
+                            <i class="fa fa-user fa-stack-1x"></i>
+                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                        </span>
                     </div>
                 </div>
+                <div class="col-md-8 col-sm-6">
+                    <p class="home-section-text">
+                        Rafael Sfair, um breve texto descrevendo quem é você, formação,
+                        áreas que atua, administra o cluster e coisas assim. A ideia é 
+                        que ao clicar no link abaixo, irá exibir os links do Lattes e 
+                        Resumé abaixo do próprio link, ou pode retirar o primeiro link 
+                        e já exibir os dois links como parte do conteúdo.<br/>
+                    <a href="#">Acesse o Lattes e meu Resumé.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- Research Section -->
+
+    <div class="container container-home-img-research"></div>
+
+    <section id="research" class="research-section">
+      <div class="container container-table">
+        <div class="vertical-center-row">
+            <div class="row">
+                <h2 class="text-center">Research</h2>
+            </div>
+            <div class="row">
                 <div class="col-md-2 col-sm-2">
                     <div class="center-buttom">
-                        <a class="home-btn" href="#">
-                            <span class="fa-stack fa-lg fa-3x">
+                        <span class="fa-stack fa-lg fa-5x">
+                            <i class="fa fa-search fa-stack-1x"></i>
+                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-6">
+                    <p class="home-section-text">
+                        Aqui pode ser um texto sobre as linhas de pesquisa. Que atua com o 
+                        grupo de astronômia, tem outras pesquisas e coisas do tipo.<br/>
+                        <a href="#">Consulte as publicações.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- Ensino Section -->
+
+    <div class="container container-home-img-ensino"></div>
+
+    <section id="ensino" class="ensino-section">
+    <div class="container container-table">
+        <div class="vertical-center-row">
+            <div class="row">
+                <h2 class="text-center">Ensino</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <div class="center-buttom">
+                            <span class="fa-stack fa-lg fa-5x">
                                 <i class="fa fa-graduation-cap fa-stack-1x"></i>
                                 <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
                             </span>
-                            <h4>Ensino</h4>
-                        </a>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="#">
-                            <span class="fa-stack fa-lg fa-3x">
-                                <i class="fa fa-server fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <h4>Cluster</h4>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="#">
-                            <span class="fa-stack fa-lg fa-3x">
-                                <i class="fa fa-user fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <h4>Currículo</h4>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="#">
-                            <span class="fa-stack fa-lg fa-3x">
-                                <i class="fa fa-bold fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <h4>Blog</h4>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-1 col-sm-1"></div>
-            </div>
-            <!-- Fim do Conteúdo -->
-        
-            <!-- Rodapé  -->
-            <div class="navbar navbar-default navbar-fixed-bottom">
-                <div class="container">
-                    <div class="row row-centered">
-                        <div class="col-centered">
-                            <ul class="nav navbar-nav navbar-bottom-content">
-                                <li><a href="#" target="_blank">Desenvolvido por JP &amp; MR.</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="col-md-8 col-sm-6">
+                <p class="home-section-text">
+                   Área para os alunos da graduação e da pós. Um texto dizendo que serão postadas 
+                   notas de aulas, datas importantes e coisas do tipo.
+                   <br/>
+                   <a href="#">Acesse a área do aluno.</a>
+                </p>
                 </div>
             </div>
-            <!-- Fim do rodapé  -->
         </div>
     </div>
+    </section>
+
+
+    <!-- Cluster Section -->
+
+    <div class="container container-home-img-cluster"></div>
+
+    <section id="cluster" class="cluster-section">
+      <div class="container container-table">
+        <div class="vertical-center-row">
+            <div class="row">
+                <h2 class="text-center">Cluster</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <div class="center-buttom">
+                        <span class="fa-stack fa-lg fa-5x">
+                            <i class="fa fa-server fa-stack-1x"></i>
+                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-6">
+                    <p class="home-section-text">
+
+                        O Cluster é usado para algumas finalidades que podem ser descritas aqui, 
+                        como executar programas, processar dados e fornecer informações para pesquisas, 
+                        pode ter dados técnicos também, como a quantidade de nós e coisas do tipo.<br/>
+                        <a href="#">Acesse os dados de processamento do cluster em tempo real.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- Contact Section -->
+
+    <section id="contact" class="contact-section">
+    <div class="container container-table">
+        <div class="vertical-center-row">
+            <div class="row">
+                <h2 class="text-center">Contact</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <form>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Name *">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email *">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Your Message *"></textarea>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <button type="submit" class="btn btn-default">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row row-centered">
+                <div class="col-centered">
+                    <a class="footer-link" href="#" target="_blank">Desenvolvido por JP &amp; MR.</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
 
     <!-- jQuery -->
     <script src="{% static 'js/jquery.js' %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'js/scrolling-nav.js' %}"></script>
 
 </body>
 
