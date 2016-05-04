@@ -2,13 +2,7 @@
 
  html, body, .container-table {
     height: 98%;
-    background: url(../img/img-home2.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
-
 .container-table {
     display: table;
 }
@@ -17,16 +11,30 @@
     vertical-align: middle;
 }
 
+/* Tentativa de centralizar o conteúdo, só não funciona na resolução do netbook.
+
+body {
+    padding-top: 80px;
+    padding-bottom: 55px;
+}
+
+.main-home {
+    position: absolute
+    top: 30%
+    left: 10%
+    right: 10%
+}
+
+.padding-home {
+    padding-top: 150px
+}
+
+*/
+
 
 /* Ajusta a altura entre o primeiro botão e a barra superior em uma resolução pequena*/
 .padding-xs {
     padding-bottom: 80px;
-}
-
-.text-btn {
-    font-size: 22pt;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 75, 62, 0.51);
 }
 
 
@@ -35,13 +43,9 @@
     text-align: center ;
 }
 
-.home-btn {
-    color: #fff;
-}
 
-
-.home-btn:hover, .home-btn:focus {
-    color: rgba(255, 255, 255, 0.75);
+.home-btn:hover {
+    color: #0C6FD5;
     text-decoration: none;
 }
 
@@ -99,7 +103,7 @@ body {
 }
 
 .footer-link {
- color: rgba(0,0,0,0.5); 
+ color: rgba(0,0,0,0.3); 
 }
 
 .footer-link:hover, .footer-link:focus {
