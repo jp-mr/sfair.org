@@ -1,10 +1,28 @@
 from django.shortcuts import render
 
+
 def home(request):
-    return render(request, "home.html", {})
+    """
+        [1] A função home renderiza a página principal
 
-def home2(request):
-    return render(request, "home2.html", {})
+        'render' vai devolver uma resposta para o 'request'(requisição
+        do navegador) renderizando o template 'home.html'
 
-def home3(request):
-    return render(request, "home3.html", {})
+        'context' serve para passar valores de variáveis para exibir
+        no template
+
+        Vá para: template/home.html
+
+    """
+
+    context = {
+
+        # envia o nome de uma classe CSS para exibir a img de fundo da home
+        'img_background': "img-background",
+    }
+
+    return render(request, "home.html", context)
+
+
+def contact(request):
+    return render(request, "forms.html", {})

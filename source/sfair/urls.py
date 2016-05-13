@@ -21,6 +21,10 @@ from django.contrib import admin
     
 urlpatterns = [            
     url(r'^admin/', admin.site.urls),  
+
+    # [1] Quando o navegador pedir o endereço www.sfar.org
+    # o django virá buscar o endereço aqui e essa linha vai redirecionar
+    # para core/urls.py
     url(r'^', include('core.urls', namespace='core')),
 ] 
 

@@ -1,355 +1,90 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- 
+    'extends' vai pegar o código do template 'base.html' e sobrescrever qualquer código
+    fora da tag 'block'. O conteúdo dessa tag será 'encaixada' dentro da tag 'block'
+    no código vindo do tameplate 'base.html'
+    Vá até 'base.html'.
+ -->
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block content %}
 
-    <title>Sfair.org</title>
-
-    <link rel="icon" href="{% static 'img/favicon.ico' %}"/>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
-
-    <!-- Custom CSS -->
-    <link href="{% static 'css/custom-home.css' %}" rel="stylesheet"/>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div id="tablet-fluid" class="container if-nav">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Sfair.org</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse navbar-right">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden">
-                        <a class="page-scroll" href="#page-top"></a>
-                    </li>
-                     <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                   <li>
-                        <a class="page-scroll" href="#research">Research</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#ensino">Ensino</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#cluster">Cluster</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#blog">Blog</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Intro Section -->
-    <section id="intro" class="intro-section"></section>
-
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-      <div id="tablet-fluid" class="container container-table">
+    <!-- Centraliza o conteúdo -->
+    <div class="container container-table">
         <div class="vertical-center-row">
-            <div class="row">
-                <h2 class="text-center">About Me</h2>
+
+            <!-- 
+                 Ajusta a distância entre o primeiro botão e a barra superior,
+                 a div só fica visível em pequenas resoluções 
+            -->
+            <div class="visible-xs">
+                <div class="padding-xs"></div>
             </div>
+     
+            <!-- Conteúdo -->
             <div class="row">
-                <div class="col-md-2 col-sm-3 padding-tablet">
+                <div class="col-md-1 col-sm-1"></div>
+                <div class="col-md-2 col-sm-2">
                     <div class="center-buttom">
-                        <span class="fa-stack fa-lg fa-5x">
-                            <i class="fa fa-user fa-stack-1x"></i>
-                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                        </span>
+                        <a class="home-btn" href="#">
+                            <span class="fa-stack fa-lg fa-5x">
+                                <i class="fa fa-search fa-stack-1x"></i>
+                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                            </span>
+                            <p class="text-btn">Research</p>
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-8 padding-tablet">
-                    <p class="home-section-text">
-                        Rafael Sfair, um breve texto descrevendo quem é você, formação,
-                        áreas que atua, administra o cluster e coisas assim. <br/>
-                        Ao clicar no link abaixo, é exibido os links do Lattes e 
-                        Resumé abaixo do próprio link. Pode ser retirado o primeiro link 
-                        e já exibir os dois links como parte do conteúdo.
-                        <br/>
-                        <a id="link-lattes-resume" href="#">Acesse o Lattes e meu Resumé.</a>
-                    </p>
-                    <p id="lattes-resume" class="home-section-text">
-                        <a href="#lattes">Lattes</a>
-                        <br/>
-                        <a href="#resume">Resumé</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-
-
-    <!-- Research Section -->
-
-    <div class="container container-home-img-research"></div>
-
-    <section id="research" class="research-section">
-      <div id="tablet-fluid" class="container container-table">
-        <div class="vertical-center-row">
-            <div class="row">
-                <h2 class="text-center">Research</h2>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-sm-3 padding-tablet">
+                <div class="col-md-2 col-sm-2">
                     <div class="center-buttom">
-                        <span class="fa-stack fa-lg fa-5x">
-                            <i class="fa fa-search fa-stack-1x"></i>
-                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-8 padding-tablet">
-                    <p class="home-section-text">
-                        Aqui pode ser um texto sobre as linhas de pesquisa. Que atua com o 
-                        grupo de astronômia, tem outras pesquisas e coisas do tipo.<br/>
-                        <a href="#publicações">Consulte as publicações.</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-
-
-    <!-- Ensino Section -->
-
-    <div class="container container-home-img-ensino"></div>
-
-    <section id="ensino" class="ensino-section">
-    <div id="tablet-fluid" class="container container-table">
-        <div class="vertical-center-row">
-            <div class="row">
-                <h2 class="text-center">Ensino</h2>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-sm-3 padding-tablet">
-                    <div class="center-buttom">
+                        <a class="home-btn" href="#">
                             <span class="fa-stack fa-lg fa-5x">
                                 <i class="fa fa-graduation-cap fa-stack-1x"></i>
                                 <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
                             </span>
+                            <p class="text-btn">Teaching</p>
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-8 padding-tablet">
-                <p class="home-section-text">
-                   Área para os alunos da graduação e da pós. Um texto dizendo que serão postadas 
-                   notas de aulas, datas importantes e coisas do tipo.
-                   <br/>
-                   <a href="#ensino">Acesse a área do aluno.</a>
-                </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-
-
-    <!-- Cluster Section -->
-
-    <div class="container container-home-img-cluster"></div>
-
-    <section id="cluster" class="cluster-section">
-      <div id="tablet-fluid" class="container container-table">
-        <div class="vertical-center-row">
-            <div class="row">
-                <h2 class="text-center">Cluster</h2>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-sm-3 padding-tablet">
+                <div class="col-md-2 col-sm-2">
                     <div class="center-buttom">
-                        <span class="fa-stack fa-lg fa-5x">
-                            <i class="fa fa-server fa-stack-1x"></i>
-                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                        </span>
+                        <a class="home-btn" href="#">
+                            <span class="fa-stack fa-lg fa-5x">
+                                <i class="fa fa-server fa-stack-1x"></i>
+                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                            </span>
+                            <p class="text-btn">Cluster</p>
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-8 padding-tablet">
-                    <p class="home-section-text">
-
-                        O Cluster é usado para algumas finalidades que podem ser descritas aqui, 
-                        como executar programas, processar dados e fornecer informações para pesquisas, 
-                        pode ter dados técnicos também, como a quantidade de nós e coisas do tipo.<br/>
-                        <a href="#cluster">Acesse os dados de processamento do cluster em tempo real.</a>
-                    </p>
+                <div class="col-md-2 col-sm-2">
+                    <div class="center-buttom">
+                        <a class="home-btn" href="#">
+                            <span class="fa-stack fa-lg fa-5x">
+                                <i class="fa fa-user fa-stack-1x"></i>
+                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                            </span>
+                            <p class="text-btn">Formation & CV</p>
+                        </a>
+                    </div>
                 </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="center-buttom">
+                        <a class="home-btn" href="#" target="_blank">
+                            <span class="fa-stack fa-lg fa-5x">
+                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fa fa-bold fa-stack-1x"></i>
+                            </span>
+                            <p class="text-btn">Blog</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-1 col-sm-1"></div>
             </div>
-        </div>
+            <!-- Fim do Conteúdo -->
+       </div>
     </div>
-    </section>
+    <!-- Fim do 'Centraliza o conteúdo' -->
 
-
-    <!-- Contact Section -->
-
-    <section id="contact" class="contact-section">
-    <div class="container container-table">
-        <div class="vertical-center-row">
-            <div class="row">
-                <h2 class="text-center">Contact</h2>
-            </div>
-            <div class="row">
-                <div class="col-xs-1 col-md-3"></div>
-                <div class="col-xs-10 col-md-6">
-                    <form>
-                        <div class="row">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name *">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email *">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Your Message *"></textarea>
-                            </div>
-                            <div class="col-lg-12 text-center">
-                                <button type="submit" class="btn btn-default">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-xs-1 col-md-3"></div>
-        </div>
-    </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="row row-centered">
-                <div class="col-centered">
-                    <a class="footer-link" href="#dev" target="_self">Desenvolvido por JP &amp; MR.</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery.js' %}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    <!-- Scrolling Nav JavaScript -->
-    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'js/scrolling-nav.js' %}"></script>
-
-
-    <script>
-
-        /*
-            Se a resolução estiver entre 980px e 768px, a JQuery aplica no documento atual uma função,
-            quando ele estiver carregado:
-
-                $(document).ready(function(){   }
-
-            Onde, para cada elemento que tenha 'id=tablet-fluid'
-            
-                $("#tablet-fluid").each(function(){    }
-
-            troca a classe alvo ('container') desse elemento que possui 'id=tablet-fluid' (this) 
-            pela nova classe ('container-fluid'):
-
-                $(this).toggleClass("container container-fluid");
-
-            e verifica se 'esse' elemento com 'id=tablet-fluid' possui a classe 'if-nav' e também
-            executa uma troca
-
-            Obs: a classe 'if-nav' é apenas para controle
-
-        */
-
-        if(screen.width < 981 && screen.width > 767) {
-            $(document).ready(function(){
-                $("#tablet-fluid").each(function() {
-                    $(this).toggleClass("container container-fluid");
-                    if($(this).hasClass("if-nav")) {
-                        $(this).toggleClass("if-nav nav-tablet-padding");
-                    }
-                })
-            })
-        }
-
-        //  o evento do clique do mouse exibe ou esconde as respostas
-        // aos comentários 
-        $("#link-lattes-resume").click(function(event){
-            event.preventDefault();
-            $(this).parent().next("#lattes-resume").fadeToggle();
-        })
-
-
-
-    /*
-    Obs.:
-    Neste exemplo, como o script que muda a classe do elemento é executado automaticamente ou seja não
-    está atrelado a nenhum evento e apenas segue a "ordem de interpretação da página" de cima para baixo,
-    é fundamental para seu bom funcionamento que ele esteja aqui em baixo na página, após o elemento alvo
-    da mudança.
-
-    You can set the class (regardless of what it was) by using .attr(), like this:
-
-        $("#td_id").attr('class', 'newClass');
-
-    If you want to add a class, use .addclass() instead, like this:
-
-        $("#td_id").addClass('newClass');
-
-    Or a short way to swap classes using .toggleClass():
-
-        $("#td_id").toggleClass('change_me newClass');
-
-    Remove a single class, multiple classes, or all classes:
-
-        $("#td_id").removeClass('class1', 'class2', 'classN+1');
-
-    */
-    </script>
-
-
-</body>
-
-</html>
+{% endblock content %}
