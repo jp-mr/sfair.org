@@ -2,6 +2,8 @@ from django.conf.urls import url
 
 from .views import ( home, contact, )
 
+# [home] Aqui ficam os endereços da app 'core'
+# Primeiro o django busca na 'urls.py'
 
 urlpatterns = [
 

@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 def home(request):
     """
-        [1] A função home renderiza a página principal
+        [home] A função home renderiza a página principal
 
         'render' vai devolver uma resposta para o 'request'(requisição
         do navegador) renderizando o template 'home.html'
@@ -17,7 +17,8 @@ def home(request):
 
     context = {
 
-        # envia o nome de uma classe CSS para exibir a img de fundo da home
+        # [home ]envia o nome de uma classe CSS para exibir a img 
+        # de fundo da home
         'img_background': "img-background",
     }
 

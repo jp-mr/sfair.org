@@ -17,14 +17,16 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-  
+
+    # [home] Quando o navegador pedir um endereço, o django virá 
+    # buscá-lo aqui.
+ 
     
 urlpatterns = [            
     url(r'^admin/', admin.site.urls),  
 
-    # [1] Quando o navegador pedir o endereço www.sfar.org
-    # o django virá buscar o endereço aqui e essa linha vai redirecionar
-    # para core/urls.py
+    # [home] Se o endereço for 'www.sfair.org', essa linha vai redirecionar
+    # para '/core/views.py'. Abra esse arquivo.
     url(r'^', include('core.urls', namespace='core')),
 ] 
 
