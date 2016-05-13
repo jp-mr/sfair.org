@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),  
 
     # [home] Essa linha vai redirecionar
-    # para '/core/views.py'. Abra esse arquivo.
+    # para '/core/urls.py'. Abra esse arquivo.
     url(r'^', include('core.urls', namespace='core')),
 ] 
 
