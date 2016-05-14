@@ -2,6 +2,38 @@
 
 {% block content  %}
 
+<!-- #TODO: Parte desse código é apenas para teste dos elemento exibidos no navegador -->
 
+    <div class="container container-table">
+        <div class="vertical-center-row">
+            <div class="row">
+                <h2 class="text-center">Contact</h2>
+            </div>
+            <div class="row">
+                <div class="col-xs-1 col-md-3"></div>
+                <div class="col-xs-10 col-md-6">
+                    <form>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Name *">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email *">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Your Message *"></textarea>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <button type="submit" class="btn btn-default">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-1 col-md-3"></div>
+        </div>
+    </div>
 
 {% endblock content %}
