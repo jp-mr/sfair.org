@@ -1,1 +1,11 @@
-[home] - Acesso e renderização da página inicial
+[contact] - Começa em core/urls.py    
+
+    Acesso e renderização da página de contato
+
+--------------------------------------------------
+
+[home] - Começa em sfair/urls.py    
+
+    Acesso e renderização da página inicial
+
+--------------------------------------------------
