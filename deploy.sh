@@ -53,7 +53,7 @@ sudo -u postgres psql template1
 echo "ALTER USER postgres with encrypted password '$your_password';"
 echo"\q"
 
-# sed substituipeed por md5
+# sed substitui peed por md5
 echo "$(sed 's/peed/md5/' /etc/postgresql/9.1/main/pg_hba.conf)" > /etc/postgresql/9.1/main/pg_hba.conf
 
 sudo service postgresql restart
