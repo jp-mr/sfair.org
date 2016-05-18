@@ -20,6 +20,7 @@
 
 versao = 9.1                  # versão do postgrespl
 your_password = new_passaword # colocar nova senha do postgres
+local_pg_hba.conf = /etc/postgresql/$versao/main/pg_hba.conf
 
 #-------------------------------------[ instalação ]-----------------------------------------
 #   
@@ -35,10 +36,10 @@ your_password = new_passaword # colocar nova senha do postgres
 #   - postgresql
 #
 
-for pacotes in $(cat pacotes.txt) 
+for pacotes in "$(cat pacotes.txt)" 
     do 
 
-        sudo apt-get install $pacotes 
+        sudo apt-get install "$pacotes" 
         echo "y"    # para confirmar as instalações
 
     done
@@ -46,15 +47,15 @@ for pacotes in $(cat pacotes.txt)
 #------------------------------[ pode ser feito manualmente ]-----------------------------------
 # site para configuração manual: https://help.ubuntu.com/14.04/serverguide/postgresql.html
 
-echo "listen_addresses = 'localhost'" >> ~/etc/postgresql/$versao/main/postgresql.conf
+echo "listen_addresses = 'localhost'" >> ~/etc/postgresql/"$versao"/main/postgresql.conf
 
 # alterar senha do usuario postgres
 sudo -u postgres psql template1
-echo "ALTER USER postgres with encrypted password '$your_password';"
+echo "ALTER USER postgres with encrypted password "$your_password";"
 echo"\q"
 
 # sed substitui peed por md5
-echo "$(sed 's/peed/md5/' /etc/postgresql/9.1/main/pg_hba.conf)" > /etc/postgresql/9.1/main/pg_hba.conf
+echo "$(sed 's/peed/md5/' "$local_pg_hba.conf")" > "$local_pg_hba.conf"
 
 sudo service postgresql restart
 
