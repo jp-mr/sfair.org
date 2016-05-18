@@ -35,7 +35,7 @@ your_password = new_passaword # colocar nova senha do postgres
 #   - postgrespl
 #
 
-for pacotes in 'cat pacotes.txt' 
+for pacotes in $(cat pacotes.txt) 
     do 
 
         sudo apt-get install $pacotes 
