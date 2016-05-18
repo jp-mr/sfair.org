@@ -32,7 +32,7 @@ your_password = new_passaword # colocar nova senha do postgres
 #   - python-psycopg2 (integração do python com o postgresql)
 #   - python-virtualenv (ambientes virtuais no python)
 #   - git-core (clonar o projeto)
-#   - postgrespl
+#   - postgresql
 #
 
 for pacotes in $(cat pacotes.txt) 

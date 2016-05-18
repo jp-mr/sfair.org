@@ -4,4 +4,4 @@ python-dev
 python-psycopg2 
 python-virtualenv 
 git-cor
-postgrespl
+postgresql
