@@ -53,9 +53,8 @@ sudo -u postgres psql template1
 echo "ALTER USER postgres with encrypted password '$your_password';"
 echo"\q"
 
-# XXX Testar isso antes de qualquer coisa !!!
-# egrep procurar exatamente a palabra peer e o sed substitui por md5
-egrep "^.*\bpeer\b.*$" /etc/postgresql/9.1/main/pg_hba.conf | seb 's/peer/md5/g'
+# sed substituipeed por md5
+echo "$(sed 's/peed/md5/' /etc/postgresql/9.1/main/pg_hba.conf)" > /etc/postgresql/9.1/main/pg_hba.conf
 
 sudo service postgresql restart
 
