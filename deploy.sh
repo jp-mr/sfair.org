@@ -62,7 +62,7 @@ echo "$(sed 's/peed/md5/' "$LOCAL_PG_HBA.CONF")" > "$LOCAL_PG_HBA.CONF"
 # sudo service postgresql restart   # esta no site do ubunto
 sudo /etc/init.d/postgresql restart # no video
 
-#----------------------------------[ criação do database ]---------------------------------------
+#----------------------------------[ cria o database ]---------------------------------------
 
 createdb -U postgres shortener # para a aplicação
 echo "$YOUR_PASSAWORD"
@@ -76,7 +76,7 @@ sudo "$NGINX" restart
 
 #----------------------------------------[ aplicação ]-------------------------------------------
 
-# criação do diretorio /deploy na raiz
+# cria o diretorio /deploy na raiz
 sudo mkdir /deploy/
 
 # permição root porque o diretorio /deploy esta na raiz
@@ -85,13 +85,13 @@ sudo chown vagrant:root /deploy/ -R
 mkdir /deploy/sites # para colocar a aplicação
 mkdir /deploy/venvs # para colocar o virtualenvs
 
-#-------------------------------------[ criação ambiente virtual ]-----------------------------
+#-------------------------------------[ cria ambiente virtual ]-----------------------------
 
 virtualenv --system-site-packages shortener /deploy/venvs
 virtualenv --system-site-packages sentry /deploy/venvs
 
-source /deploy/venvs/shortener/bin/activate # ativação do ambiente virtual
+source /deploy/venvs/shortener/bin/activate # ativa o ambiente virtual
 
 #------------------------------------------[ projeto ]-----------------------------------------
 
-git clone "$NEW_PROJECT" /deploy/sites/ # clonar projeto do github
+git clone "$NEW_PROJECT" /deploy/sites/ # clona projeto do github
