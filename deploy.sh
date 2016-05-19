@@ -18,11 +18,11 @@
 #   - SENTRY para gerenciar possíveis erros em produção
 #   
 
-versao = 9.1                  # versão do postgrespl
-your_password = new_passaword # colocar nova senha do postgres
-local_pg_hba.conf = /etc/postgresql/$versao/main/pg_hba.conf
-nginx = /etc/init.d/nginx
-new_project = https://github.com/
+VERSAO = ~/etc/postgresql/9.1/main/postgresql.conf # versão do postgrespl
+YOUR_PASSWORD = new_passaword                      # colocar nova senha do postgres
+LOCAL_PG_HBA.CONF = /etc/postgresql/$VERSAO/main/pg_hba.conf
+NGINX = /etc/init.d/nginx
+NEW_PROJECT = https://github.com/
 
 #-------------------------------------[ instalação ]-----------------------------------------
 #   
@@ -38,10 +38,10 @@ new_project = https://github.com/
 #   - postgresql
 #
 
-for pacotes in "$(cat pacotes.txt)" 
+for PACOTES in "$(cat pacotes.txt)" 
     do 
 
-        sudo apt-get install "$pacotes" 
+        sudo apt-get install "$PACOTES" 
         echo "y"    # para confirmar as instalações
 
     done
@@ -49,15 +49,15 @@ for pacotes in "$(cat pacotes.txt)"
 #------------------------------[ pode ser feito manualmente ]-----------------------------------
 # site para configuração manual: https://help.ubuntu.com/14.04/serverguide/postgresql.html
 
-echo "listen_addresses = 'localhost'" >> ~/etc/postgresql/"$versao"/main/postgresql.conf
+echo "listen_addresses = 'localhost'" >> "$VERSAO"
 
 # alterar senha do usuario postgres
 sudo -u postgres psql template1
-echo "ALTER USER postgres with encrypted password "$your_password";"
+echo "ALTER USER postgres with encrypted password "$YOUR_PASSWORD";"
 echo"\q"
 
 # sed substitui peed por md5
-echo "$(sed 's/peed/md5/' "$local_pg_hba.conf")" > "$local_pg_hba.conf"
+echo "$(sed 's/peed/md5/' "$LOCAL_PG_HBA.CONF")" > "$LOCAL_PG_HBA.CONF"
 
 # sudo service postgresql restart   # esta no site do ubunto
 sudo /etc/init.d/postgresql restart # no video
@@ -65,14 +65,14 @@ sudo /etc/init.d/postgresql restart # no video
 #----------------------------------[ criação do database ]---------------------------------------
 
 createdb -U postgres shortener # para a aplicação
-echo"$your_passaword"
+echo"$YOUR_PASSAWORD"
 
 createdb -U postgres sentry # para o sentry
-echo"$your_passaword"
+echo"$YOUR_PASSAWORD"
 
 #-------------------------------------------[ nginx ]--------------------------------------------
 
-sudo "$nginx" restart
+sudo "$NGINX" restart
 
 #----------------------------------------[ aplicação ]-------------------------------------------
 
@@ -95,7 +95,7 @@ source ~/deploy/venvs/shortener/bin/activate # ativação do ambiente virtual
 
 #------------------------------------------[ projeto ]-----------------------------------------
 
-git clone "$new_project" /deploy/sites/ # clonar projeto do github
+git clone "$NEW_PROJECT" /deploy/sites/ # clonar projeto do github
 
 
 
