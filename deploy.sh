@@ -54,7 +54,7 @@ echo "listen_addresses = 'localhost'" >> "$VERSAO"
 # alterar senha do usuario postgres
 sudo -u postgres psql template1
 echo "ALTER USER postgres with encrypted password "$YOUR_PASSWORD";"
-echo"\q"
+echo "\q"
 
 # sed substitui peed por md5
 echo "$(sed 's/peed/md5/' "$LOCAL_PG_HBA.CONF")" > "$LOCAL_PG_HBA.CONF"
@@ -65,10 +65,10 @@ sudo /etc/init.d/postgresql restart # no video
 #----------------------------------[ criação do database ]---------------------------------------
 
 createdb -U postgres shortener # para a aplicação
-echo"$YOUR_PASSAWORD"
+echo "$YOUR_PASSAWORD"
 
 createdb -U postgres sentry # para o sentry
-echo"$YOUR_PASSAWORD"
+echo "$YOUR_PASSAWORD"
 
 #-------------------------------------------[ nginx ]--------------------------------------------
 
