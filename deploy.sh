@@ -5,11 +5,8 @@
 # automatização do deploy de aplicações django/python
 #
 # 201618051500: João Paulo, Maio de 2016
-#   
-#   
 #                                                      
 #-----------------[ Não use servidores compartilhados (shared hosting) ]-----------------------
-#   
 #   
 #   - NGNIX para servir conteúdo estático e rediredionar as requisições para o GUNICORN
 #   - GUNICORN como servidor de aplicação
