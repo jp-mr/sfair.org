@@ -18,9 +18,9 @@
 #   - SENTRY para gerenciar possíveis erros em produção
 #   
 
-VERSAO = ~/etc/postgresql/9.1/main/postgresql.conf # versão do postgrespl
+VERSAO = /etc/postgresql/9.1/main/postgresql.conf # versão do postgrespl
 YOUR_PASSWORD = new_passaword                      # colocar nova senha do postgres
-LOCAL_PG_HBA.CONF = /etc/postgresql/$VERSAO/main/pg_hba.conf
+LOCAL_PG_HBA.CONF = /etc/postgresql/9.1/main/pg_hba.conf
 NGINX = /etc/init.d/nginx
 NEW_PROJECT = https://github.com/
 
@@ -79,8 +79,7 @@ sudo "$NGINX" restart
 # criação do diretorio /deploy na raiz
 sudo mkdir /deploy/
 
-# permição root dentro do diretorio /deploy
-# XXX acho perigoso isso!!! 
+# permição root porque o diretorio /deploy esta na raiz
 sudo chown vagrant:root /deploy/ -R
 
 mkdir /deploy/sites # para colocar a aplicação
@@ -91,7 +90,7 @@ mkdir /deploy/venvs # para colocar o virtualenvs
 virtualenv --system-site-packages shortener /deploy/venvs
 virtualenv --system-site-packages sentry /deploy/venvs
 
-source ~/deploy/venvs/shortener/bin/activate # ativação do ambiente virtual
+source /deploy/venvs/shortener/bin/activate # ativação do ambiente virtual
 
 #------------------------------------------[ projeto ]-----------------------------------------
 
