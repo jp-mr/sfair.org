@@ -96,17 +96,3 @@ source ~/deploy/venvs/shortener/bin/activate # ativação do ambiente virtual
 #------------------------------------------[ projeto ]-----------------------------------------
 
 git clone "$NEW_PROJECT" /deploy/sites/ # clonar projeto do github
-
-
-
-
-
-
-
-
-
-
-
-
-
-
