@@ -21,6 +21,8 @@
 versao = 9.1                  # versão do postgrespl
 your_password = new_passaword # colocar nova senha do postgres
 local_pg_hba.conf = /etc/postgresql/$versao/main/pg_hba.conf
+nginx = /etc/init.d/nginx
+new_project = https://github.com/
 
 #-------------------------------------[ instalação ]-----------------------------------------
 #   
@@ -57,7 +59,51 @@ echo"\q"
 # sed substitui peed por md5
 echo "$(sed 's/peed/md5/' "$local_pg_hba.conf")" > "$local_pg_hba.conf"
 
-sudo service postgresql restart
+# sudo service postgresql restart   # esta no site do ubunto
+sudo /etc/init.d/postgresql restart # no video
+
+#----------------------------------[ criação do database ]---------------------------------------
+
+createdb -U postgres shortener # para a aplicação
+echo"$your_passaword"
+
+createdb -U postgres sentry # para o sentry
+echo"$your_passaword"
+
+#-------------------------------------------[ nginx ]--------------------------------------------
+
+sudo "$nginx" restart
+
+#----------------------------------------[ aplicação ]-------------------------------------------
+
+# criação do diretorio /deploy na raiz
+sudo mkdir /deploy/
+
+# permição root dentro do diretorio /deploy
+# XXX acho perigoso isso!!! 
+sudo chown vagrant:root /deploy/ -R
+
+mkdir /deploy/sites # para colocar a aplicação
+mkdir /deploy/venvs # para colocar o virtualenvs
+
+#-------------------------------------[ criação ambiente virtual ]-----------------------------
+
+virtualenv --system-site-packages shortener /deploy/venvs
+virtualenv --system-site-packages sentry /deploy/venvs
+
+source ~/deploy/venvs/shortener/bin/activate # ativação do ambiente virtual
+
+#------------------------------------------[ projeto ]-----------------------------------------
+
+git clone "$new_project" /deploy/sites/ # clonar projeto do github
+
+
+
+
+
+
+
+
 
 
 
