@@ -94,17 +94,18 @@ source /deploy/venvs/shortener/bin/activate # ativa o ambiente virtual
 #XXX clonar direto na forma /deploy/sites/sfair.org 
 git clone "$NEW_PROJECT" /deploy/sites/ # clona projeto do github
 
-#XXX clonado direto na forma do aviso anterior esse comanda:
+#XXX comando não é necessario:
 mv shortener /deploy/sites  # copiando diretorio shortener para o diretorio sites
-# não é necessario e nem:
+
+#XXX e nem:
 #       ~$ rm -rf django-shortener-example 
 # que foi feito no video.
 
-#XXX shortener no nosso caso é o sfair.org
+#XXX shortener = sfair.org
 pip3 install -r requirements.txt /deploy/sites/shortener
 
-# comando que vai em uma arquivo.sh para testar as duas aplicações, o accounts e o shorturl
-# ./runtests (no do arquivo.sh)
+# comando que vai em um arquivo.sh para testar as duas aplicações, o accounts e o shorturl
+# ./runtests (nome do arquivo.sh)
 ./manage.py test accounts shorturl /deploy/sites/shortener
 
 # roda o server de desenvolvimento na porta 8000
