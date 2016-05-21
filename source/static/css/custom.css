@@ -27,6 +27,7 @@ html, body, .container-table {
     padding-bottom: 80px;
 }
 
+
 .text-btn {
     font-size: 13pt;
     font-weight: bold;
@@ -37,6 +38,7 @@ html, body, .container-table {
 .center-buttom {
     text-align: center ;
 }
+
 
 .home-btn {
     color: #fff;
@@ -50,30 +52,7 @@ html, body, .container-table {
 }
 
 
-/* Ajusta o tamanho da barra do rodapé  */
-
-.navbar-fixed-bottom {
-    min-height: 40px;
-    height: 40px;
-}
-
-
-/* Alinha verticalmente o elemento do rodapé em um resolução grande */
-
-.navbar-bottom-content>li>a {
-    padding-top: 8px;    
-}
-
-
-/* Mantém o elemento do rodapé verticalmente alinhado em resoluções pequenas */
-
-.navbar-nav {
-    float: left;
-    margin: 0px;
-}
-
-
-/* Centraliza o elemento no rodapé */
+/* Centraliza o elemento*/
 
 .row-centered {
     text-align:center;
@@ -109,4 +88,16 @@ body {
 .footer-link:hover, .footer-link:focus {
   color: #fff;
   text-decoration:none
+}
+
+/* Contact
+--------------------------------------------------*/
+
+/* Esconde a exibição do nomes dos campos do formuário renderizados pelo django*/
+.control-label, .requiredField {
+    display: none !important;
+}
+
+textarea.form-control {
+    height: 130px;
 }

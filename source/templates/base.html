@@ -20,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sfair.org</title>
+    <title>Sfair.org {% if title %}| {{ title }}{% endif %}</title>
     <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
     <!-- Bootstrap Core CSS -->
@@ -66,9 +66,25 @@
 
     <!-- [home] Todo bloco 'content' de outro template será encaixado aqui  -->
 
+
     {% block content %}
 
     {% endblock content %}
+
+
+    {% if message_sent %}
+            <!-- Small modal -->
+            <div class="modal fade bs-example-modal-sm" id="modalEmailSent" tabindex="-1" role="dialog" aria-labelledby="modalEmailSent">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <p class="modal-title" id="myModalLabel">Your message was sent successfully.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endif %}
 
 
     <!-- Rodapé -->
@@ -88,6 +104,14 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% if message_sent %}
+        <script>
+            $(document).ready(function(){
+                $('#modalEmailSent').modal('show');
+            })
+        </script>
+    {% endif %}
 
 
     <!--- #XXX: Era pra retirar a classe 'img-background' de todas as tags

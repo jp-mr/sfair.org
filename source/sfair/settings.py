@@ -28,6 +28,24 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Definições para email    
+#EMAIL_HOST = 'smtp.domain.com'
+#EMAIL_HOST_USER = 'email@domain.com' 
+#EMAIL_HOST_PASSWORD = 'password'
+#EMAIL_PORT = 587           
+#EMAIL_USE_TSL = True 
+
+
+# Para testar localmente o envio de email descomente as linhas abaixo e 
+# rode em outra instancia do terminal o comando: 
+# $python -m smtpd -n -c DebuggingServer localhost:1025
+
+#EMAIL_HOST = 'localhost'
+#EMAIL_PORT = 1025
+#EMAIL_HOST_USER = 'contact@sfair.org'
+#EMAIL_HOST_PASSWORD = None
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +55,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third party
+    'crispy_forms',
+
+    # local project
+    'core',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
