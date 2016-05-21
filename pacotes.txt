@@ -1,0 +1,8 @@
+vim 
+build-essential 
+python-dev 
+python-psycopg2 
+python-virtualenv 
+git-cor
+postgresql
+nginx
