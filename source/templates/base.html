@@ -8,7 +8,8 @@
     'img_background' está sendo passado por meio do contexto 
     da 'views.home'(a função 'home' na 'views.py')
     Essa classe exibe a imagem de fundo
-    (Ver 'static.css')
+    O mesmo se aplica a tag <body>
+    Vá para: 'static/css/custom.css')
 -->
 <html id="img-home" {% if img_background %} class="{{ img_background }}" {% endif %} lang="en">
 
@@ -65,26 +66,32 @@
 
 
     <!-- [home] Todo bloco 'content' de outro template será encaixado aqui  -->
-
-
     {% block content %}
 
     {% endblock content %}
 
 
+    <!-- [contact] Small Modal
+
+         Exibe um aviso para o usuário quando um email é enviado através da página de contatos. 
+         O usuário é redirecionado para a página inicial e 'message_sent' é passado através
+         do contexto para acionar a exibição da mensagem.
+         Vá para: seção de script no final do arquivo.
+
+     -->
     {% if message_sent %}
-            <!-- Small modal -->
             <div class="modal fade bs-example-modal-sm" id="modalEmailSent" tabindex="-1" role="dialog" aria-labelledby="modalEmailSent">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <p class="modal-title" id="myModalLabel">Your message was sent successfully.</p>
+                            <p class="modal-title" id="modalMessage">Your message was sent successfully.</p>
                         </div>
                     </div>
                 </div>
             </div>
     {% endif %}
+    <!-- Fim Small Modal -->
 
 
     <!-- Rodapé -->
@@ -99,12 +106,24 @@
     </footer>
     <!-- Fim do Rodapé  -->
 
+
+    <!-- ############### [ Script  ] ###############  -->
+
     <!-- jQuery -->
     <script src="{% static 'js/jquery.js' %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
+
+    <!-- [contact] JQuery que ativa o Small Modal
+
+        Se 'message_sent' for passado pelo contexto, o código do Small Modal será
+        embutido no documento DOM, junto com essa JQuery.
+        Quando a página estiver carregada [ $(document).ready(function(){}) ] o Modal
+        com o id 'modalEmailSent' será exibido [ .modal('show') ]
+
+    -->
     {% if message_sent %}
         <script>
             $(document).ready(function(){

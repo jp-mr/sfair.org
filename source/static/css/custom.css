@@ -5,6 +5,7 @@ html, body, .container-table {
     height: 97%;
 }
 
+/* [home] - Imagem de fundo da página inicial */
 .img-background {
     background: url(../img/home.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;

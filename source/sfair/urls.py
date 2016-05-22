@@ -18,13 +18,13 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-# [home] Quando o navegador pedir um endereço, o django virá 
+# [home] Quando o navegador pedir o endereço do domínio, o django virá 
 # buscá-lo aqui.
     
 urlpatterns = [            
     url(r'^admin/', admin.site.urls),  
 
-    # [home] Essa linha vai redirecionar
+    # [home, contact] Essa linha vai redirecionar
     # para '/core/urls.py'. Abra esse arquivo.
     url(r'^', include('core.urls', namespace='core')),
 ] 

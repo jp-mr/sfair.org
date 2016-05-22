@@ -2,13 +2,14 @@ from django.conf.urls import url
 
 from .views import ( home, contact, )
 
-# [home] Aqui ficam os endereços da app 'core'
-# Primeiro o django busca na 'urls.py'
+# Aqui ficam os endereços da app 'core'
+# primeiro o django busca em '/sfair/urls.py'
 
 urlpatterns = [
 
-    # [1] Essa linha procura a função 'home' na 'views.py'
+    # [home] Essa linha procura a função 'home' na 'views.py'
     url(r'^$', home, name='home'),
 
+    # [contact] Essa linha procura a função 'contact' na 'views.py'
     url(r'^contact/$', contact, name='contact'),
 ]
