@@ -78,18 +78,22 @@ def contact(request):
             to_email = [from_email, ]
             contact_message = "%s: %s via %s" % (name, message, email)
 
-            # Envia o email através do servidor SMTP
+            # [contact] Envia o email através do servidor SMTP
             send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
 
-            # Redireciona para a página principal adicionando '?sent=True' na URL
+            # [contact] Redireciona para a página principal adicionando '?sent=True' na URL
             # Vá para: função 'home'
             return redirect(reverse('core:home') + '?sent=True')
 
+    # Instancia um formulário em branco
     form = ContactForm()
 
+    # Contexto que será enviado para o template para exibir um título
+    # para a página e o formulário em branco
     context = {
         'title': title,
         'form': form,
     }
 
+    # Renderiza a página
     return render(request, "forms.html", context)
