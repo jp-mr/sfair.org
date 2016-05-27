@@ -115,4 +115,4 @@ pip3 install -r requirements.txt /deploy/sites/shortener
 sleep 2
 
 # Ctrl+C
-kill -9 888
+kill -9 130
