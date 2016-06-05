@@ -11,6 +11,7 @@
 #               - continuação do deploy.sh
 #               - ajuste das variaveis globais
 #               - criação das tabelas no postgresql
+#               - criação do root no postgresql
 #               - gunnicorn para rodar a aplicação wsgi na porta 8000
 #                                                
 #-----------------[ Não use servidores compartilhados (shared hosting) ]-----------------------
