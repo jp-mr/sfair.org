@@ -9,7 +9,10 @@
 #
 # 201605061758: João Paulo, Junho de 2016
 #               - continuação do deploy.sh
-#                                                 
+#               - ajuste das variaveis globais
+#               - criação das tabelas no postgresql
+#               - gunnicorn para rodar a aplicação wsgi na porta 8000
+#                                                
 #-----------------[ Não use servidores compartilhados (shared hosting) ]-----------------------
 #   
 #   - NGNIX para servir conteúdo estático e rediredionar as requisições para o GUNICORN
