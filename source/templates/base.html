@@ -57,6 +57,13 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav navbar-right">
+            {% if  not img_background %}
+                <li><a href="#" target="_self">Research</a></li>
+                <li><a href="#" target="_self">Teaching</a></li>
+                <li><a href="#" target="_self">Cluster</a></li>
+                <li><a href="{% url 'core:formation&CV' %}" target="_self">Formation & CV</a></li>
+                <li><a href="#" target="_self">Blog</a></li>
+            {% endif %}
             <li><a href="{% url 'core:contact' %}" target="_self">Contact</a></li>
           </ul>
         </div>
@@ -124,14 +131,24 @@
         com o id 'modalEmailSent' será exibido [ .modal('show') ]
 
     -->
+
+    <script>
+
     {% if message_sent %}
-        <script>
-            $(document).ready(function(){
-                $('#modalEmailSent').modal('show');
-            })
-        </script>
+        $(document).ready(function(){
+            $('#modalEmailSent').modal('show');
+        })
     {% endif %}
 
+    //  o evento do clique do mouse exibe ou esconde as respostas
+    // aos comentários 
+    $("#link-lattes-resume").click(function(event){
+        event.preventDefault();
+        $(this).parent().next("#lattes-resume").fadeToggle();
+    }) 
+
+
+   </script>
 
     <!--- #XXX: Era pra retirar a classe 'img-background' de todas as tags
                 com o id 'img-home', mas não funciona e eu não sei o motivo.

@@ -53,6 +53,7 @@ html, body, .container-table {
 }
 
 
+
 /* Centraliza o elemento*/
 
 .row-centered {
@@ -63,6 +64,41 @@ html, body, .container-table {
     float:none;
     text-align:left;
     margin-right:-4px;
+}
+
+
+/* Aplica a CSS se resolução >= 500px 
+
+   Ajusta a distância entre os títulos das páginas e a navbar
+
+--------------------------------------------------*/
+
+@media (min-width: 500px) {
+
+    .title-page {
+        margin-bottom: 45px !important;
+    }
+}
+
+
+
+/* Aplica a CSS se resolução <= 500px 
+
+   Ajusta a fonte do título da página Formation & CV
+
+--------------------------------------------------*/
+
+
+@media (max-width: 500px) {
+
+    .title-formation {
+        font-size: 36px !important;
+    }
+}
+
+
+a {
+    text-decoration: none !important;
 }
 
 
@@ -83,12 +119,12 @@ body {
 }
 
 .footer-link {
- color: #999898;; 
+ color: #999898;
 }
 
 .footer-link:hover, .footer-link:focus {
   color: #fff;
-  text-decoration:none
+  text-decoration:none;
 }
 
 /* Contact

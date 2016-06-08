@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    <div class="container container-table">
+        <div class="vertical-center-row">
+
+            <!-- 
+                 Ajusta a distância entre o primeiro botão e a barra superior,
+                 a div só fica visível em pequenas resoluções 
+            -->
+            <div class="visible-xs">
+                <div class="padding-xs"></div>
+            </div>
+
+
+            <div class="row row-centered">
+                <div class="col-centered">
+                    <h2 class="text-center title-page title-formation">Formation & CV</h2>
+                </div>
+            </div>
+            <div class="row row-centered">
+                <div class="col-centered">
+
+                <div class="col-md-2 col-sm-3">
+                    <div class="center-buttom">
+                        <span class="fa-stack fa-lg fa-5x">
+                            <i class="fa fa-user fa-stack-1x"></i>
+                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <p class="text-justify">
+                       Um breve texto descrevendo quem é você, formação,
+                       áreas que atua, administra o cluster e coisas assim. <br/>
+                       Ao clicar no link abaixo, é exibido os links do Lattes e
+                       Resumé abaixo do próprio link. Pode ser retirado o primeiro link
+                       e já exibir os dois links como parte do conteúdo.
+                       <br/>
+                    </p>
+                    <hr/>
+                    <p >
+                        <a href="#lattes">Lattes</a>
+                        <br/>
+                        <a href="#resume">Resumé</a>
+                    </p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+         
+
+{% endblock %}
+

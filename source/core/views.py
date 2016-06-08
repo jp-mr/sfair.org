@@ -97,3 +97,8 @@ def contact(request):
 
     # Renderiza a página
     return render(request, "forms.html", context)
+
+
+def formation(request):
+    context = {}
+    return render(request, "formation.html", context)
