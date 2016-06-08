@@ -5,7 +5,15 @@
 # automatização do deploy de aplicações django/python
 #
 # 201618051500: João Paulo, Maio de 2016
-#                                                      
+#               - versão incompleta do deploy.sh
+#
+# 201605061758: João Paulo, Junho de 2016
+#               - continuação do deploy.sh
+#               - ajuste das variaveis globais
+#               - criação das tabelas no postgresql
+#               - criação do root no postgresql
+#               - gunnicorn para rodar a aplicação wsgi na porta 8000
+#                                                
 #-----------------[ Não use servidores compartilhados (shared hosting) ]-----------------------
 #   
 #   - NGNIX para servir conteúdo estático e rediredionar as requisições para o GUNICORN
@@ -15,11 +23,14 @@
 #   - SENTRY para gerenciar possíveis erros em produção
 #   
 
-VERSAO = /etc/postgresql/9.1/main/postgresql.conf # versão do postgrespl
-YOUR_PASSWORD = new_passaword                      # colocar nova senha do postgres
-LOCAL_PG_HBA.CONF = /etc/postgresql/9.1/main/pg_hba.conf
-NGINX = /etc/init.d/nginx
-NEW_PROJECT = https://github.com/
+VERSAO="/etc/postgresql/9.1/main/postgresql.conf" # versão do postgrespl
+YOUR_PASSWORD="new_passaword"                      # colocar nova senha do postgres
+LOCAL_PG_HBA.CONF="/etc/postgresql/9.1/main/pg_hba.conf"
+NGINX="/etc/init.d/nginx"
+NEW_PROJECT="https://github.com/"
+USERNAME="postgresql"   # nome para o root do postgresql
+EMAIL="postgresql@postgresql" # e-mail para o root do postgresql
+PASSWORD="postgresql"   # password do postgresql
 
 #-------------------------------------[ instalação ]-----------------------------------------
 #   
@@ -111,8 +122,29 @@ pip3 install -r requirements.txt /deploy/sites/shortener
 # roda o server de desenvolvimento na porta 8000
 ./manage.py runserver 0.0.0.0:8000 /deploy/sites/shortener
 
-# espera 2 segundos
-sleep 2
+# espera 5 segundos
+sleep 5
 
 # Ctrl+C
-kill -9 888
+kill -9 130
+
+# criar as tabelas no postgresql
+./manage.py syncdb --settings=shortener.settings_production
+
+# criar o root no postgresql
+echo "yes"
+echo "$USERNAME"
+echo "$EMAIL"
+echo "$PASSWORD" 
+echo "$PASSWORD"
+
+#------------[XXX nesse ponto o servidor de desenvolvimento deve estar funcionando]--------------
+
+#--------------------------------------[ gunnicorn ]----------------------------------------------
+
+# para rodar a aplicação wsgi na porta 8000
+# obs: pyramid e no flask é a mesmo coisa, só rodas que a aplicação wsgi funciona
+gunicorn shortener.wsgi:application -b 0.0.0.0:8000
+kill -9 130
+
+#-------------------------------------------[ nginx ]--------------------------------------------
