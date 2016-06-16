@@ -4,7 +4,9 @@ from .views import (
 
             home,
             contact,
-            formation
+            formation,
+            research,
+            publications,
         )
 
 # Aqui ficam os endereços da app 'core'
@@ -20,5 +22,11 @@ urlpatterns = [
 
     # [formation&CV] Essa linha procura a função 'formation' na 'views.py'
     url(r'^formation&CV/$', formation, name='formation&CV'),
+
+    # [research] Essa linha procura a função 'research' na 'views.py'
+    url(r'^research/$', research, name='research'),
+
+    # [publications] Essa linha procura a função 'publications' na 'views.py'
+    url(r'^research/publications/$', publications, name='publications'),
 
 ]

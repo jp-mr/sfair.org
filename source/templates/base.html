@@ -58,7 +58,7 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav navbar-right">
             {% if  not img_background %}
-                <li><a href="#" target="_self">Research</a></li>
+                <li><a href="{% url 'core:research' %}" target="_self">Research</a></li>
                 <li><a href="#" target="_self">Teaching</a></li>
                 <li><a href="#" target="_self">Cluster</a></li>
                 <li><a href="{% url 'core:formation&CV' %}" target="_self">Formation & CV</a></li>
@@ -70,7 +70,6 @@
       </div>
     </div>
     <!-- Fim da barra superior  -->
-
 
     <!-- [home] Todo bloco 'content' de outro template será encaixado aqui  -->
     {% block content %}
@@ -140,12 +139,12 @@
         })
     {% endif %}
 
-    //  o evento do clique do mouse exibe ou esconde as respostas
-    // aos comentários 
-    $("#link-lattes-resume").click(function(event){
-        event.preventDefault();
-        $(this).parent().next("#lattes-resume").fadeToggle();
-    }) 
+
+    // Caixa de diálogo ao parar o mouse em cima de uma link
+
+    $(".tip-right").tooltip({
+        placement : 'bottom' 
+    });
 
 
    </script>

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container container-table padding-publications">
+        <div class="vertical-center-row">
+
+            <div class="content-navbar-adjust"></div>
+
+            {% for pub in pub_list %}
+                <div class="row-centered">
+                        <div class="col-centered col-md-11"> 
+                            <h5>{{ pub.title }}</h5>
+                            <p class="text-justify">{{ pub.overview }}</p>
+                            <a href="{{ pub.upload.url }}">Download</a>
+                            <hr/>
+                        </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

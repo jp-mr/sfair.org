@@ -1,6 +1,12 @@
-[contact] - Começa em core/urls.py    
+[contact] - Começa em sfair/urls.py    
 
     Acesso, renderização da página de contato e envio do formulário
+
+--------------------------------------------------
+
+[formation&CV] - começa em sfair/urls.py
+
+    Acesso e renderização da página.
 
 --------------------------------------------------
 

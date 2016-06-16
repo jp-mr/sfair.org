@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 
 from .forms import ContactForm
+from .models import Publication
 
 
 def home(request):
@@ -13,7 +14,7 @@ def home(request):
         'render' vai devolver uma resposta para o 'request'(requisição
         do navegador) renderizando o template 'home.html'
 
-        'context' serve para passar valores de variáveis que 
+        'context' serve para passar valores de variáveis que
         podem ser usadas no template
 
         Vá para: template/home.html
@@ -30,12 +31,12 @@ def home(request):
     # após o redirecionamento da página de contato
     msg_sent = request.GET.get('sent', False)
 
-    # [contact] Adiciona uma chave/valor para ser enviada ao template 
+    # [contact] Adiciona uma chave/valor para ser enviada ao template
     # através do contexto para exibir uma mensagem de confirmação
-    #para o usuário
+    # para o usuário
     # Vá para: template/home.html
     if msg_sent:
-        context['message_sent'] = 'message_sent'   
+        context['message_sent'] = 'message_sent'
 
     return render(request, "home.html", context)
 
@@ -56,10 +57,11 @@ def contact(request):
     title = "Contact"
 
     # [contat] Quando o usuário clicar no botão enviar,
-    #o método da requicisão é avaliado
+    # o método da requicisão é avaliado
     if request.method == 'POST':
 
-        # [contact] Uma instancia de form é criada com as informações do usuário
+        # [contact] Uma instancia de form é criada com as informações
+        # do usuário
         form = ContactForm(request.POST or None)
 
         # [contact] Se as informações forem válidas
@@ -79,9 +81,16 @@ def contact(request):
             contact_message = "%s: %s via %s" % (name, message, email)
 
             # [contact] Envia o email através do servidor SMTP
-            send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
+            send_mail(
+                subject,
+                contact_message,
+                from_email,
+                to_email,
+                fail_silently=True
+            )
 
-            # [contact] Redireciona para a página principal adicionando '?sent=True' na URL
+            # [contact] Redireciona para a página principal
+            # adicionando '?sent=True' na URL
             # Vá para: função 'home'
             return redirect(reverse('core:home') + '?sent=True')
 
@@ -100,5 +109,22 @@ def contact(request):
 
 
 def formation(request):
-    context = {}
-    return render(request, "formation.html", context)
+    # Renderiza a página
+    return render(request, "formation.html", {})
+
+
+def research(request):
+    # Renderiza a página
+    return render(request, "research.html", {})
+
+
+def publications(request):
+
+    publications = Publication.objects.all()
+
+    context = {
+        'pub_list': publications,
+    }
+
+    # Renderiza a página
+    return render(request, "publications.html", context)

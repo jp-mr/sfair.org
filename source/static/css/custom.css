@@ -23,12 +23,6 @@ html, body, .container-table {
 }
 
 
-/* Ajusta a altura entre o primeiro botão e a barra superior em uma resolução pequena*/
-.padding-xs {
-    padding-bottom: 80px;
-}
-
-
 .text-btn {
     font-size: 13pt;
     font-weight: bold;
@@ -66,14 +60,18 @@ html, body, .container-table {
     margin-right:-4px;
 }
 
+.content-navbar-adjust {
+     height: 64px;
+}
 
-/* Aplica a CSS se resolução >= 500px 
+
+/* Aplica a CSS se a altura >= 768 e largura >= 601px 
 
    Ajusta a distância entre os títulos das páginas e a navbar
 
 --------------------------------------------------*/
 
-@media (min-width: 500px) {
+@media (min-width: 768px) and (min-height: 601px) {
 
     .title-page {
         margin-bottom: 45px !important;
@@ -94,7 +92,13 @@ html, body, .container-table {
     .title-formation {
         font-size: 36px !important;
     }
+
+    .padding-publications {
+        padding-left: 0px;
+        padding-right: 6px;
+    }
 }
+
 
 
 a {
