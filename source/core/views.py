@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 
@@ -122,8 +123,31 @@ def publications(request):
 
     publications = Publication.objects.all()
 
+    # Páginador - Documentação do Django
+    paginator = Paginator(publications, 4) #Exibe 4 post por página
+
+    l = []
+    for page in paginator.page_range:
+        l.append(page)
+
+    page_request_var = 'page'
+    page = request.GET.get(page_request_var)
+
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        # Se page não é um inteiro, retorna a primeira página
+        queryset = paginator.page(1)
+    except EmptyPage:
+        # Se a página estiver fora do número real de páginas existentes,
+        # retorna a última página
+        queryset = paginator.page(paginator.num_pages)
+
     context = {
-        'pub_list': publications,
+        'pub_list': queryset,
+        'page_request_var': page_request_var,
+        'list': l,
+        'page': page,
     }
 
     # Renderiza a página

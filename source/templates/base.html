@@ -133,21 +133,23 @@
 
     <script>
 
-    {% if message_sent %}
         $(document).ready(function(){
-            $('#modalEmailSent').modal('show');
+    
+            {% if message_sent %}
+                $('#modalEmailSent').modal('show');
+            {% endif %}
+
+            {% if pub_list %}
+                $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
+                $("#{{ page }}").addClass('active')
+            {% endif %}
+            // Caixa de diálogo ao parar o mouse em cima de uma link
+            $(".tip-right").tooltip({
+                placement : 'bottom' 
+            });
         })
-    {% endif %}
 
-
-    // Caixa de diálogo ao parar o mouse em cima de uma link
-
-    $(".tip-right").tooltip({
-        placement : 'bottom' 
-    });
-
-
-   </script>
+    </script>
 
     <!--- #XXX: Era pra retirar a classe 'img-background' de todas as tags
                 com o id 'img-home', mas não funciona e eu não sei o motivo.

@@ -60,9 +60,10 @@ html, body, .container-table {
     margin-right:-4px;
 }
 
-.content-navbar-adjust {
-     height: 64px;
+.title-page-contact {
+    margin-top: 0px !important;
 }
+
 
 
 /* Aplica a CSS se a altura >= 768 e largura >= 601px 
@@ -76,9 +77,21 @@ html, body, .container-table {
     .title-page {
         margin-bottom: 45px !important;
     }
+
 }
 
 
+.content-navbar-adjust {
+    height: 64px;
+    position:relative;
+    top: 0%;
+}
+
+.content-navbar-adjust-publications {
+    height: 84px;
+    position:relative;
+    top: 0%;
+}
 
 /* Aplica a CSS se resolução <= 500px 
 
@@ -103,6 +116,14 @@ html, body, .container-table {
 
 a {
     text-decoration: none !important;
+}
+
+.title-publications {
+    margin-bottom: 0px !important;
+}
+
+.publications-margin-top {
+    margin-top: 10px !important;
 }
 
 
