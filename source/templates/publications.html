@@ -15,7 +15,7 @@
                         <small>Published: {{ pub.published}}</small>
                         <p class="text-justify publications-margin-top">{{ pub.overview }}</p>
                         {% csrf_token %}
-                        <a id="{{ pub.pub_id }}" href="{{ pub.upload.url }}" target="_blank">Download</a>
+                        <a id="{{ pub.id }}" href="{{ pub.upload.url }}" target="_blank">Download</a>
                         <hr/>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                                 </li>
                             {% endif %}
                             {% for l in list %}
-                                <li id="{{ l }}"><a href="?{{ page_request_var }}={{ l }}">{{ l }}</a></li>
+                                <li id="page{{ l }}"><a href="?{{ page_request_var }}={{ l }}">{{ l }}</a></li>
                             {% endfor %}
                             {% if pub_list.has_next %}
                                 <li>

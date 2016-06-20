@@ -147,9 +147,9 @@
             {% if pub_list %}
                 $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
                 {%if page %}
-                    $("#{{ page }}").addClass('active')
+                    $("#page{{ page }}").addClass('active')
                 {% else %}
-                    $("#1").addClass('active')
+                    $("#page1").addClass('active')
                 {% endif %}
 
                 //For getting CSRF token
@@ -211,9 +211,9 @@
                 };
 
                 {% for pub in pub_list %}
-                    $("#{{ pub.pub_id }}").click(function( event ) {
+                    $("#{{ pub.id }}").click(function( event ) {
                         event.preventDefault();
-                        counter("{{ pub.pub_id }}");
+                        counter("{{ pub.id }}");
                         var url = "{{ pub.upload.url }}";
                         window.open(url, '_blank')
                     });

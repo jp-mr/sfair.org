@@ -126,7 +126,7 @@ def publications(request):
         if request.is_ajax():
             #Always use get on request.POST. Correct way of querying a QueryDict.
             publication_id = request.POST.get('pub_id')
-            publication = Publication.objects.get(pub_id=publication_id)
+            publication = Publication.objects.get(id=publication_id)
             publication.counter += 1
             publication.save()
 
