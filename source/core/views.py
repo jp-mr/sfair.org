@@ -121,9 +121,19 @@ def research(request):
 
 def publications(request):
 
+    if request.method == 'POST':
+        #POST goes here . is_ajax is must to capture ajax requests. Beginner's pit.
+        if request.is_ajax():
+            #Always use get on request.POST. Correct way of querying a QueryDict.
+            publication_id = request.POST.get('pub_id')
+            publication = Publication.objects.get(pub_id=publication_id)
+            publication.counter += 1
+            publication.save()
+
+
     publications = Publication.objects.all()
 
-    # Páginador - Documentação do Django
+    # Paginador - Documentação do Django
     paginator = Paginator(publications, 4) #Exibe 4 post por página
 
     l = []

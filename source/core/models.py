@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 class Publication(models.Model):
@@ -10,7 +11,9 @@ class Publication(models.Model):
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     published = models.DateField(auto_now=False, auto_now_add=False)
+    pub_id = models.UUIDField(default=uuid.uuid4, editable=False)
+
 
     # Ordenando a lista do post do mais recente ao mais antigo
     class Meta:
-        ordering = ["-published"] 
+        ordering = ["-published"]

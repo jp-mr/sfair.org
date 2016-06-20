@@ -14,7 +14,8 @@
                         <h5 class="title-publications">{{ pub.title }}</h5>
                         <small>Published: {{ pub.published}}</small>
                         <p class="text-justify publications-margin-top">{{ pub.overview }}</p>
-                        <a href="{{ pub.upload.url }}">Download</a>
+                        {% csrf_token %}
+                        <a id="{{ pub.pub_id }}" href="{{ pub.upload.url }}" target="_blank">Download</a>
                         <hr/>
                     </div>
                 </div>
@@ -26,9 +27,7 @@
                         <ul class="pagination">
                             {% if pub_list.has_previous %}
                                 <li>
-                                    <a href="?{{ page_request_var }}=
-                                              {{ pub_list.previous_page_number }}" 
-                                              aria-label="Previous">
+                                    <a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
@@ -38,9 +37,7 @@
                             {% endfor %}
                             {% if pub_list.has_next %}
                                 <li>
-                                    <a href="?{{ page_request_var }}=
-                                              {{ pub_list.next_page_number }}" 
-                                              aria-label="Next">
+                                    <a href="?{{ page_request_var }}={{ pub_list.next_page_number }}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

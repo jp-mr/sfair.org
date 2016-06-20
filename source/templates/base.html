@@ -134,19 +134,93 @@
     <script>
 
         $(document).ready(function(){
-    
+
+            // Caixa de diálogo ao parar o mouse em cima de uma link
+            $(".tip-right").tooltip({
+                placement : 'bottom' 
+            });
+   
             {% if message_sent %}
                 $('#modalEmailSent').modal('show');
             {% endif %}
 
             {% if pub_list %}
                 $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
-                $("#{{ page }}").addClass('active')
+                {%if page %}
+                    $("#{{ page }}").addClass('active')
+                {% else %}
+                    $("#1").addClass('active')
+                {% endif %}
+
+                //For getting CSRF token
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie != '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+                function counter(pub_id){
+                    
+                    //Prepare csrf token
+                    var csrftoken = getCookie('csrftoken');
+
+                    function csrfSafeMethod(method) {
+                        // these HTTP methods do not require CSRF protection
+                        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                    }
+                    $.ajaxSetup({
+                        beforeSend: function(xhr, settings) {
+                            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                            }
+                        }
+                    });
+        
+                    //This is the Ajax post.Observe carefully. It is nothing but details 
+                    //of where_to_post,what_to_post
+                    //Send data  
+                    $.ajax({
+                        url : window.location.href, // the endpoint,commonly same url
+                        type : "POST", // http method
+                        data : { 
+                                 csrfmiddlewaretoken : csrftoken, 
+                                 pub_id : pub_id,
+                        }, // data sent with the post request
+                        // handle a successful response
+                        success : function() {
+                            console.log("OK"); // another sanity check
+                        },
+        
+                        // handle a non-successful response
+                        error : function(xhr,errmsg,err) {
+                            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more 
+                                                                               // info about the error 
+                                                                               // to the console
+                        }
+                    });
+                };
+
+                {% for pub in pub_list %}
+                    $("#{{ pub.pub_id }}").click(function( event ) {
+                        event.preventDefault();
+                        counter("{{ pub.pub_id }}");
+                        var url = "{{ pub.upload.url }}";
+                        window.open(url, '_blank')
+                    });
+                {% endfor %}
+
             {% endif %}
-            // Caixa de diálogo ao parar o mouse em cima de uma link
-            $(".tip-right").tooltip({
-                placement : 'bottom' 
-            });
+
         })
 
     </script>
