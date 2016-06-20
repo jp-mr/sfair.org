@@ -121,36 +121,50 @@ def research(request):
 
 def publications(request):
 
+    # [publications] Se o método de requisição for POST e AJAX
+    # (após clicar em 'Download'), é capturado o ID do artigo
+    # e usado para buscá-lo no banco de dados. Após, é somando 1
+    # ao valor do campo 'counter'.
+    # Obs: a paǵina não é atualizada.
+
     if request.method == 'POST':
-        #POST goes here . is_ajax is must to capture ajax requests. Beginner's pit.
         if request.is_ajax():
-            #Always use get on request.POST. Correct way of querying a QueryDict.
             publication_id = request.POST.get('pub_id')
+            # [publications] O método 'get' busca no banco de dados objeto com 
+            # o ID passado pela requisição.
             publication = Publication.objects.get(id=publication_id)
             publication.counter += 1
             publication.save()
 
 
+    # [publications] Se o método de requisição for GET, todos os artigos
+    # serão trazidos do banco de dados e separados em grupos pelo paginador
+
+    # [publications ] Captura todos os artigos do banco de dados
     publications = Publication.objects.all()
 
-    # Paginador - Documentação do Django
-    paginator = Paginator(publications, 4) #Exibe 4 post por página
+    # [publications ] Função que implementa a pagiçãoo
+    paginator = Paginator(publications, 4) #Exibe 4 artigos por página
 
+    # [publications ] Cria uma lista com os número das páginas
     l = []
     for page in paginator.page_range:
         l.append(page)
 
+    # [publications ] Captura o valor da variável page no cabeçalho 
+    # da requisição. Esse valor só existe a partir da segunda página.
+    # Também é passado no contexto para determinar qual botão será
+    # destacado na páginação
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
 
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
-        # Se page não é um inteiro, retorna a primeira página
+        # [publications ] Se page não é um inteiro, retorna a primeira página
         queryset = paginator.page(1)
     except EmptyPage:
-        # Se a página estiver fora do número real de páginas existentes,
-        # retorna a última página
+        # 
         queryset = paginator.page(paginator.num_pages)
 
     context = {
@@ -160,5 +174,6 @@ def publications(request):
         'page': page,
     }
 
-    # Renderiza a página
+    # [publications ] Renderiza a página
+    # Vá para: templates/publications.html
     return render(request, "publications.html", context)

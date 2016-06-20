@@ -1,17 +1,32 @@
-[contact] - Começa em sfair/urls.py    
+Começa em sfair/urls.py
+
+--------------------------------------------------
+
+[contact]
 
     Acesso, renderização da página de contato e envio do formulário
 
 --------------------------------------------------
 
-[formation&CV] - começa em sfair/urls.py
+[formation&CV]
 
     Acesso e renderização da página.
 
 --------------------------------------------------
 
-[home] - Começa em sfair/urls.py    
+[home]
 
     Acesso e renderização da página inicial
 
 --------------------------------------------------
+
+[research]
+
+    Acesso e renderização da página.
+
+--------------------------------------------------
+
+[research/publications/]
+
+    Acesso, renderização da página, lista de artigos e contador de downloads
+ 

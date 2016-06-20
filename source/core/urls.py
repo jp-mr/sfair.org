@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^research/$', research, name='research'),
 
     # [publications] Essa linha procura a função 'publications' na 'views.py'
+    # Vá para: core/models.py
     url(r'^research/publications/$', publications, name='publications'),
 
 ]
