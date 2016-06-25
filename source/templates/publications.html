@@ -8,7 +8,8 @@
 
             <div id="publications" class="content-navbar-adjust"></div>
 
-            <!-- [publications] Itera sobre pub_list (passado no contexto em view.py) -->
+            <!-- [publications] Itera sobre pub_list (passado no contexto em view.py) 
+            e replica o código para cada artigos -->
             {% for pub in pub_list %}
                 <div class="row-centered">
                     <div class="col-centered col-md-11"> 
@@ -40,8 +41,10 @@
                                     </a>
                                 </li>
                             {% endif %}
+                            <!-- [publications] Itera sobre 'list' (passado no contexto em views.py) 
+                            e atribuindo um número para cara página -->
                             {% for l in list %}
-                                <li id="page{{ num_page }}"><a href="?{{ page_request_var }}={{ num_page }}">{{ num_page }}</a></li>
+                                <li id="page{{ l }}"><a href="?{{ page_request_var }}={{ l }}">{{ l }}</a></li>
                             {% endfor %}
                             {% if pub_list.has_next %}
                                 <li>
