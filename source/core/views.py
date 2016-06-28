@@ -144,7 +144,7 @@ def publications(request):
     publications = Publication.objects.all()
 
     # [publications ] Função que implementa a pagiçãoo
-    paginator = Paginator(publications, 4) #Exibe 4 artigos por página
+    paginator = Paginator(publications, 6) #Exibe 4 artigos por página
 
     # [publications ] Cria uma lista com os número das páginas.
     # Será passado como contexto para exibir os números nos botões

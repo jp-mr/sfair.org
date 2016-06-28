@@ -14,14 +14,33 @@ html, body, .container-table {
     background-size: cover;
 }
 
+
+
+/* Centraliza o conteúdo no centro da página  */
+
 .container-table {
     display: table;
 }
+
 .vertical-center-row {
     display: table-cell;
     vertical-align: middle;
 }
 
+
+
+/* Centraliza o elemento na linha e na coluna*/
+
+.row-centered {
+    text-align:center;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
 
 .text-btn {
     font-size: 13pt;
@@ -46,19 +65,6 @@ html, body, .container-table {
     text-decoration: none;
 }
 
-
-
-/* Centraliza o elemento*/
-
-.row-centered {
-    text-align:center;
-}
-.col-centered {
-    display:inline-block;
-    float:none;
-    text-align:left;
-    margin-right:-4px;
-}
 
 .title-page-contact {
     margin-top: 0px !important;
@@ -110,6 +116,13 @@ html, body, .container-table {
         padding-left: 0px;
         padding-right: 6px;
     }
+}
+
+
+/* Centraliza verticalmente o conteúdo
+--------------------------------------------------*/
+.vertical-center-row-publication {
+    vertical-align: middle;
 }
 
 
