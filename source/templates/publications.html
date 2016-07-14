@@ -3,92 +3,87 @@
 
 {% block content %}
 
-    <div class="container container-table padding-publications">
-        <div class="vertical-center-row-publications">
+	<div class="container container-table padding-publications">
+		<div class="vertical-center-row-publications">
 
-            <div id="publications" class="content-navbar-adjust"></div>
+			<div id="publications" class="content-navbar-adjust"></div>
 
-            <!-- [publications] Itera sobre pub_list (passado no contexto em view.py) 
-            e replica o código para cada artigos -->
-            {% for pub in pub_list %}
-                <div class="row-centered">
-                    <div class="col-centered col-md-11"> 
-                        <h5 class="title-publications">{{ pub.title }}</h5>
-                        <small>Published: {{ pub.published}}</small>
-                        <p class="text-justify publications-margin-top">{{ pub.overview }}</p>
-                        {% csrf_token %}
-                        <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
-                             o 'id' ta tag <a> será usado no script em 'templates/base.html' 
-                             para a requisição AJAX do contador de downloads. -->
-                        <a id="{{ pub.id }}" href="{{ pub.upload.url }}" target="_blank">Download</a>
-                        <hr/>
-                    </div>
-                </div>
-            {% endfor %}
-
-            <div class="row-centered">
-                <div class="col-centered">
-                    <nav>
-                        <!--
-                            [publications] Páginador: << 1 2 3 4 >>
-                            Vá para: templates/base.html
-                        -->
-                        <ul class="pagination">
-                            {% if pub_list.has_previous %}
-                                <li>
-                                    <a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            <!-- [publications] Itera sobre 'list' (passado no contexto em views.py) 
-                            e atribuindo um número para cara página -->
-                            {% for l in list %}
-                                <li id="page{{ l }}"><a href="?{{ page_request_var }}={{ l }}">{{ l }}</a></li>
-                            {% endfor %}
-                            {% if pub_list.has_next %}
-                                <li>
-                                    <a href="?{{ page_request_var }}={{ pub_list.next_page_number }}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-
-
-               <!--{# Paginador:  Next - Page 1 of 2 - Previous
-
-                    <div class="pagination">
-                        <nav>
-                            <ul class="pager">
-                                {% if pub_list.has_previous %}
-                                    <li>
-                                        <a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}">
-                                        Next
-                                        </a>
-                                    </li>
-                                {% endif %}
-            
-                                <span class="current">
-                                    Page {{ pub_list.number }} of {{ pub_list.paginator.num_pages }}
-                                </span>
-            
-                                {% if pub_list.has_next %}
-                                    <li>
-                                        <a href="?{{ page_request_var }}={{ pub_list.next_page_number }}">
-                                        Previous
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </nav>
-                    </div>
-                #}-->
-
-                </div>
+				<!-- [publications] Itera sobre pub_list (passado no contexto em view.py) 
+					   e replica o código para cada artigos -->
+        {% for pub in pub_list %}
+					<div class="row-centered">
+						<div class="col-centered col-md-11"> 
+							<h5 class="title-publications">{{ pub.title }}</h5>
+			        <small>Published: {{ pub.published}}</small>
+							<p class="text-justify publications-margin-top">{{ pub.overview }}</p>
+							{% csrf_token %}
+              <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
+                   o 'id' ta tag <a> será usado no script em 'templates/base.html' 
+                   para a requisição AJAX do contador de downloads. -->
+								<a id="{{ pub.id }}" href="{{ pub.upload.url }}" target="_blank">Download</a>
+                <hr/>
             </div>
-        </div>
-    </div>
+          </div>
+        {% endfor %}
+
+        <div class="row-centered">
+					<div class="col-centered">
+						<nav>
+							<!--
+								[publications] Páginador: << 1 2 3 4 >>
+                Vá para: templates/base.html
+              -->
+							<ul class="pagination">
+								{% if pub_list.has_previous %}
+									<li>
+										<a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                {% endif %}
+                <!-- [publications] Itera sobre 'list' (passado no contexto em views.py) 
+                     e atribuindo um número para cara página -->
+                {% for l in list %}
+									<li id="page{{ l }}"><a href="?{{ page_request_var }}={{ l }}">{{ l }}</a></li>
+                {% endfor %}
+                {% if pub_list.has_next %}
+									<li>
+										<a href="?{{ page_request_var }}={{ pub_list.next_page_number }}" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+                {% endif %}
+              </ul>
+            </nav>
+
+
+          <!--{# Paginador:  Next - Page 1 of 2 - Previous
+
+						<div class="pagination">
+							<nav>
+								<ul class="pager">
+									{% if pub_list.has_previous %}
+										<li>
+											<a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}">Next</a>
+                    </li>
+                  {% endif %}
+									<span class="current">
+										Page {{ pub_list.number }} of {{ pub_list.paginator.num_pages }}
+                  </span>
+									{% if pub_list.has_next %}
+										<li>
+											<a href="?{{ page_request_var }}={{ pub_list.next_page_number }}">Previous</a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            </div>
+
+          #}-->
+
+				</div>
+			</div>
+		</div>
+  </div>
 
 {% endblock %}

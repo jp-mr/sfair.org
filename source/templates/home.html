@@ -2,89 +2,89 @@
 {% load staticfiles %}
 
 <!-- [home]
-    'extends' vai pegar o código do template 'base.html' e sobrescrever qualquer código
-    fora da tag 'block'. O conteúdo dessa tag será 'encaixada' dentro da tag 'block'
-    no código vindo do tameplate 'base.html'
-    Vá até 'base.html'.
+     'extends' vai pegar o código do template 'base.html' e sobrescrever qualquer código
+     fora da tag 'block'. O conteúdo dessa tag será 'encaixada' dentro da tag 'block'
+     no código vindo do tameplate 'base.html'
+     Vá até 'base.html'.
  -->
 
 {% block content %}
 
-    <!-- Centraliza o conteúdo -->
-    <div class="container container-table">
-        <div class="vertical-center-row">
+  <!-- Centraliza o conteúdo -->
+  <div class="container container-table">
+    <div class="vertical-center-row">
 
-            <!-- 
-                 Ajusta a distância entre o primeiro botão e a barra superior,
-                 a div só fica visível em pequenas resoluções 
-            -->
-            <div class="visible-xs">
-                <div class="padding-xs"></div>
-            </div>
+      <!-- 
+            Ajusta a distância entre o primeiro botão e a barra superior,
+            a div só fica visível em pequenas resoluções 
+      -->
+      <div class="visible-xs">
+        <div class="padding-xs"></div>
+      </div>
      
-            <!-- Conteúdo -->
-            <div class="row">
-                <div class="col-md-1 col-sm-1"></div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="{% url 'core:research' %}">
-                            <span class="fa-stack fa-lg fa-5x">
-                                <i class="fa fa-search fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <p class="text-btn">Research</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="#">
-                            <span class="fa-stack fa-lg fa-5x">
-                                <i class="fa fa-graduation-cap fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <p class="text-btn">Teaching</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="#">
-                            <span class="fa-stack fa-lg fa-5x">
-                                <i class="fa fa-server fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <p class="text-btn">Cluster</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="{% url 'core:formation&CV' %}">
-                            <span class="fa-stack fa-lg fa-5x">
-                                <i class="fa fa-user fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                            <p class="text-btn">Formation & CV</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="center-buttom">
-                        <a class="home-btn" href="#" target="_blank">
-                            <span class="fa-stack fa-lg fa-5x">
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                                <i class="fa fa-bold fa-stack-1x"></i>
-                            </span>
-                            <p class="text-btn">Blog</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-1 col-sm-1"></div>
+      <!-- Conteúdo -->
+        <div class="row">
+          <div class="col-md-1 col-sm-1"></div>
+          <div class="col-md-2 col-sm-2">
+            <div class="center-buttom">
+              <a class="home-btn" href="{% url 'core:research' %}">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-search fa-stack-1x"></i>
+                  <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                </span>
+                <p class="text-btn">Research</p>
+              </a>
             </div>
-            <!-- Fim do Conteúdo -->
-       </div>
+          </div>
+          <div class="col-md-2 col-sm-2">
+            <div class="center-buttom">
+              <a class="home-btn" href="#">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-graduation-cap fa-stack-1x"></i>
+                  <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                </span>
+                <p class="text-btn">Teaching</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2">
+            <div class="center-buttom">
+              <a class="home-btn" href="#">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-server fa-stack-1x"></i>
+                  <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                </span>
+                <p class="text-btn">Cluster</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2">
+            <div class="center-buttom">
+              <a class="home-btn" href="{% url 'core:formation&CV' %}">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-user fa-stack-1x"></i>
+                  <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                </span>
+                <p class="text-btn">Formation & CV</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2">
+            <div class="center-buttom">
+              <a class="home-btn" href="#" target="_blank">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                  <i class="fa fa-bold fa-stack-1x"></i>
+                </span>
+                <p class="text-btn">Blog</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-1 col-sm-1"></div>
+        </div>
+        <!-- Fim do Conteúdo -->
     </div>
-    <!-- Fim do 'Centraliza o conteúdo' -->
+  </div>
+  <!-- Fim do 'Centraliza o conteúdo' -->
 
 {% endblock content %}

@@ -1,2 +1,4 @@
 Django==1.9.5
 django-crispy-forms==1.6.0
+mysqlclient
+configparser

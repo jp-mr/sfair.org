@@ -4,60 +4,59 @@
 
 {% block content %}
 
-    <div class="container container-table">
-        <div class="vertical-center-row">
+  <div class="container container-table">
+    <div class="vertical-center-row">
 
-            <div class="content-navbar-adjust"></div>
+      <div class="content-navbar-adjust"></div>
 
-            <div class="row row-centered">
-                <div class="col-centered">
-                    <h2 class="text-center">Research</h2>
-                </div>
-            </div>
-            <div class="row row-centered">
-                <div class="col-centered">
-                    <div class="col-md-2 col-sm-3 padding-tablet">
-                        <div class="center-buttom">
-                            <span class="fa-stack fa-lg fa-5x">
-                                <i class="fa fa-search fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-sm-8 padding-tablet">
-                        <p class="text-justify">
-                            Aqui pode ser um texto sobre as linhas de pesquisa. Que atua com o
-                            grupo de astronômia, tem outras pesquisas e coisas do tipo.<br/>
-                            Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris 
-                            se pirulitá. Mé faiz elementum girarzis, nisi eros vermeio. Leite de 
-                            capivaris, leite de mula manquis. in elementis mé pra quem é 
-                            amistosis quis leo.
-                        </p>
-                        <hr/>
-                        <p>
-                            <a href="{% url 'core:publications'%}">Publications</a>
-                            <br/>
-                            <a class="tip-right" 
-                               data-toggle="tooltip"
-                               title="Explica o que é ADS"
-                               href="#ADS">
-                               ADS
-                            </a>
-                        </p>
-
-                    </div>
-                </div>
-            </div>
+      <div class="row row-centered">
+        <div class="col-centered">
+          <h2 class="text-center">Research</h2>
         </div>
-    </div>
-
-
-
-                </div>
+      </div>
+      <div class="row row-centered">
+        <div class="col-centered">
+          <div class="col-md-2 col-sm-3 padding-tablet">
+            <div class="center-buttom">
+              <span class="fa-stack fa-lg fa-5x">
+                <i class="fa fa-search fa-stack-1x"></i>
+                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+              </span>
             </div>
+          </div>
+          <div class="col-md-8 col-sm-8 padding-tablet">
+            <p class="text-justify">
+              Aqui pode ser um texto sobre as linhas de pesquisa. Que atua com o
+              grupo de astronômia, tem outras pesquisas e coisas do tipo.<br/>
+              Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris 
+              se pirulitá. Mé faiz elementum girarzis, nisi eros vermeio. Leite de 
+              capivaris, leite de mula manquis. in elementis mé pra quem é 
+              amistosis quis leo.
+            </p>
+            <hr/>
+            <p>
+              <a href="{% url 'core:publications'%}">Publications</a>
+              <br/>
+              <a href="#ADS">ADS</a>
+
+              <!--{#
+
+              <a href="{% url 'core:publications'%}">Publications</a>
+              <br/>
+              <a class="tip-right" 
+                 data-toggle="tooltip"
+                 title="Explica o que é ADS"
+                 href="#ADS">
+                 ADS
+              </a>
+
+              #}-->
+
+            </p>
+          </div>
         </div>
+      </div>
     </div>
-         
+  </div>
 
 {% endblock %}
-

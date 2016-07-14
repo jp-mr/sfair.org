@@ -6,7 +6,7 @@ from .models import Publication
 class PublicationModelAdmin(admin.ModelAdmin):
 
     # [publications] Exibe os campos em colunas
-    list_display = ['title', 'updated', 'timestamp', 'published', 'counter']
+    list_display = ['title', 'updated', 'timestamp', 'published', 'download']
 
     # [publications] Implementa um campo de filtro à esquerda da página
     list_filter = ['title']

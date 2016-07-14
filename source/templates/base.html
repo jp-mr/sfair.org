@@ -5,44 +5,43 @@
 <!DOCTYPE html>
 
 <!-- [home]
-    'img_background' está sendo passado por meio do contexto 
-    da 'views.home'(a função 'home' na 'views.py')
-    Essa classe exibe a imagem de fundo
-    O mesmo se aplica a tag <body>
-    Vá para: 'static/css/custom.css')
+     'img_background' está sendo passado por meio do contexto 
+     da 'views.home'(a função 'home' na 'views.py')
+     Essa classe exibe a imagem de fundo
+     O mesmo se aplica a tag <body>
+     Vá para: 'static/css/custom.css')
 -->
 <html id="img-home" {% if img_background %} class="{{ img_background }}" {% endif %} lang="en">
 
-<head>
-
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    
     <title>Sfair.org {% if title %}| {{ title }}{% endif %}</title>
     <link href="{% static 'img/favicon.ico' %}" rel="icon">
-
+    
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-
+    
     <!-- Custom CSS -->
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
-
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+  </head>
 
-</head>
-
-<body id="img-home" {% if img_background %} class="{{ img_background }}" {% endif %} >
+  <body id="img-home" {% if img_background %} class="{{ img_background }}" {% endif %} >
 
     <!-- Barra superior -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -58,11 +57,11 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav navbar-right">
             {% if  not img_background %}
-                <li><a href="{% url 'core:research' %}" target="_self">Research</a></li>
-                <li><a href="#" target="_self">Teaching</a></li>
-                <li><a href="#" target="_self">Cluster</a></li>
-                <li><a href="{% url 'core:formation&CV' %}" target="_self">Formation & CV</a></li>
-                <li><a href="#" target="_self">Blog</a></li>
+              <li><a href="{% url 'core:research' %}" target="_self">Research</a></li>
+              <li><a href="#" target="_self">Teaching</a></li>
+              <li><a href="#" target="_self">Cluster</a></li>
+              <li><a href="{% url 'core:formation&CV' %}" target="_self">Formation & CV</a></li>
+              <li><a href="#" target="_self">Blog</a></li>
             {% endif %}
             <li><a href="{% url 'core:contact' %}" target="_self">Contact</a></li>
           </ul>
@@ -79,36 +78,42 @@
 
     <!-- [contact] Small Modal
 
-         Exibe um aviso para o usuário quando um email é enviado através da página de contatos. 
-         O usuário é redirecionado para a página inicial e 'message_sent' é passado através
-         do contexto para acionar a exibição da mensagem.
-         Vá para: seção de script no final do arquivo.
+      Exibe um aviso para o usuário quando um email é enviado através da página de contatos. 
+      O usuário é redirecionado para a página inicial e 'message_sent' é passado através
+      do contexto para acionar a exibição da mensagem.
+      Vá para: seção de script no final do arquivo.
 
-     -->
+    -->
     {% if message_sent %}
-            <div class="modal fade bs-example-modal-sm" id="modalEmailSent" tabindex="-1" role="dialog" aria-labelledby="modalEmailSent">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <p class="modal-title" id="modalMessage">Your message was sent successfully.</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="modal fade bs-example-modal-sm" 
+           id="modalEmailSent" 
+           tabindex="-1" 
+           role="dialog" 
+           aria-labelledby="modalEmailSent">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <p class="modal-title" id="modalMessage">Your message was sent successfully.</p>
             </div>
+          </div>
+        </div>
+      </div>
     {% endif %}
     <!-- Fim Small Modal -->
 
 
     <!-- Rodapé -->
     <footer class="footer">
-        <div class="container">
-            <div class="row row-centered">
-                <div class="col-centered">
-                    <a class="footer-link" href="#" target="_blank">Desenvolvido por JP &amp; MR.</a>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row row-centered">
+          <div class="col-centered">
+            <a class="footer-link" href="#" target="_blank">Desenvolvido por JP &amp; MR.</a>
+          </div>
         </div>
+      </div>
     </footer>
     <!-- Fim do Rodapé  -->
 
@@ -123,139 +128,139 @@
 
     <script>
 
-        $(document).ready(function(){
+      $(document).ready(function(){
 
-            // Caixa de diálogo ao parar o mouse em cima de um link
-            $(".tip-right").tooltip({
-                placement : 'bottom' 
-            });
+        // Caixa de diálogo ao parar o mouse em cima de um link
+        $(".tip-right").tooltip({
+          placement : 'bottom' 
+        });
 
-            // [contact] JQuery que ativa o Small Modal
-            // Se 'message_sent' for passado pelo contexto, o código do Small Modal será
-            // embutido no documento DOM, junto com essa JQuery.
-            // Quando a página estiver carregada [ $(document).ready(function(){}) ] o Modal
-            // com o id 'modalEmailSent' será exibido [ .modal('show') ]
-            {% if message_sent %}
-                $('#modalEmailSent').modal('show');
-            {% endif %}
+        // [contact] JQuery que ativa o Small Modal
+        // Se 'message_sent' for passado pelo contexto, o código do Small Modal será
+        // embutido no documento DOM, junto com essa JQuery.
+        // Quando a página estiver carregada [ $(document).ready(function(){}) ] o Modal
+        // com o id 'modalEmailSent' será exibido [ .modal('show') ]
+        {% if message_sent %}
+          $('#modalEmailSent').modal('show');
+        {% endif %}
 
-            // [publications] Scripts serão implementados se pub_list for passado no contexto
-            {% if pub_list %}
-                // [publications] troca a classe da tag com o id 'publications' para ajustar
-                // a distância entre o primeiro artigo e a nav-bar
-                $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
-                // [publications] Implementa o botão que será detacado utilizando o valor de 'page',
-                // passado no contexto
-                {%if page %}
-                    $("#page{{ page }}").addClass('active')
-                {% else %}
-                    $("#page1").addClass('active')
-                {% endif %}
+        // [publications] Scripts serão implementados se pub_list for passado no contexto
+        {% if pub_list %}
+          // [publications] troca a classe da tag com o id 'publications' para ajustar
+          // a distância entre o primeiro artigo e a nav-bar
+          $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
+            // [publications] Implementa o botão que será detacado utilizando o valor de 'page',
+            // passado no contexto
+          {%if page %}
+            $("#page{{ page }}").addClass('active')
+          {% else %}
+            $("#page1").addClass('active')
+          {% endif %}
 
-                // [publications] Código copiado da documentação do Django
-                // Implementas segurança com ataque CSRF
-                // ## INÍCIO ##
+          // [publications] Código copiado da documentação do Django
+          // Implementas segurança com ataque CSRF
+          // ## INÍCIO ##
 
-                //For getting CSRF token
-                function getCookie(name) {
-                    var cookieValue = null;
-                    if (document.cookie && document.cookie != '') {
-                        var cookies = document.cookie.split(';');
-                        for (var i = 0; i < cookies.length; i++) {
-                            var cookie = jQuery.trim(cookies[i]);
-                            // Does this cookie string begin with the name we want?
-                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                break;
-                            }
-                        }
-                    }
-                    return cookieValue;
+          //For getting CSRF token
+          function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
                 }
+              }
+            }
+            return cookieValue;
+          }
 
-                // ## FIM ##
+          // ## FIM ##
 
 
-                function counter(pub_id){
-                    
-                    // [publications] Código copiado da documentação do Django
-                    // Implementas segurança com ataque CSRF
-                    // ## INÍCIO ##
+          function counter(pub_id){
 
-                    //Prepare csrf token
-                    var csrftoken = getCookie('csrftoken');
+            // [publications] Código copiado da documentação do Django
+            // Implementas segurança com ataque CSRF
+            // ## INÍCIO ##
 
-                    function csrfSafeMethod(method) {
-                        // these HTTP methods do not require CSRF protection
-                        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-                    }
-                    $.ajaxSetup({
-                        beforeSend: function(xhr, settings) {
-                            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                            }
-                        }
-                    });
-                    // ## FIM ##
+            //Prepare csrf token
+            var csrftoken = getCookie('csrftoken');
 
-                    // [publications] Requisição AJAX
-                    $.ajax({
-                        url : window.location.href, // the endpoint,commonly same url
-                        type : "POST", // http method
-                        data : { 
-                                 csrfmiddlewaretoken : csrftoken, 
-                                 pub_id : pub_id,
-                        }, // data sent with the post request
-                        // handle a successful response
-                        success : function() {
-                            console.log("OK"); // another sanity check
-                        },
+            function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+              return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+              beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                  xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+              }
+            });
+            // ## FIM ##
+
+            // [publications] Requisição AJAX
+            $.ajax({
+              url : window.location.href, // the endpoint,commonly same url
+              type : "POST", // http method
+              data : { 
+                csrfmiddlewaretoken : csrftoken, 
+                pub_id : pub_id,
+              }, // data sent with the post request
+              // handle a successful response
+              success : function() {
+                console.log("OK"); // another sanity check
+              },
+
+              // handle a non-successful response
+              error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more 
+                                                           // info about the error 
+                                                           // to the console
+              }
+            });
+          };
+
+          // [publications] Itera sobre pub_list e implementa, para cada artigo, o método JQuery
+          // que chama a função 'counter', responsavel por disparar a requisição AJAX do 
+          // contador de downlods. O método JQuery também abre uma nova aba com o link do artigo.
+          {% for pub in pub_list %}
+            $("#{{ pub.id }}").click(function( event ) {
+              event.preventDefault();
+              counter("{{ pub.id }}");
+              var url = "{{ pub.upload.url }}";
+              window.open(url, '_blank')
+            });
+          {% endfor %}
+
+        {% endif %}
         
-                        // handle a non-successful response
-                        error : function(xhr,errmsg,err) {
-                            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more 
-                                                                               // info about the error 
-                                                                               // to the console
-                        }
-                    });
-                };
+      })
 
-                // [publications] Itera sobre pub_list e implementa, para cada artigo, o método JQuery
-                // que chama a função 'counter', responsavel por disparar a requisição AJAX do 
-                // contador de downlods. O método JQuery também abre uma nova aba com o link do artigo.
-                {% for pub in pub_list %}
-                    $("#{{ pub.id }}").click(function( event ) {
-                        event.preventDefault();
-                        counter("{{ pub.id }}");
-                        var url = "{{ pub.upload.url }}";
-                        window.open(url, '_blank')
-                    });
-                {% endfor %}
+  </script>
 
-            {% endif %}
+  <!--- #XXX: Era pra retirar a classe 'img-background' de todas as tags
+              com o id 'img-home', mas não funciona e eu não sei o motivo.
+              'img-background' só é usado na home.
+              A classe agora é ativada pelo contexto passado na 'views.py'.
+  
+  <script>
 
+    $(document).ready(function(){
+      $("#img-home").each(function(){
+        $(this).removeClass("img-background");
+          console.log("OK")
         })
-
-    </script>
-
-    <!--- #XXX: Era pra retirar a classe 'img-background' de todas as tags
-                com o id 'img-home', mas não funciona e eu não sei o motivo.
-                'img-background' só é usado na home.
-                A classe agora é ativada pelo contexto passado na 'views.py'.
- 
-    <script>
-
-        $(document).ready(function(){
-            $("#img-home").each(function(){
-                $(this).removeClass("img-background");
-                console.log("OK")
-            })
-        })
-
-    </script>
-
-    -->
-
-</body>
+    })
+  
+  </script>
+  
+  -->
+  
+  </body>
 
 </html>

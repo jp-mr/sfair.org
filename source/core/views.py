@@ -72,8 +72,7 @@ def contact(request):
             name = form.cleaned_data.get('name')
             email = form.cleaned_data.get('email')
             message = form.cleaned_data.get('message')
-
-            subject = "Contact - Sfair.org"
+            subject = form.cleaned_data.get('subject')
 
             # [contact] Atribui o email cadastrado no servidor SMTP
             from_email = settings.EMAIL_HOST_USER
@@ -130,12 +129,11 @@ def publications(request):
     if request.method == 'POST':
         if request.is_ajax():
             publication_id = request.POST.get('pub_id')
-            # [publications] O método 'get' busca no banco de dados objeto com 
+            # [publications] O método 'get' busca no banco de dados objeto com
             # o ID passado pela requisição.
             publication = Publication.objects.get(id=publication_id)
-            publication.counter += 1
+            publication.download += 1
             publication.save()
-
 
     # [publications] Se o método de requisição for GET, todos os artigos
     # serão trazidos do banco de dados e separados em grupos pelo paginador
@@ -144,7 +142,7 @@ def publications(request):
     publications = Publication.objects.all()
 
     # [publications ] Função que implementa a pagiçãoo
-    paginator = Paginator(publications, 6) #Exibe 4 artigos por página
+    paginator = Paginator(publications, 6)  # Exibe 4 artigos por página
 
     # [publications ] Cria uma lista com os número das páginas.
     # Será passado como contexto para exibir os números nos botões
@@ -153,7 +151,7 @@ def publications(request):
     for page in paginator.page_range:
         l.append(page)
 
-    # [publications ] Captura o valor da variável page no cabeçalho 
+    # [publications ] Captura o valor da variável page no cabeçalho
     # da requisição. Esse valor só existe a partir da segunda página.
     # Também é passado no contexto para determinar qual botão será
     # destacado na páginação
@@ -166,7 +164,7 @@ def publications(request):
         # [publications ] Se page não é um inteiro, retorna a primeira página
         queryset = paginator.page(1)
     except EmptyPage:
-        # 
+        #
         queryset = paginator.page(paginator.num_pages)
 
     context = {

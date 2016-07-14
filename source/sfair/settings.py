@@ -28,22 +28,22 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Definições para email    
-#EMAIL_HOST = 'smtp.domain.com'
-#EMAIL_HOST_USER = 'email@domain.com' 
-#EMAIL_HOST_PASSWORD = 'password'
-#EMAIL_PORT = 587           
-#EMAIL_USE_TSL = True 
+# Definições para email
+# EMAIL_HOST = 'smtp.domain.com'
+# EMAIL_HOST_USER = 'email@domain.com'
+# EMAIL_HOST_PASSWORD = 'password'
+# EMAIL_PORT = 587
+# EMAIL_USE_TSL = True
 
 
-# Para testar localmente o envio de email descomente as linhas abaixo e 
-# rode em outra instancia do terminal o comando: 
+# Para testar localmente o envio de email descomente as linhas abaixo e
+# rode em outra instancia do terminal o comando:
 # $python -m smtpd -n -c DebuggingServer localhost:1025
 
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 1025
-#EMAIL_HOST_USER = 'contact@sfair.org'
-#EMAIL_HOST_PASSWORD = None
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
+# EMAIL_HOST_USER = 'contact@sfair.org'
+# EMAIL_HOST_PASSWORD = None
 
 
 # Application definition
@@ -79,7 +79,7 @@ MIDDLEWARE_CLASSES = [
 ROOT_URLCONF = 'sfair.urls'
 
 # Por padrão o django procura os templates dentro de uma pasta 'templates'
-# no diretório do aplicativo  
+# no diretório do aplicativo
 # 'DIRS': [os.path.join(BASE_DIR, "templates")], configura o django
 # para procurar a pasta 'templates' no diretório raiz do projeto
 TEMPLATES = [
@@ -117,16 +117,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                    UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                    MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                    CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                    NumericPasswordValidator',
     },
 ]
 
@@ -150,8 +154,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [ 
-    os.path.join(BASE_DIR, "static"), 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_prod")
