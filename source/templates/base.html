@@ -110,7 +110,12 @@
       <div class="container">
         <div class="row row-centered">
           <div class="col-centered">
-            <a class="footer-link" href="#" target="_blank">Desenvolvido por JP &amp; MR.</a>
+            <a id="footer-link-dev" 
+							 class="footer-link" 
+							 href="#" 
+							 target="_blank">
+							 Desenvolvido por JP &amp; MR.
+						</a>
           </div>
         </div>
       </div>
@@ -134,6 +139,11 @@
         $(".tip-right").tooltip({
           placement : 'bottom' 
         });
+
+				{% if img_background %}
+					$("#footer-link-dev").toggleClass('footer-link footer-link-home');
+				{% endif %}
+
 
         // [contact] JQuery que ativa o Small Modal
         // Se 'message_sent' for passado pelo contexto, o código do Small Modal será
