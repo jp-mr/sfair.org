@@ -25,6 +25,7 @@ SECRET_KEY = '4z3nxq+gh+)esx4@%ffav@vo)8u+rh9p=*zynnv2x7*mk0ibs3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 
 
@@ -158,8 +159,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_prod")
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "public/static")
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_prod")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "public/media")

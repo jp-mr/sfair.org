@@ -189,3 +189,20 @@ body {
 textarea.form-control {
     height: 100px;
 }
+
+
+/* Ajusta a posição do modal */
+
+.modal-dialog {
+  top: 30%;
+}
+
+
+/* Ícone do modal */
+
+.modal-header i {
+	font-size: 20px;
+	float: right;
+}
+
+
