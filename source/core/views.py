@@ -78,7 +78,7 @@ def contact(request):
             from_email = settings.EMAIL_HOST_USER
 
             to_email = [from_email, ]
-            contact_message = "%s: %s via %s" % (name, message, email)
+            contact_message = "%s <%s> \n\n %s" % (name, email, message)
 
             # [contact] Envia o email através do servidor SMTP
             send_mail(

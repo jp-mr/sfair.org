@@ -6,13 +6,17 @@
   <div class="container container-table">
     <div class="vertical-center-row">
 
-				<!-- 
-            Ajusta a distância entre o primeiro botão e a barra superior,
-            a div só fica visível em pequenas resoluções 
-				-->
-			  <div class="visible-xs">
-		      <div class="padding-xs"></div>
-	      </div>
+			<!-- 
+        Ajusta a distância entre o conteúdo e a barra superior,
+        a div só fica visível em pequenas resoluções 
+			-->      
+      <div class="hidden-md hidden-lg">
+        <div class="padding-navbar"></div>
+      </div>
+
+      <div class="hidden-xs hidden-sm">
+				<div class="content-navbar-adjust"></div>
+      </div>
 
         <div class="row">
           <h2 class="text-center title-page-contact">{{ title }}</h2>

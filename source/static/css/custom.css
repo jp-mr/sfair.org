@@ -71,7 +71,13 @@ html, body, .container-table {
 }
 
 
+@media (min-width: 992px) {
 
+	.title-page-contact {
+			margin-top: 21px !important;
+	}
+
+}
 /* Aplica a CSS se a altura >= 768 e largura >= 601px 
 
    Ajusta a distância entre os títulos das páginas e a navbar
@@ -99,6 +105,14 @@ html, body, .container-table {
     top: 0%;
 }
 
+/* Ajusta a distância entre o primeiro botão e a barra superior */
+.padding-navbar {
+		margin-bottom: 85px;
+}
+
+
+
+
 /* Aplica a CSS se resolução <= 500px 
 --------------------------------------------------*/
 
@@ -116,10 +130,6 @@ html, body, .container-table {
         padding-right: 6px;
     }
 
-		/* Ajusta a distância entre o primeiro botão e a barra superior */
-		.padding-xs {
-				margin-bottom: 85px;
-		}
 }
 
 
