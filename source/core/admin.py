@@ -8,6 +8,9 @@ class PublicationModelAdmin(admin.ModelAdmin):
     # [publications] Exibe os campos em colunas
     list_display = ['title', 'updated', 'timestamp', 'published', 'download']
 
+    # [publications] Não permite a edição dos campos
+    readonly_fields = ['download', ]
+
     # [publications] Implementa um campo de filtro à esquerda da página
     list_filter = ['title']
 
