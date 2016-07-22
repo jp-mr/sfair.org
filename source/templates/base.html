@@ -4,14 +4,7 @@
 
 <!DOCTYPE html>
 
-<!-- [home]
-     'img_background' está sendo passado por meio do contexto 
-     da 'views.home'(a função 'home' na 'views.py')
-     Essa classe exibe a imagem de fundo
-     O mesmo se aplica a tag <body>
-     Vá para: 'static/css/custom.css')
--->
-<html id="img-home" {% if img_background %} class="{{ img_background }}" {% endif %} lang="en">
+<html lang="en">
 
   <head>
     <meta charset="utf-8">
@@ -42,7 +35,14 @@
     
   </head>
 
-  <body id="img-home" {% if img_background %} class="{{ img_background }}" {% endif %} >
+	<!-- [home]
+     'img_background' está sendo passado por meio do contexto 
+     da 'views.home'(a função 'home' na 'views.py')
+     Essa classe exibe a imagem de fundo
+     Vá para: 'static/css/custom.css')
+	-->
+
+	<body id="img-home" {% if img_background %} class="{{ img_background }}" {% endif %} >
 
     <!-- Barra superior -->
     <div class="navbar navbar-default navbar-fixed-top">
