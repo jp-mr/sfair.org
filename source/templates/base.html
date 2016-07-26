@@ -112,7 +112,6 @@
 
     {% endblock content %}
 
-
     <!-- [contact] modalEmailSent
 
       Exibe um aviso para o usuário quando um email é enviado através da página de contatos. 
@@ -158,19 +157,15 @@
 
     <!-- Rodapé -->
     <footer class="footer">
-      <div class="container">
-        <div class="row row-centered">
-          <div class="col-centered">
-            <a id="footer-link-dev" 
-							 class="footer-link"
-							 data-toggle="modal"
-							 data-target="#modalNoPage"
-							 href="#" 
-							 target="_blank">
-							 Desenvolvido por JP &amp; MR.
-						</a>
-          </div>
-        </div>
+      <div class="col-md-4 col-md-offset-4 text-center">
+        <a id="footer-link-dev" 
+					 class="footer-link"
+					 data-toggle="modal"
+					 data-target="#modalNoPage"
+					 href="#" 
+					 target="_blank">
+					 Desenvolvido por JP &amp; MR.
+				</a>
       </div>
     </footer>
     <!-- Fim do Rodapé  -->
@@ -193,6 +188,7 @@
           placement : 'bottom' 
         });
 
+        // Altera o comportamento 'hover' do link do rodapé
 				{% if img_background %}
 					$("#footer-link-dev").toggleClass('footer-link footer-link-home');
 				{% endif %}

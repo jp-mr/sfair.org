@@ -1,9 +1,9 @@
-/* Centraliza o conteúdo da home */
+/* Centraliza o conteúdo */
 
- 
 html, body, .container-table {
     height: 97%;
 }
+
 
 /* [home] - Imagem de fundo da página inicial */
 .img-background {
@@ -45,12 +45,6 @@ html, body, .container-table {
 .text-btn {
     font-size: 13pt;
     font-weight: bold;
-}
-
-
-/* Alinha os textos com os botões */
-.center-buttom {
-    text-align: center;
 }
 
 
@@ -107,7 +101,7 @@ html, body, .container-table {
 
 /* Ajusta a distância entre o primeiro botão e a barra superior */
 .padding-navbar {
-		margin-bottom: 85px;
+		margin-bottom: 70px;
 }
 
 
@@ -161,13 +155,14 @@ html {
   min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 0px;
 }
+
 .footer {
-  bottom: 0;
+  bottom: 0px;
   width: 100%;
-  background-color: rgba(0,0,0,0);
+  margin-top: 5px;
+  background-color: transparent;
 }
 
 .footer-link {
@@ -188,6 +183,7 @@ body {
   text-decoration:none;
 }
 
+
 /* Contact
 --------------------------------------------------*/
 
@@ -201,10 +197,14 @@ textarea.form-control {
 }
 
 
+
+/* Modal 
+-------------------------------------------------- */
+
 /* Ajusta a posição do modal */
 
-.modal-dialog {
-  top: 30%;
+.modal {
+  top: 20%;
 }
 
 
@@ -216,3 +216,7 @@ textarea.form-control {
 }
 
 
+/* Padding do texto */
+#formation .col-xs-12, #research .col-xs-12 {
+  padding: 0px;
+}
