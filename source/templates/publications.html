@@ -15,8 +15,7 @@
 						<div class="col-centered col-md-11"> 
 							<h5 class="title-publications">{{ pub.title }}</h5>
 			        <small>Published: {{ pub.published }}</small>
-							<p class="text-justify publications-margin-top">{{
-              pub.overview|linebreaksbr }}</p>
+							<p class="text-justify publications-margin-top">{{ pub.overview|linebreaks }}</p>
 							{% csrf_token %}
               <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
                    o 'id' ta tag <a> será usado no script em 'templates/base.html' 
