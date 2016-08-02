@@ -1,6 +1,49 @@
-/* Centraliza o conteúdo */
+html {
+    height: 97%;
+}
 
-html, body, .container-table {
+body {
+    height: 93%;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  body {
+      height: 98%;
+  }
+}
+
+@media (min-width: 768px) and (min-height: 1024px) {
+  body {
+      height: 100%;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  body {
+      height: 97%;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  body {
+      height: 99%;
+  }
+  .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: -10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-right {
+      float: right !important;
+      margin-right: -5px;
+  }
+}
+
+.container-table {
     height: 97%;
 }
 
@@ -15,7 +58,6 @@ html, body, .container-table {
 }
 
 
-
 /* Centraliza o conteúdo no centro da página  */
 
 .container-table {
@@ -25,21 +67,6 @@ html, body, .container-table {
 .vertical-center-row {
     display: table-cell;
     vertical-align: middle;
-}
-
-
-
-/* Centraliza o elemento na linha e na coluna*/
-
-.row-centered {
-    text-align:center;
-}
-
-.col-centered {
-    display:inline-block;
-    float:none;
-    text-align:left;
-    margin-right:-4px;
 }
 
 .text-btn {
@@ -217,6 +244,6 @@ textarea.form-control {
 
 
 /* Padding do texto */
-#formation .col-xs-12, #research .col-xs-12 {
+#formation, #research {
   padding: 0px;
 }

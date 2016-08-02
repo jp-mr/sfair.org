@@ -1,6 +1,15 @@
 from django.contrib import admin
+from django.contrib.admin.sites import AdminSite
 
-from .models import Publication
+from .models import Publication, PageDescription
+
+
+AdminSite.site_header = "Sfair.org"
+AdminSite.site_title = "Sfair.org"
+
+class PageDescriptionModelAdmin(admin.ModelAdmin):
+    class Meta:
+        model = PageDescription
 
 
 class PublicationModelAdmin(admin.ModelAdmin):
@@ -25,3 +34,4 @@ class PublicationModelAdmin(admin.ModelAdmin):
 # [publications] Registra o modelo Publication
 # Vá para: core/views.py
 admin.site.register(Publication, PublicationModelAdmin)
+admin.site.register(PageDescription, PageDescriptionModelAdmin)

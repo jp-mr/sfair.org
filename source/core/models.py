@@ -1,6 +1,13 @@
 from django.db import models
 
 
+class PageDescription(models.Model):
+    research = models.TextField()
+    teaching = models.TextField()
+    cluster = models.TextField()
+    formation = models.TextField()
+
+
 class Publication(models.Model):
 
     # [publications] Definindo os campos no banco de dados

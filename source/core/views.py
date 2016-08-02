@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 
 from .forms import ContactForm
-from .models import Publication
+from .models import Publication, PageDescription
 
 
 def home(request):
@@ -109,13 +109,29 @@ def contact(request):
 
 
 def formation(request):
+
+    description_qs = PageDescription.objects.all()
+    description = description_qs.first()
+
+    context = {
+        "content": description,
+    }
+
     # Renderiza a página
-    return render(request, "formation.html", {})
+    return render(request, "formation.html", context)
 
 
 def research(request):
+
+    description_qs = PageDescription.objects.all()
+    description = description_qs.first()
+
+    context = {
+        "content": description,
+    }
+
     # Renderiza a página
-    return render(request, "research.html", {})
+    return render(request, "research.html", context)
 
 
 def publications(request):
