@@ -126,32 +126,31 @@ def publications(request):
     # ao valor do campo 'counter'.
     # Obs: a paǵina não é atualizada.
 
-    if request.method == 'POST':
-        if request.is_ajax():
-            publication_id = request.POST.get('pub_id')
-            # [publications] O método 'get' busca no banco de dados objeto com
-            # o ID passado pela requisição.
-            publication = Publication.objects.get(id=publication_id)
-            publication.download += 1
-            publication.save()
+    if request.method == 'POST' and request.is_ajax():
+        publication_id = request.POST.get('pub_id')
+        # [publications] O método 'get' busca no banco de dados objeto com
+        # o ID passado pela requisição.
+        publication = Publication.objects.get(id=publication_id)
+        publication.download += 1
+        publication.save()
 
     # [publications] Se o método de requisição for GET, todos os artigos
     # serão trazidos do banco de dados e separados em grupos pelo paginador
 
-    # [publications ] Captura todos os artigos do banco de dados
+    # [publications] Captura todos os artigos do banco de dados
     publications = Publication.objects.all()
 
-    # [publications ] Função que implementa a pagiçãoo
-    paginator = Paginator(publications, 6)  # Exibe 4 artigos por página
+    # [publications] Função que implementa a pagiçãoo
+    paginator = Paginator(publications, 6)  # Exibe 6 artigos por página
 
-    # [publications ] Cria uma lista com os número das páginas.
+    # [publications] Cria uma lista com os número das páginas.
     # Será passado como contexto para exibir os números nos botões
     # do paginador
     l = []
     for page in paginator.page_range:
         l.append(page)
 
-    # [publications ] Captura o valor da variável page no cabeçalho
+    # [publications] Captura o valor da variável page no cabeçalho
     # da requisição. Esse valor só existe a partir da segunda página.
     # Também é passado no contexto para determinar qual botão será
     # destacado na páginação
@@ -159,12 +158,16 @@ def publications(request):
     page = request.GET.get(page_request_var)
 
     try:
+        # [publications] Se a váriavel 'page'for 'None', levanta uma exceção,
+        # senão 'queryset' recebe os artigos que devem ser exibidos ná pagina
+        # requisitada pelo 'request'
         queryset = paginator.page(page)
+
     except PageNotAnInteger:
-        # [publications ] Se page não é um inteiro, retorna a primeira página
+        # [publications] Se page não é um inteiro, retorna a primeira página
         queryset = paginator.page(1)
+
     except EmptyPage:
-        #
         queryset = paginator.page(paginator.num_pages)
 
     context = {
@@ -174,6 +177,6 @@ def publications(request):
         'page': page,
     }
 
-    # [publications ] Renderiza a página
+    # [publications] Renderiza a página
     # Vá para: templates/publications.html
     return render(request, "publications.html", context)
