@@ -15,21 +15,22 @@ class PageDescriptionModelAdmin(admin.ModelAdmin):
 class PublicationModelAdmin(admin.ModelAdmin):
 
     # [publications] Exibe os campos em colunas
-    list_display = ['title', 'updated', 'timestamp', 'published', 'download']
+    list_display = ['title', 'author', 'journal','year', 'download']
 
     # [publications] Não permite a edição dos campos
     readonly_fields = ['download', ]
 
     # [publications] Implementa um campo de filtro à esquerda da página
-    list_filter = ['title']
+    list_filter = ['author', 'journal']
 
     # [publications] Implementa um campo de busca
-    search_fields = ['title', 'overview']
+    search_fields = ['title', 'author', 'journal', 'year', 'abstract']
 
     class Meta:
         # [publications] Atribui a tabela Publication para ser exibido
         # na página de Administrador
         model = Publication
+
 
 # [publications] Registra o modelo Publication
 # Vá para: core/views.py

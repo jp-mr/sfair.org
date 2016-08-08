@@ -43,10 +43,6 @@ body {
   }
 }
 
-.container-table {
-    height: 97%;
-}
-
 
 /* [home] - Imagem de fundo da página inicial */
 .img-background {
@@ -62,6 +58,7 @@ body {
 
 .container-table {
     display: table;
+    height: 97%;
 }
 
 .vertical-center-row {
@@ -69,17 +66,18 @@ body {
     vertical-align: middle;
 }
 
+
+/* Ícones (botões) da Home */
+
 .text-btn {
     font-size: 13pt;
     font-weight: bold;
 }
 
-
 .home-btn {
     color: #fff;
     text-shadow: 2px 2px 2px #000000;
 }
-
 
 .home-btn:hover, .home-btn:focus {
     color: rgba(255, 255, 255, 0.75);
@@ -87,18 +85,6 @@ body {
 }
 
 
-.title-page-contact {
-    margin-top: 0px !important;
-}
-
-
-@media (min-width: 992px) {
-
-	.title-page-contact {
-			margin-top: 21px !important;
-	}
-
-}
 /* Aplica a CSS se a altura >= 768 e largura >= 601px 
 
    Ajusta a distância entre os títulos das páginas e a navbar
@@ -110,7 +96,6 @@ body {
     .title-page {
         margin-bottom: 45px !important;
     }
-
 }
 
 
@@ -121,16 +106,19 @@ body {
 }
 
 .content-navbar-adjust-publications {
-    height: 84px;
+    height: 38px;
     position:relative;
     top: 0%;
+}
+
+.year-title {
+   margin-top: 50px;
 }
 
 /* Ajusta a distância entre o primeiro botão e a barra superior */
 .padding-navbar {
 		margin-bottom: 70px;
 }
-
 
 
 
@@ -145,29 +133,33 @@ body {
 		.title-formation {
         font-size: 36px !important;
     }
-
-    .padding-publications {
-        padding-left: 0px;
-        padding-right: 6px;
-    }
-
 }
-
-
-/* Centraliza verticalmente o conteúdo
---------------------------------------------------*/
-.vertical-center-row-publication {
-    vertical-align: middle;
-}
-
 
 
 a {
     text-decoration: none !important;
 }
 
+
+.hr-year {
+  margin-bottom: 0px;
+}
+
 .title-publications {
-    margin-bottom: 0px !important;
+    margin-bottom: 0px!important;
+    margin-top: 30px!important;
+}
+
+#author {
+  margin-bottom: -5px;
+}
+
+#journal {
+  font-style: italic;
+}
+
+#abstract {
+  display: none;
 }
 
 .publications-margin-top {
@@ -213,6 +205,18 @@ body {
 
 /* Contact
 --------------------------------------------------*/
+
+.title-page-contact {
+    margin-top: 0px !important;
+}
+
+@media (min-width: 992px) {
+
+	.title-page-contact {
+			margin-top: 21px !important;
+	}
+
+}
 
 /* Esconde a exibição do nomes dos campos do formuário renderizados pelo django*/
 .control-label, .requiredField {

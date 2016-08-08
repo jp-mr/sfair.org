@@ -186,11 +186,19 @@ def publications(request):
     except EmptyPage:
         queryset = paginator.page(paginator.num_pages)
 
+    years = []
+    for qs in queryset:
+        if not qs.year in years:
+            years.append(qs.year)
+
+    #years_dict = {'years': years}
+
     context = {
         'pub_list': queryset,
         'page_request_var': page_request_var,
         'list': l,
         'page': page,
+        'years': years,
     }
 
     # [publications] Renderiza a página
