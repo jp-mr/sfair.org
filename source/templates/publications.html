@@ -3,85 +3,72 @@
 
 {% block content %}
 
-	<div class="container container-table">
-	  <div id="publications" class="content-navbar-adjust"></div>
-
-    <!-- [publications] Itera sobre pub_list (passado no contexto em view.py) 
-			    e replica o código para cada artigos -->
-    {% for pub in pub_list %}
-    <div id="{{pub.year}}" class="row">
-		  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-			  <h5 class="title-publications">{{ pub.title }}</h5>
-        <span>
-          <p id="author">{{ pub.author}}</p>
-          <p id="journal">{{ pub.journal}}</p>
-        </span>
-        <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
-				{% csrf_token %}
-        <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
-             o 'id' ta tag <a> será usado no script em 'templates/base.html' 
-             para a requisição AJAX do contador de downloads. -->
-				<a id="{{ pub.id }}" href="{{ pub.upload.url }}"
-            target="_blank">[ preprint ]</a>
-				<p id="abstract" class="text-justify publications-margin-top">{{ pub.abstract|linebreaksbr }}</p>
-      </div>
+<div class="container container-table">
+  <div id="publications" class="content-navbar-adjust"></div>
+  
+  <!-- [publications] Itera sobre pub_list (passado no contexto em view.py) 
+  		 e replica o código para cada artigos -->
+  {% for pub in pub_list %}
+  <div id="{{pub.year}}" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+      <h5 class="title-publications">{{ pub.title }}</h5>
+      <span>
+        <p id="author">{{ pub.author}}</p>
+        <p id="journal">{{ pub.journal}}</p>
+      </span>
+      <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
+      {% csrf_token %}
+      <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
+           o 'id' ta tag <a> será usado no script em 'templates/base.html' 
+           para a requisição AJAX do contador de downloads. -->
+      <a id="{{ pub.id }}" href="{{ pub.upload.url }}"
+         target="_blank">[ preprint ]</a>
+      <p id="abstract" class="text-justify publications-margin-top">{{ pub.abstract|linebreaksbr }}</p>
     </div>
-    {% endfor %}
-	
-		<nav>
-      <div class="text-center col-sm-6 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
-			  <!--
-				  [publications] Páginador: << 1 2 3 4 >>
-          Vá para: templates/base.html
-        -->
-			  <ul class="pagination">
-				  {% if pub_list.has_previous %}
-					  <li>
-						  <a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}" aria-label="Previous">
-							  <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-          {% endif %}
-          <!-- [publications] Itera sobre 'list' (passado no contexto em views.py) 
-               e atribuindo um número para cara página -->
-          {% for l in list %}
-					  <li id="page{{ l }}"><a href="?{{ page_request_var }}={{ l }}">{{ l }}</a></li>
-          {% endfor %}
-          {% if pub_list.has_next %}
-					  <li>
-						  <a href="?{{ page_request_var }}={{ pub_list.next_page_number }}" aria-label="Next">
-							  <span aria-hidden="true">&raquo;</span>
-						  </a>
-					  </li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
-
-
-    <!--{# Paginador:  Next - Page 1 of 2 - Previous
-
-				<div class="pagination">
-					<nav>
-						<ul class="pager">
-							{% if pub_list.has_previous %}
-								<li>
-									<a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}">Next</a>
-                </li>
-              {% endif %}
-							<span class="current">
-								Page {{ pub_list.number }} of {{ pub_list.paginator.num_pages }}
-              </span>
-							{% if pub_list.has_next %}
-								<li>
-									<a href="?{{ page_request_var }}={{ pub_list.next_page_number }}">Previous</a>
-                </li>
-              {% endif %}
-            </ul>
-          </nav>
-        </div>
-
-      #}-->
-
   </div>
+  {% endfor %}
+</div>   
+
 {% endblock %}
+
+
+{% block paginator %}
+
+{% if pub_list %}
+  <div>
+    <div class="text-center col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+    <!-- 
+  	  [publications] Páginador: << 1 2 3 4 >>
+      Vá para: templates/base.html
+    -->
+      <ul class="pagination">
+        {% if pub_list.has_previous %}
+        <li>
+          <a href="?{{ page_request_var }}={{ pub_list.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+          </li>
+        {% endif %}
+        <!--
+          [publications] Itera sobre 'list' (passado no contexto em views.py) 
+          e atribuindo um número para cara página 
+        -->
+        {% for l in list %}
+        <li id="page{{ l }}"><a href="?{{ page_request_var }}={{ l }}">{{ l }}</a></li>
+        {% endfor %}
+
+        {% if pub_list.has_next %}
+        <li>
+          <a href="?{{ page_request_var }}={{ pub_list.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <script src="{% static 'js/fokus.min.js'%}"></script>
+{% endif %}
+
+{% endblock paginator %}

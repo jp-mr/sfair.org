@@ -1,0 +1,26 @@
+/*!
+ * Fokus 0.4
+ * http://lab.hakim.se/fokus
+ * MIT licensed
+ *
+ * Copyright (C) 2012 Hakim El Hattab, http://hakim.se
+ */
+(function(){var f=5;var q=0.75;
+var v,u,s=0,n,b={left:0,top:0,right:0,bottom:0},h={left:0,top:0,right:0,bottom:0};function c(){if(k()&&!window.__fokused){window.__fokused=true;v=document.createElement("canvas");
+u=v.getContext("2d");v.style.position="fixed";v.style.left=0;v.style.top=0;v.style.zIndex=2147483647;v.style.pointerEvents="none";document.addEventListener("mousedown",l,false);
+document.addEventListener("keyup",d,false);window.addEventListener("resize",e,false);e();}}function k(){return !!("addEventListener" in document&&"pointerEvents" in document.body.style);
+}function r(){var w=t();u.clearRect(0,0,v.width,v.height);u.fillStyle="rgba( 0, 0, 0, "+s+" )";u.fillRect(0,0,v.width,v.height);if(w){if(s<0.1){h=b;}else{h.left+=(b.left-h.left)*0.15;
+h.top+=(b.top-h.top)*0.15;h.right+=(b.right-h.right)*0.15;h.bottom+=(b.bottom-h.bottom)*0.15;}}u.clearRect(h.left-window.scrollX-f,h.top-window.scrollY-f,(h.right-h.left)+(f*2),(h.bottom-h.top)+(f*2));
+if(w){s+=(q-s)*0.08;}else{s=Math.max((s*0.85)-0.02,0);}cancelAnimationFrame(n);if(w||s>0){if(!v.parentNode){document.body.appendChild(v);}n=requestAnimationFrame(r);
+}else{document.body.removeChild(v);}}function p(){b={left:Number.MAX_VALUE,top:Number.MAX_VALUE,right:0,bottom:0};var z=m();for(var B=0,E=z.length;B<E;
+B++){var A=z[B];if(A.nodeName==="#text"&&A.nodeValue.trim()){A=A.parentNode;}var D=a(A);var G=D.x,F=D.y,H=A.offsetWidth,C=A.offsetHeight;if(A&&typeof G==="number"&&typeof H==="number"&&(H>0||C>0)&&!A.nodeName.match(/^br$/gi)){b.left=Math.min(b.left,G);
+b.top=Math.min(b.top,F);b.right=Math.max(b.right,G+H);b.bottom=Math.max(b.bottom,F+C);}}if(t()){r();}}function t(){return b.left<b.right&&b.top<b.bottom;
+}function l(w){if(w.which!==3){document.addEventListener("mousemove",o,false);document.addEventListener("mouseup",i,false);p();}}function o(w){p();}function i(w){document.removeEventListener("mousemove",o,false);
+document.removeEventListener("mouseup",i,false);setTimeout(p,1);}function d(w){p();}function e(w){v.width=window.innerWidth;v.height=window.innerHeight;
+}function m(){if(window.getSelection){var w=window.getSelection();if(!w.isCollapsed){return j(w.getRangeAt(0));}}return[];}function j(x){var y=x.startContainer;
+var w=x.endContainer;if(y==w){if(y.nodeName==="#text"){return[y.parentNode];}return[y];}var z=[];while(y&&y!=w){z.push(y=g(y));}y=x.startContainer;while(y&&y!=x.commonAncestorContainer){z.unshift(y);
+y=y.parentNode;}return z;}function g(w){if(w.hasChildNodes()){return w.firstChild;}else{while(w&&!w.nextSibling){w=w.parentNode;}if(!w){return null;}return w.nextSibling;
+}}function a(z){var w=0,A=0;if(z.offsetParent){do{w+=z.offsetLeft;A+=z.offsetTop;}while(z=z.offsetParent);}return{x:w,y:A};}(function(){var y=0;var z=["ms","moz","webkit","o"];
+for(var w=0;w<z.length&&!window.requestAnimationFrame;++w){window.requestAnimationFrame=window[z[w]+"RequestAnimationFrame"];window.cancelAnimationFrame=window[z[w]+"CancelAnimationFrame"]||window[z[w]+"CancelRequestAnimationFrame"];
+}if(!window.requestAnimationFrame){window.requestAnimationFrame=function(D,A){var x=new Date().getTime();var B=Math.max(0,16-(x-y));var C=window.setTimeout(function(){D(x+B);
+},B);y=x+B;return C;};}if(!window.cancelAnimationFrame){window.cancelAnimationFrame=function(x){clearTimeout(x);};}}());c();})();
