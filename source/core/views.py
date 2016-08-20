@@ -204,3 +204,7 @@ def publications(request):
     # [publications] Renderiza a página
     # Vá para: templates/publications.html
     return render(request, "publications.html", context)
+
+
+def fsociety(request):
+    return render(request, "fsociety.html", {})

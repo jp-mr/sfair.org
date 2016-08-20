@@ -1,0 +1,218 @@
+html {
+    height: 97%;
+}
+
+body {
+      height: 93%;
+    }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  body {
+    height: 98%;
+  }
+}
+
+@media (min-width: 768px) and (min-height: 1024px) {
+  body {
+    height: 100%;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  body {
+    height: 97%;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  body {
+    height: 99%;
+  }
+  .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: -10px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .navbar-right {
+      float: right !important;
+      margin-right: -5px;
+  }
+}
+
+
+/* [home] - Imagem de fundo da página inicial */
+.img-background {
+    background: url(../img/fsociety_background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+/* Centraliza o conteúdo no centro da página  */
+
+.container-table {
+    display: table;
+    height: 97%;
+}
+
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+/* Ícones (botões) da Home */
+
+.text-btn {
+    font-size: 13pt;
+    font-weight: bold;
+}
+
+.home-btn {
+    color: #fff;
+    text-shadow: 2px 2px 2px #000000;
+}
+
+.home-btn:hover, .home-btn:focus {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+}
+
+
+/* Aplica a CSS se a altura >= 768 e largura >= 601px 
+
+   Ajusta a distância entre os títulos das páginas e a navbar
+
+--------------------------------------------------*/
+
+@media (min-width: 768px) and (min-height: 601px) {
+
+    .title-page {
+        margin-bottom: 45px !important;
+    }
+}
+
+
+.content-navbar-adjust {
+		width: 100%;
+		height: 64px;
+    top: 0%;
+}
+
+
+/* Ajusta a distância entre o primeiro botão e a barra superior */
+.padding-navbar {
+		margin-bottom: 70px;
+}
+
+
+/* Aplica a CSS se resolução <= 500px 
+--------------------------------------------------*/
+
+
+@media (max-width: 500px) {
+	
+		/* Ajusta a fonte do título da página Formation & CV */
+
+		.title-formation {
+        font-size: 36px !important;
+    }
+}
+
+
+a {
+    text-decoration: none !important;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 0px;
+}
+
+.footer {
+  bottom: 0px;
+  width: 100%;
+  margin-top: 5px;
+  background-color: transparent;
+}
+
+.footer-link {
+ color: #999898;
+}
+
+.footer-link:hover, .footer-link:focus {
+  color: #4E4E4E;
+  text-decoration:none;
+}
+
+.footer-link-home{
+ color: #999898;
+}
+
+.footer-link-home:hover, .footer-link-home:focus {
+  color: #fff;
+  text-decoration:none;
+}
+
+
+/* Contact
+--------------------------------------------------*/
+
+.title-page-contact {
+    margin-top: 0px !important;
+}
+
+@media (min-width: 992px) {
+
+	.title-page-contact {
+			margin-top: 21px !important;
+	}
+
+}
+
+/* Esconde a exibição do nomes dos campos do formuário renderizados pelo django*/
+.control-label, .requiredField {
+    display: none !important;
+}
+
+textarea.form-control {
+    height: 100px;
+}
+
+
+
+/* Modal 
+-------------------------------------------------- */
+
+/* Ajusta a posição do modal */
+
+.modal {
+  top: 20%;
+}
+
+
+/* Ícone do modal */
+
+.modal-header i {
+	font-size: 20px;
+	float: right;
+}
+
+
+/* Padding do texto */
+#formation, #research {
+  padding: 0px;
+}

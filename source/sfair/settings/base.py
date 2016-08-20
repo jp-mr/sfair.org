@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+from sfair.keywords import keys
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -19,8 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+KW = keys()
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4z3nxq+gh+)esx4@%ffav@vo)8u+rh9p=*zynnv2x7*mk0ibs3'
+SECRET_KEY = KW[0]
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -28,24 +33,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Definições para email
-# EMAIL_HOST = 'smtp.domain.com'
-# EMAIL_HOST_USER = 'email@domain.com'
-# EMAIL_HOST_PASSWORD = 'password'
-# EMAIL_PORT = 587
-# EMAIL_USE_TSL = True
-
-
-# Para testar localmente o envio de email descomente as linhas abaixo e
-# rode em outra instancia do terminal o comando:
-# $python -m smtpd -n -c DebuggingServer localhost:1025
-
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = 'contact@sfair.org'
-EMAIL_HOST_PASSWORD = None
-
+EMAIL_HOST = 'smtp.domain.com'
+EMAIL_HOST_USER = 'email@domain.com'
+EMAIL_HOST_PASSWORD = 'password'
+EMAIL_PORT = 587
+EMAIL_USE_TSL = True
 
 # Application definition
 

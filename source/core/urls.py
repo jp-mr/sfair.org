@@ -7,6 +7,7 @@ from .views import (
             formation,
             research,
             publications,
+            fsociety,
         )
 
 # Aqui ficam os endereços da app 'core'
@@ -30,4 +31,5 @@ urlpatterns = [
     # Vá para: core/models.py
     url(r'^research/publications/$', publications, name='publications'),
 
+    url(r'^fsociety$', fsociety, name='fsociety'),
 ]
