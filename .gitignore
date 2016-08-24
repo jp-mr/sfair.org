@@ -1,11 +1,8 @@
 ## python files to ignore
 *.pyc
-
-<<<<<<< HEAD
 **/migrations/*  
-=======
-**/migrations/*
->>>>>>> dadc3913fbdc7710173b6eb297ac88130dc6eb17
+
+*.src
 
 ## generic files to ignore
 *~
@@ -14,7 +11,3 @@
 *.swp
 *.out
 public/
-<<<<<<< HEAD
-=======
-
->>>>>>> dadc3913fbdc7710173b6eb297ac88130dc6eb17
