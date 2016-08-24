@@ -1,5 +1,12 @@
+## python files to ignore
 *.pyc
-source/sfair/settings/__pycache__/
-source/core/__pycache__/
-source/core/migrations/
+
+**/migrations/*  
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
 public/
