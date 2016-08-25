@@ -15,7 +15,7 @@ EMAIL_HOST_USER = KW[3]
 EMAIL_HOST_PASSWORD = KW[4]
 EMAIL_PORT = 25
 EMAIL_USE_TSL = True
-EMAIL_DESTINY = KW[5]
+EMAIL_DESTINY = False
 
 # Para testar localmente o envio de email descomente as linhas abaixo e 
 # rode em outra instancia do terminal o comando: 
@@ -33,10 +33,10 @@ EMAIL_DESTINY = KW[5]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': KW[6],
-        'USER': KW[7],
-        'PASSWORD': KW[8],
-        'HOST': KW[9],
+        'NAME': KW[5],
+        'USER': KW[6],
+        'PASSWORD': KW[7],
+        'HOST': KW[8],
         'PORT': '3306',
     }
 }

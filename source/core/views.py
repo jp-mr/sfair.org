@@ -78,6 +78,10 @@ def contact(request):
             from_email = settings.EMAIL_HOST_USER
 
             to_email = [from_email, ]
+
+            if settings.EMAIL_DESTINY:
+                to_email += [settings.EMAIL_DESTINY]
+
             contact_message = "%s <%s> \n\n %s" % (name, email, message)
 
             # [contact] Envia o email através do servidor SMTP
@@ -190,8 +194,6 @@ def publications(request):
     for qs in queryset:
         if not qs.year in years:
             years.append(qs.year)
-
-    #years_dict = {'years': years}
 
     context = {
         'pub_list': queryset,

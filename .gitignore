@@ -4,6 +4,8 @@
 
 ##
 *.src
+passenger_wsgi.py
+public/
 
 ## generic files to ignore
 *~
@@ -11,4 +13,3 @@
 *.DS_Store
 *.swp
 *.out
-public/
