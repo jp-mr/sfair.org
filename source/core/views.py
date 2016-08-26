@@ -105,7 +105,7 @@ def contact(request):
                     contact_message,
                     from_email,
                     to_email,
-                    reply_to=[email
+                    reply_to=[email],
                     )
 
             msg.send(fail_silently=False)
