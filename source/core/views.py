@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
@@ -90,14 +90,25 @@ def contact(request):
             # XXX TODO: Tratar a exceção quando o envio do email falhar.
             #           Essa exceção só é levantada quando a variável 
             #           "fail_silently" for igual a "False".
-            send_mail(
-                subject,
-                contact_message,
-                from_email,
-                to_email,
-                reply_to=[email],
-                fail_silently=False
-            )
+            # send_mail(
+            #     subject,
+            #     contact_message,
+            #     from_email,
+            #     to_email,
+            #     reply_to=[email],
+            #     fail_silently=False
+            # )
+
+
+            msg = EmailMessage(
+                    subject,
+                    contact_message,
+                    from_email,
+                    to_email,
+                    reply_to=[email
+                    )
+
+            msg.send(fail_silently=False)
 
             # [contact] Redireciona para a página principal
             # adicionando '?sent=True' na URL
