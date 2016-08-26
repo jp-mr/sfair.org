@@ -75,8 +75,7 @@ def contact(request):
             subject = form.cleaned_data.get('subject')
 
             # [contact] Atribui o email cadastrado no servidor SMTP
-            # from_email = settings.EMAIL_HOST_USER
-            from_email = email
+            from_email = settings.EMAIL_HOST_USER
 
             to_email = [from_email, ]
 
@@ -86,6 +85,9 @@ def contact(request):
             contact_message = "%s <%s> \n\n %s" % (name, email, message)
 
             # [contact] Envia o email através do servidor SMTP
+            # XXX TODO: Tratar a exceção quando o envio do email falhar.
+            #           Essa exceção só é levantada quando a variável 
+            #           "fail_silently" for igual a "False".
             send_mail(
                 subject,
                 contact_message,
