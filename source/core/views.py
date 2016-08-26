@@ -95,6 +95,7 @@ def contact(request):
                 contact_message,
                 from_email,
                 to_email,
+                reply_to=[email],
                 fail_silently=False
             )
 
