@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage  # send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
@@ -79,15 +79,14 @@ def contact(request):
 
             to_email = [from_email, ]
 
+            # [contact] Se a variável EMAIL_DESTINY, no arquivo de
+            # configuração do django, não for "False", adiciona o seu valor a
+            # lista de destinatários
             if settings.EMAIL_DESTINY:
                 to_email += [settings.EMAIL_DESTINY]
 
             contact_message = "%s <%s> \n\n %s" % (name, email, message)
 
-            # [contact] Envia o email através do servidor SMTP
-            # XXX TODO: Tratar a exceção quando o envio do email falhar.
-            #           Essa exceção só é levantada quando a variável 
-            #           "fail_silently" for igual a "False".
             # send_mail(
             #     subject,
             #     contact_message,
@@ -97,7 +96,12 @@ def contact(request):
             #     fail_silently=False
             # )
 
+            # XXX TODO: Pesquisar se é possível tratar a exceção quando
+            #           o envio do email falhar. Essa exceção só é
+            #           levantada quando a variável "fail_silently"
+            #           for igual a "False".
 
+            # [contact] Envia o email através do servidor SMTP
             msg = EmailMessage(
                     subject,
                     contact_message,
