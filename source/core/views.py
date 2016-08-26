@@ -75,11 +75,9 @@ def contact(request):
             subject = form.cleaned_data.get('subject')
 
             # [contact] Atribui o email cadastrado no servidor SMTP
-            #from_email = settings.EMAIL_HOST_USER
-            from_email = email
+            from_email = settings.EMAIL_HOST_USER
 
-            #to_email = [from_email, ]
-            to_email = [settings.EMAIL_HOST_USER, ]
+            to_email = [from_email, ]
 
             if settings.EMAIL_DESTINY:
                 to_email += [settings.EMAIL_DESTINY]
