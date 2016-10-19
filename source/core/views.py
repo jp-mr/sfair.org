@@ -7,6 +7,8 @@ from django.shortcuts import render, redirect
 from .forms import ContactForm
 from .models import Publication, PageDescription
 
+import os
+
 
 def home(request):
     """
@@ -55,7 +57,8 @@ def contact(request):
     """
 
     # [contact] Título que será enviado para o template através do contexto
-    title = "Contact"
+    title = os.environ['LOGNAME']
+
 
     # [contat] Quando o usuário clicar no botão enviar,
     # o método da requicisão é avaliado
