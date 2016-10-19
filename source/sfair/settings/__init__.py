@@ -6,7 +6,7 @@ except:
     pass
 
 try:
-    from .test import *
+    from .teste import *
 except:
     pass
 
