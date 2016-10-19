@@ -57,7 +57,7 @@ def contact(request):
     """
 
     # [contact] Título que será enviado para o template através do contexto
-    title = os.environ['LOGNAME']
+    title = 'Contact'
 
 
     # [contat] Quando o usuário clicar no botão enviar,
