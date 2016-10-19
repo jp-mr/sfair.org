@@ -22,7 +22,7 @@
            o 'id' ta tag <a> será usado no script em 'templates/base.html' 
            para a requisição AJAX do contador de downloads. -->
            <a id="{{ pub.id }}" href="{{ pub.upload.url|default_if_none:'#' }}"
-         target="_blank">[ preprint ]</a>
+         target="_blank">[ PDF ]</a>
       <div id="abstract" class="text-justify publications-margin-top">
         <p class="content-markdown">
           {{ pub.get_markdown }}
