@@ -1,5 +1,6 @@
 ## python files to ignore
 *.pyc
+**/__pycache__/*
 **/migrations/*  
 
 ##
