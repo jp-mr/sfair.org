@@ -133,11 +133,10 @@ def contact(request):
 
 def formation(request):
 
-    description_qs = PageDescription.objects.all()
-    description = description_qs.first()
+    obj = PageDescription.objects.get(pk=4)
 
     context = {
-        "content": description,
+        'obj': obj
     }
 
     # Renderiza a página
@@ -146,11 +145,10 @@ def formation(request):
 
 def research(request):
 
-    description_qs = PageDescription.objects.all()
-    description = description_qs.first()
+    obj = PageDescription.objects.get(pk=1)
 
     context = {
-        "content": description,
+        'obj': obj
     }
 
     # Renderiza a página
@@ -225,7 +223,3 @@ def publications(request):
     # [publications] Renderiza a página
     # Vá para: templates/publications.html
     return render(request, "publications.html", context)
-
-
-def fsociety(request):
-    return render(request, "fsociety.html", {})

@@ -1,4 +1,7 @@
 from django import forms
+from pagedown.widgets import AdminPagedownWidget
+
+from .models import PageDescription, Publication
 
 
 class ContactForm(forms.Form):
@@ -27,3 +30,51 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={
         'placeholder': 'Message'
     }))
+
+
+class PageDescriptionForm(forms.ModelForm):
+    description = forms.CharField(widget=AdminPagedownWidget())
+
+    class Meta:
+        model = PageDescription
+        fields = "__all__"
+
+
+class PublicationForm(forms.ModelForm):
+    abstract = forms.CharField(widget=AdminPagedownWidget())
+
+    class Meta:
+        model = Publication
+        fields = "__all__"
+
+
+# class ResearchPageDescriptionForm(forms.ModelForm):
+#     description = forms.CharField(widget=AdminPagedownWidget())
+# 
+#     class Meta:
+#         model = ResearchPageDescription
+#         fields = "__all__"
+# 
+# 
+# class TeachingPageDescriptionForm(forms.ModelForm):
+#     description = forms.CharField(widget=AdminPagedownWidget())
+# 
+#     class Meta:
+#         model = TeachingPageDescription
+#         fields = "__all__"
+# 
+# 
+# class ClusterPageDescriptionForm(forms.ModelForm):
+#     description = forms.CharField(widget=AdminPagedownWidget())
+# 
+#     class Meta:
+#         model = ClusterPageDescription
+#         fields = "__all__"
+# 
+# 
+# class FormationPageDescriptionForm(forms.ModelForm):
+#     description = forms.CharField(widget=AdminPagedownWidget())
+# 
+#     class Meta:
+#         model = FormationPageDescription
+#         fields = "__all__"

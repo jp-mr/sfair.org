@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
     <!-- ############### [ Script  ] ###############  -->
 
     <!-- jQuery -->
@@ -6,6 +8,8 @@
     <!-- Bootstrap Core JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+    <!-- Marked 0.3.6 -->
+    <script src="{% static 'js/marked.min.js' %}"></script>
 
     <script>
 
@@ -57,7 +61,7 @@
           // a distância entre o primeiro artigo e a nav-bar
           $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
 
-          // [publications] Implementa o botão que será detacado utilizando o valor de 'page',
+          // [publications] Implementa o botão que será destacado utilizando o valor de 'page',
           // passado no contexto
           {%if page %}
             $("#page{{ page }}").addClass('active')
@@ -164,6 +168,28 @@
           }
 
         {% endif %}
+
+        // Markdown
+        // ==================================================
+        // Quando a página for carregada (document), executa as funções.
+        // Primeira função:
+        //     $(".content-markdown") se refere a uma classe dentro de uma 
+        //     tag <p> em 'post_detail.html'.
+        //     '.this' se refere a '.content-markdown'
+        //     '.each()' executa uma iteração
+        //     'marked()' é chamada do script 'Markdown' acima.
+        //     'console.log()' exibe a saída no console do navegador
+        // Segunda função:
+        //     adiciona a classe 'img-responsive' para tornar responsivas 
+        //     as imagens adicionadas pelo app 'markdown'
+
+        $(".content-markdown").each(function(){
+            var content = $(this).text()
+            //console.log(content)
+            var markedContent = marked(content)
+            //console.log(markedContent)
+            $(this).html(markedContent)
+        });
 
       })
 

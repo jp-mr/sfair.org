@@ -6,7 +6,7 @@
   <div class="container container-table">
     <div class="vertical-center-row">
       <div class="content-navbar-adjust"></div>
-      <h2 class="text-center title-formation">Formation & CV</h2>
+      <h2 class="text-center title-formation">{{ obj.title }}</h2>
       <div class="col-md-2 col-sm-3">
         <div class="text-center">
           <span class="fa-stack fa-lg fa-5x">
@@ -16,9 +16,12 @@
         </div>
       </div>
       <div id="formation" class="col-md-8 col-sm-8 col-xs-12">
-        <p class="text-justify">
-          {{ content.formation|linebreaksbr }}
-        </p>
+        <div class="text-justify">
+          <p class="content-markdown">
+          {{ obj.get_markdown }}
+          </p>
+        </div>
+
         <hr/>
         <p>
           <a href="http://lattes.cnpq.br/6928187292584643" target="_blank">Lattes</a>

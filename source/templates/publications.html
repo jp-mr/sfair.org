@@ -21,9 +21,13 @@
       <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
            o 'id' ta tag <a> será usado no script em 'templates/base.html' 
            para a requisição AJAX do contador de downloads. -->
-      <a id="{{ pub.id }}" href="{{ pub.upload.url }}"
+           <a id="{{ pub.id }}" href="{{ pub.upload.url|default_if_none:'#' }}"
          target="_blank">[ preprint ]</a>
-      <p id="abstract" class="text-justify publications-margin-top">{{ pub.abstract|linebreaksbr }}</p>
+      <div id="abstract" class="text-justify publications-margin-top">
+        <p class="content-markdown">
+          {{ pub.get_markdown }}
+        </p>
+      </div>
     </div>
   </div>
   {% endfor %}
