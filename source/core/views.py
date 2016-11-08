@@ -136,7 +136,7 @@ def contact(request):
 
 def formation(request):
 
-    obj = PageDescription.objects.get(pk=4)
+    obj = PageDescription.objects.get(pk=1)
 
     context = {
         'obj': obj
@@ -148,7 +148,7 @@ def formation(request):
 
 def research(request):
 
-    obj = PageDescription.objects.get(pk=1)
+    obj = PageDescription.objects.get(pk=2)
 
     context = {
         'obj': obj
