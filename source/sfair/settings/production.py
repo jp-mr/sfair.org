@@ -1,35 +1,25 @@
-from sfair.keywords import keys
-
 import os
 
 
 if os.environ['LOGNAME'] == 'sfair':
 
-    KW = keys()
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.environ['SECRET_PROJECT_KEY']
 
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
 
     ALLOWED_HOSTS = [
-        KW[1],
+        os.environ['ALLOWED_HOSTS_URL'],
     ]
 
     # Definições para email    
-    EMAIL_HOST = KW[2]
-    EMAIL_HOST_USER = KW[3]
-    EMAIL_HOST_PASSWORD = KW[4]
+    EMAIL_HOST = os.environ['HOST_EMAIL']
+    EMAIL_HOST_USER = os.environ['HOST_USER_EMAIL']
+    EMAIL_HOST_PASSWORD = os.environ['HOST_PASSWORD_EMAIL']
     EMAIL_PORT = 25
     EMAIL_USE_TSL = True
-    EMAIL_DESTINY = KW[5]
-
-    # Para testar localmente o envio de email descomente as linhas abaixo e 
-    # rode em outra instancia do terminal o comando: 
-    # $python -m smtpd -n -c DebuggingServer localhost:1025
-
-    #EMAIL_HOST = 'localhost'
-    #EMAIL_PORT = 1025
-    #EMAIL_HOST_USER = 'contact@sfair.org'
-    #EMAIL_HOST_PASSWORD = None
+    EMAIL_DESTINY = os.environ['DESTINY_EMAIL']
 
     # Database
     # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -37,10 +27,10 @@ if os.environ['LOGNAME'] == 'sfair':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': KW[6],
-            'USER': KW[7],
-            'PASSWORD': KW[8],
-            'HOST': KW[9],
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASSWORD'],
+            'HOST': os.environ['DB_HOST'],
             'PORT': '3306',
         }
     }
