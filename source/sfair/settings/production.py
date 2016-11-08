@@ -10,7 +10,7 @@ if os.environ['LOGNAME'] == 'sfair':
     DEBUG = False
 
     ALLOWED_HOSTS = [
-        os.environ['ALLOWED_HOSTS_URL'],
+        os.environ['ALLOWED_HOST_URL'],
     ]
 
     # Definições para email    
