@@ -7,10 +7,10 @@ if os.environ['LOGNAME'] == 'sfair':
     SECRET_KEY = os.environ['SECRET_PROJECT_KEY']
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = False
+    DEBUG = True
 
     ALLOWED_HOSTS = [
-        os.environ['ALLOWED_HOST_URL'],
+        os.environ['ALLOWED_HOSTs_URL'],
     ]
 
     # Definições para email    
