@@ -17,11 +17,11 @@ class PageDescriptionModelAdmin(admin.ModelAdmin):
 
     # Não permite a adição de novos objetos no admin
     def has_add_permission(self, request):
-        return False
+        return True
 
     # Não permite a remoção de objetos no admin
     def has_delete_permission(self, request, obj=PageDescription):
-        return False
+        return True
 
     # list_display = ['title', 'pk']
 
