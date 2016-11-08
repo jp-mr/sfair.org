@@ -1,7 +1,0 @@
-python manage.py runserver --settings=sfair.settings.local
-
-python manage.py makemigrations --settings=sfair.settings.local
-
-python manage.py migrate --settings=sfair.settings.local
-
-python manage.py createsuperuser --settings=sfair.settings.local

@@ -1,22 +1,21 @@
-from sfair.keywords import keys
-
 import os
 
 if os.environ['LOGNAME'] == 'sfair_teste':
 
-    KW = keys()
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.environ['SECRET_PROJECT_KEY']
 
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
 
     ALLOWED_HOSTS = [
-        KW[1],
+        os.environ['ALLOWED_HOSTS_URL'],
     ]
 
     # Definições para email    
-    EMAIL_HOST = KW[2]
-    EMAIL_HOST_USER = KW[3]
-    EMAIL_HOST_PASSWORD = KW[4]
+    EMAIL_HOST = os.environ['HOST_EMAIL']
+    EMAIL_HOST_USER = os.environ['HOST_USER_EMAIL']
+    EMAIL_HOST_PASSWORD = os.environ['HOST_PASSWORD_EMAIL']
     EMAIL_PORT = 25
     EMAIL_USE_TSL = True
     EMAIL_DESTINY = False
@@ -36,10 +35,10 @@ if os.environ['LOGNAME'] == 'sfair_teste':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': KW[5],
-            'USER': KW[6],
-            'PASSWORD': KW[7],
-            'HOST': KW[8],
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASSWORD'],
+            'HOST': os.environ['DB_HOST'],
             'PORT': '3306',
         }
     }
