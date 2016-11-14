@@ -9,6 +9,7 @@ db.sqlite3
 public/
 secret_key_dev
 .cache/
+.coverage/
 
 ## generic files to ignore
 *~
