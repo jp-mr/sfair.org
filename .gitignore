@@ -8,6 +8,8 @@
 db.sqlite3
 passenger_wsgi.py
 public/
+secret_key_dev
+.cache/
 
 ## generic files to ignore
 *~
