@@ -46,35 +46,3 @@ class PublicationForm(forms.ModelForm):
     class Meta:
         model = Publication
         fields = "__all__"
-
-
-# class ResearchPageDescriptionForm(forms.ModelForm):
-#     description = forms.CharField(widget=AdminPagedownWidget())
-# 
-#     class Meta:
-#         model = ResearchPageDescription
-#         fields = "__all__"
-# 
-# 
-# class TeachingPageDescriptionForm(forms.ModelForm):
-#     description = forms.CharField(widget=AdminPagedownWidget())
-# 
-#     class Meta:
-#         model = TeachingPageDescription
-#         fields = "__all__"
-# 
-# 
-# class ClusterPageDescriptionForm(forms.ModelForm):
-#     description = forms.CharField(widget=AdminPagedownWidget())
-# 
-#     class Meta:
-#         model = ClusterPageDescription
-#         fields = "__all__"
-# 
-# 
-# class FormationPageDescriptionForm(forms.ModelForm):
-#     description = forms.CharField(widget=AdminPagedownWidget())
-# 
-#     class Meta:
-#         model = FormationPageDescription
-#         fields = "__all__"

@@ -29,42 +29,6 @@ class PageDescriptionModelAdmin(admin.ModelAdmin):
     #     abstract = True
 
 
-# class ResearchPageDescriptionModelAdmin(PageDescriptionModelAdmin):
-# 
-#     form = ResearchPageDescriptionForm
-# 
-#     # Não permite a remoção de objetos no admin
-#     def has_delete_permission(self, request, obj=ResearchPageDescription):
-#         return False
-# 
-# 
-# class TeachingPageDescriptionModelAdmin(PageDescriptionModelAdmin):
-# 
-#     form = TeachingPageDescriptionForm
-# 
-#     # Não permite a remoção de objetos no admin
-#     def has_delete_permission(self, request, obj=TeachingPageDescription):
-#         return False
-# 
-# 
-# class ClusterPageDescriptionModelAdmin(PageDescriptionModelAdmin):
-# 
-#     form = ClusterPageDescriptionForm
-# 
-#     # Não permite a remoção de objetos no admin
-#     def has_delete_permission(self, request, obj=ClusterPageDescription):
-#         return False
-# 
-# 
-# class FormationPageDescriptionModelAdmin(PageDescriptionModelAdmin):
-# 
-#     form = FormationPageDescriptionForm
-# 
-#     # Não permite a remoção de objetos no admin
-#     def has_delete_permission(self, request, obj=FormationPageDescription):
-#         return False
-
-
 class PublicationModelAdmin(admin.ModelAdmin):
 
     form = PublicationForm
@@ -84,17 +48,8 @@ class PublicationModelAdmin(admin.ModelAdmin):
     # [publications] Implementa a opção de exclusão
     actions = ['delete_selected']
 
-    # class Meta:
-    #     # [publications] Atribui a tabela Publication para ser exibido
-    #     # na página de Administrador
-    #     model = Publication
-
 
 # [publications] Registra o modelo Publication
 # Vá para: core/views.py
 admin.site.register(Publication, PublicationModelAdmin)
 admin.site.register(PageDescription, PageDescriptionModelAdmin)
-# admin.site.register(ResearchPageDescription, ResearchPageDescriptionModelAdmin)
-# admin.site.register(TeachingPageDescription, TeachingPageDescriptionModelAdmin)
-# admin.site.register(ClusterPageDescription, ClusterPageDescriptionModelAdmin)
-# admin.site.register(FormationPageDescription, FormationPageDescriptionModelAdmin)
