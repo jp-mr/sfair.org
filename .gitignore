@@ -4,8 +4,6 @@
 **/migrations/*  
 
 ##
-.*
-!.gitignore
 *.src
 db.sqlite3
 public/
