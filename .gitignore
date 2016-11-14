@@ -6,7 +6,6 @@
 ##
 *.src
 db.sqlite3
-passenger_wsgi.py
 public/
 
 ## generic files to ignore
