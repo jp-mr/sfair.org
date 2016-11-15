@@ -4,6 +4,7 @@
 **/migrations/*  
 
 ##
+.coverage
 *.src
 db.sqlite3
 public/
