@@ -43,12 +43,22 @@ class PageDescriptionForm(forms.ModelForm):
 
     class Meta:
         model = PageDescription
-        fields = "__all__"
-
+        fields = [
+            'title',
+            'description',
+            ]
 
 class PublicationForm(forms.ModelForm):
     abstract = forms.CharField(widget=AdminPagedownWidget())
 
     class Meta:
         model = Publication
-        fields = "__all__"
+        fields = [
+            'title',
+            'author',
+            'journal',
+            'year',
+            'abstract',
+            'upload',
+            'download',
+            ]
