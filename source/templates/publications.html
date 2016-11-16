@@ -16,7 +16,6 @@
         <p id="author">{{ pub.author}}</p>
         <p id="journal">{{ pub.journal}}</p>
       </span>
-      <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
       {% csrf_token %}
       <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
            o 'id' ta tag <a> será usado no script em 'templates/base.html' 
@@ -24,6 +23,7 @@
       {% if  not pub.upload.name == 'noFile' %}
         <a id="{{ pub.id }}" href="{{ pub.upload.url }}" target="_blank">[ PDF ]</a>
       {% endif %}
+      <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
       <div id="abstract" class="text-justify publications-margin-top">
         <p class="content-markdown">
           {{ pub.get_markdown }}
