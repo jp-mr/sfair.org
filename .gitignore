@@ -4,6 +4,7 @@
 **/migrations/*  
 
 ##
+.htaccess
 .coverage
 *.src
 db.sqlite3
