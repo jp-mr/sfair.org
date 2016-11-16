@@ -151,7 +151,7 @@
             // [publication] Manipula a vizualização do 'abstract' do artigo
             $(".abstract-{{pub.id}}").click(function(event){
               event.preventDefault();
-              $(this).next().next().next("#abstract").fadeToggle();
+              $("#abstract").fadeToggle();
             });
 
           {% endfor %}

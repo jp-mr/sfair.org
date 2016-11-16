@@ -19,16 +19,22 @@ class ContactForm(forms.Form):
 
     """
     name = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'Name'
+        'placeholder': 'Name',
+        'required': True,
     }))
     email = forms.EmailField(widget=forms.TextInput(attrs={
-        'placeholder': 'Email'
+        'placeholder': 'Email',
+        'pattern': "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+(\.[a-zA-Z]{1,6})",
+        'required': True,
+        'title':"Example:\nemail@domain.org\nemail@domain.com\nemail@domain.com.br"
     }))
     subject = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'Subject'
+        'placeholder': 'Subject',
+        'required': True,
     }))
     message = forms.CharField(widget=forms.Textarea(attrs={
-        'placeholder': 'Message'
+        'placeholder': 'Message',
+        'required': True,
     }))
 
 

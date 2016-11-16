@@ -180,6 +180,10 @@ def publications(request):
     # [publications] Captura todos os artigos do banco de dados
     publications = Publication.objects.all()
 
+    #for p in publications:
+    #    if not p.upload.name:
+    #        p.upload.name = 'noFile'
+
     # [publications] Função que implementa a pagiçãoo
     paginator = Paginator(publications, 6)  # Exibe 6 artigos por página
 
@@ -214,6 +218,8 @@ def publications(request):
     for qs in queryset:
         if not qs.year in years:
             years.append(qs.year)
+        if not qs.upload.name:
+            qs.upload.name = 'noFile'
 
     context = {
         'pub_list': queryset,

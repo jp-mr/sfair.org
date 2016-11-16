@@ -11,7 +11,7 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 EMAIL_HOST_USER = 'contact@sfair.org'
 EMAIL_HOST_PASSWORD = None
-
+EMAIL_DESTINY = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',

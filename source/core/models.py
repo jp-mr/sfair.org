@@ -34,8 +34,11 @@ class Publication(models.Model):
                 choices=year_choices(),
                 default=datetime.datetime.now().year)
     abstract = models.TextField()
-    upload = models.FileField(upload_to='publications', max_length=100,
-            null=True, blank=True)
+    upload = models.FileField(
+            upload_to='publications',
+            max_length=100,
+            blank=True
+            )
     download = models.IntegerField(default=0)
 
     def __str__(self):
