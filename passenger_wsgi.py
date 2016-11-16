@@ -4,10 +4,16 @@ import sys
 
 SRCDIR = os.environ['SRCDIR']
 PROJECTNAME = os.environ['PROJECT_NAME']
+<<<<<<< HEAD
 VENV = os.environ['VENV']
 INTERP = os.environ['INTERP']
 
 
+=======
+VENV = os.environ['VENV']  
+INTERP = os.environ['INTERP']
+
+>>>>>>> 330b3b6a91ccc86fa28d135f5ec8c9ad687d002d
 if sys.executable != INTERP:
     os.execl(INTERP, INTERP, *sys.argv)
 
