@@ -3,31 +3,16 @@
 **/__pycache__/*           
 **/migrations/*  
 
-##
-<<<<<<< HEAD
+## developer enviroment
 .htaccess
-.coverage
+.coverage          
 *.src
 db.sqlite3
-=======
-.htaccess                  
-.coverage                  
-*.src
-db.sqlite3                 
->>>>>>> 9844df8b40950257298c96cd99f582e6ba227c0b
 public/
 secret_key_dev
 .cache/
 htmlcov/
-<<<<<<< HEAD
-<<<<<<< HEAD
 /source/.coverage
-=======
-<<<<<<< HEAD               
-/source/.coverage          
->>>>>>> 9844df8b40950257298c96cd99f582e6ba227c0b
-=======
->>>>>>> e690f06396390de28b8d82ad4c9f2e4230b692ed
 
 ## generic files to ignore
 *~
@@ -35,4 +20,3 @@ htmlcov/
 *.DS_Store
 *.swp
 *.out
-
