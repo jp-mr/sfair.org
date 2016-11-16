@@ -16,14 +16,14 @@
         <p id="author">{{ pub.author}}</p>
         <p id="journal">{{ pub.journal}}</p>
       </span>
-      {% csrf_token %}
+      <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
       <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
            o 'id' ta tag <a> será usado no script em 'templates/base.html' 
            para a requisição AJAX do contador de downloads. -->
-      {% if  not pub.upload.name == 'noFile' %}
+      {% if not pub.upload.name == 'noFile' %}
+      {% csrf_token %}
         <a id="{{ pub.id }}" href="{{ pub.upload.url }}" target="_blank">[ PDF ]</a>
       {% endif %}
-      <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
       <div id="abstract" class="text-justify publications-margin-top">
         <p class="content-markdown">
           {{ pub.get_markdown }}
