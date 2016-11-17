@@ -70,11 +70,13 @@ class PublicationForm(forms.ModelForm):
 
         uploaded_file = self.cleaned_data["upload"]
 
-        supported_types = ['application/pdf',]
+        if uploaded_file:
 
-        mime_type = magic.from_buffer(uploaded_file.file.read(1024), mime=True)
-        uploaded_file.file.seek(0)
+            supported_types = ['application/pdf',]
 
-        if mime_type not in supported_types:
-            msg = 'Unsupported file type. Just PDF are allowed.'
-            self.add_error('upload', msg)
+            mime_type = magic.from_buffer(uploaded_file.file.read(1024), mime=True)
+            uploaded_file.file.seek(0)
+
+            if mime_type not in supported_types:
+                msg = 'Unsupported file type. Just PDF are allowed.'
+                self.add_error('upload', msg)
