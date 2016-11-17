@@ -1,5 +1,6 @@
 from django import forms
 from pagedown.widgets import AdminPagedownWidget
+import magic
 
 from .models import PageDescription, Publication
 
@@ -62,3 +63,18 @@ class PublicationForm(forms.ModelForm):
             'upload',
             'download',
             ]
+
+    def clean(self):
+
+        cleaned_data = super(PublicationForm, self).clean()
+
+        uploaded_file = self.cleaned_data["upload"]
+
+        supported_types = ['application/pdf',]
+
+        mime_type = magic.from_buffer(uploaded_file.file.read(1024), mime=True)
+        uploaded_file.file.seek(0)
+
+        if mime_type not in supported_types:
+            msg = 'Unsupported file type. Just PDF are allowed.'
+            self.add_error('upload', msg)

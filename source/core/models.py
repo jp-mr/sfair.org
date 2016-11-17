@@ -1,13 +1,30 @@
+from django import forms
 from django.db import models
 from django.utils.safestring import mark_safe
 
 from markdown_deux import markdown
 import datetime
+#import magic
 
 
 def year_choices():
     year_choices = [(r, r) for r in range(1984, datetime.date.today().year+1)]
     return year_choices
+
+
+# def validate_file(value):
+# 
+#     supported_types = ['application/pdf',]
+#     supported_files = ['PDF document',]
+# 
+#     mime_type = magic.from_file(value, mime=True)
+#     if mime_type not in supported_types:
+#         raise forms.ValidationError('Unsupported file type.')
+# 
+#     file_type = magic.from_file(value)
+#     for s in supported_files:
+#         if s not in file_type:
+#             raise forms.ValidationError('Unsupported file type.')
 
 
 class PageDescription(models.Model):
@@ -35,6 +52,7 @@ class Publication(models.Model):
                 default=datetime.datetime.now().year)
     abstract = models.TextField()
     upload = models.FileField(
+            #validators=[validate_file],
             upload_to='publications',
             max_length=100,
             blank=True
