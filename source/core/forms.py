@@ -65,18 +65,17 @@ class PublicationForm(forms.ModelForm):
             ]
 
     def clean(self):
-
+        # [publications] Sobrecreve o método 'clean' que é chamado para fazer
+        # a validação das informações enviadas em um formulário.
         cleaned_data = super(PublicationForm, self).clean()
-
         uploaded_file = self.cleaned_data["upload"]
-
         if uploaded_file:
-
+            # [publications] Utilizando uma biblioteca de terceiros, verifica
+            # se o arquivo carregado é um PDF
             supported_types = ['application/pdf',]
-
             mime_type = magic.from_buffer(uploaded_file.file.read(1024), mime=True)
             uploaded_file.file.seek(0)
-
             if mime_type not in supported_types:
                 msg = 'Unsupported file type. Just PDF are allowed.'
                 self.add_error('upload', msg)
+        return cleaned_data

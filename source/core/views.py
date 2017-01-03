@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage  # send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
+from django.db.models import F
 from django.shortcuts import render, redirect
 
 from .forms import ContactForm
@@ -168,11 +169,28 @@ def publications(request):
 
     if request.method == 'POST' and request.is_ajax():
         publication_id = request.POST.get('pub_id')
-        # [publications] O método 'get' busca no banco de dados objeto com
-        # o ID passado pela requisição.
-        publication = Publication.objects.get(id=publication_id)
-        publication.download += 1
-        publication.save()
+
+        # [publications] O método filter retorna um objeto Queryset com todos
+        # os objetos que batem com a cláusula passada como argumento. Como o
+        # campo 'id' gerado automaticamento pelo Django é sempre único,
+        # Queryset conterá sempre apenas um objeto.
+        # O método '.update()' do objeto Queryset executa a mesma operação do
+        # método '.save()' do objeto Model. A função F() passada como
+        # argumento para o método '.update()' faz com que a operação de
+        # incremento seja executada diretamente no banco de dados através de
+        # uma expressão SQL, sem que o Python tenha que carregar qualquer
+        # valor em sua memória ou executar a operação de soma.
+        publication = Publication.objects.filter(id=publication_id)
+        publication.update(download=F('download') + 1)
+
+        # [publications](Esse bloco de código foi subtítuido pela 
+        # linha acima.)
+        # O método 'get' busca no banco de dados objeto com
+        # o ID passado pela requisição e retorna esse objeto.
+        # publication = Publication.objects.get(id=publication_id)
+        # publication.download += 1
+        # publication.save()
+
 
     # [publications] Se o método de requisição for GET, todos os artigos
     # serão trazidos do banco de dados e separados em grupos pelo paginador
@@ -214,6 +232,11 @@ def publications(request):
     except EmptyPage:
         queryset = paginator.page(paginator.num_pages)
 
+    # [publications] Cria uma lista com os anos das publicações. Se algum ano
+    # já estiver na lista, não é adicionado novamente a lista.
+    # Verifica se cada publicação tem um arquivo PDF associado, caso não
+    # tenha, atribui uma string que será usada em 'publications.html' num
+    # bloco 'if' para não exibir o link de download
     years = []
     for qs in queryset:
         if not qs.year in years:
