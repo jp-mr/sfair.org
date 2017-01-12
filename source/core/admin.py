@@ -14,6 +14,7 @@ admin.site.disable_action('delete_selected')
 class PageDescriptionModelAdmin(admin.ModelAdmin):
 
     form = PageDescriptionForm
+    fields = ['description']
 
     # Não permite a adição de novos objetos no admin
     def has_add_permission(self, request):
