@@ -63,11 +63,11 @@
 
           // [publications] Implementa o botão que será destacado utilizando o valor de 'page',
           // passado no contexto
-          {%if page %}
-            $("#page{{ page }}").addClass('active')
-          {% else %}
-            $("#page1").addClass('active')
-          {% endif %}
+          // {%if page %}
+          //   $("#page{{ page }}").addClass('active')
+          // {% else %}
+          //   $("#page1").addClass('active')
+          // {% endif %}
 
           // [publications] Código copiado da documentação do Django
           // Implementa segurança contra ataque CSRF
@@ -167,7 +167,8 @@
           var years = {{ years }};
           
           for (var i = 0; i < years.length; i++) {
-            var str = "<div class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h3 class='year-title'>"+years[i]+"</h3><hr class='hr-year'/></div></div>";
+            // var str = "<div class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h3 class='year-title'>"+years[i]+"</h3><hr class='hr-year'/></div></div>";
+            var str = "<div class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h3 class='year-title'>"+years[i]+"</h3></div></div>";
             $(str).insertBefore("#"+years[i]);
             delete years[i];
           }

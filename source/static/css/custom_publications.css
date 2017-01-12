@@ -15,22 +15,24 @@ body {
 .year-title {
   font-size: 22px;
   margin-top: 30px;
+  margin-bottom: -10px;
 }
 
 a {
   text-decoration: none !important;
 }
 
-
+/*
 .hr-year {
   margin-top: 12px;
   margin-bottom: 0px;
 }
+*/
 
 .title-publications {
     font-size: 17px;
     margin-bottom: 0px!important;
-    margin-top: 30px!important;
+    margin-top: 25px!important;
 }
 
 #author {
