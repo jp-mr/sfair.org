@@ -49,6 +49,22 @@ class CoreViewTest(TestCase):
         self.assertTemplateUsed(response, 'home.html')
         self.assertTemplateUsed(response, 'javascript.html')
 
+    def test_research(self):
+        PageDescription.objects.create(title='Research')
+        response = self.client.get(reverse('core:research'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'research.html')
+        self.assertTemplateUsed(response, 'javascript.html')
+
+    def test_formation(self):
+        PageDescription.objects.create(title='Formation')
+        response = self.client.get(reverse('core:formation&CV'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'formation.html')
+        self.assertTemplateUsed(response, 'javascript.html')
+
     def test_contact(self):
         response = self.client.get(reverse('core:contact'))
         self.assertEqual(response.status_code, 200)
