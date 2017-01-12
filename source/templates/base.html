@@ -73,11 +73,17 @@
                    target="_self">
                    Research
                 </a>
-              </li> #} -->
+              </li> #} 
+              
+              # Essa linha foi retirada para que o link Research voltasse a apontar 
+              para a página, ao invés de abrir o menus dropdown.
+
+              data-toggle="dropdown"
+              
+              -->
               <li class="dropdown">
-                <a href="#" 
+                <a href="{% url 'core:research' %}" 
                    class="dropdown-toggle"
-                   data-toggle="dropdown"
                    role="button"
                    aria-haspopup="true"
                    aria-expanded="false">
@@ -85,7 +91,6 @@
                    <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="{% url 'core:research' %}">Description</a></li>
                   <li><a href="{% url 'core:publications'%}">Publications</a></li>
                   <li><a href="https://ui.adsabs.harvard.edu/#search/q=%20author%3A%22Sfair%2C%20R.%22&sort=date%20desc%2C%20bibcode%20desc" target="_blank">ADS</a></li>
                 </ul>
