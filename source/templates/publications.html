@@ -34,9 +34,11 @@
   {% endfor %}
 </div>   
 
+<script src="{% static 'js/fokus.min.js'%}"></script>
 {% endblock %}
 
 
+<!-- {# [publications] Páginação não está sendo utilizada
 {% block paginator %}
 
 {% if pub_list %}
@@ -73,7 +75,6 @@
     </div>
   </div>
 
-  <script src="{% static 'js/fokus.min.js'%}"></script>
 {% endif %}
 
-{% endblock paginator %}
+{% endblock paginator %} #} -->

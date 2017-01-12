@@ -76,7 +76,6 @@ class CoreViewTest(TestCase):
     def test_content_contact_email(self):
         response = self.client.post(reverse('core:contact'), self.valid_post_email)
         email = mail.outbox[0]
-        print(email)
         self.assertEqual(email.from_email, 'contact@sfair.org')
         self.assertEqual(email.subject, 'TESTE')
         self.assertEqual(

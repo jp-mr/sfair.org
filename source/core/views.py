@@ -196,41 +196,42 @@ def publications(request):
     # serão trazidos do banco de dados e separados em grupos pelo paginador
 
     # [publications] Captura todos os artigos do banco de dados
-    publications = Publication.objects.all()
+    # publications = Publication.objects.all()
+    queryset = Publication.objects.all()
 
     #for p in publications:
     #    if not p.upload.name:
     #        p.upload.name = 'noFile'
 
     # [publications] Função que implementa a pagiçãoo
-    paginator = Paginator(publications, 6)  # Exibe 6 artigos por página
+    # paginator = Paginator(publications, 6)  # Exibe 6 artigos por página
 
     # [publications] Cria uma lista com os número das páginas.
     # Será passado como contexto para exibir os números nos botões
     # do paginador
-    l = []
-    for page in paginator.page_range:
-        l.append(page)
+    # l = []
+    # for page in paginator.page_range:
+    #     l.append(page)
 
     # [publications] Captura o valor da variável page no cabeçalho
     # da requisição. Esse valor só existe a partir da segunda página.
     # Também é passado no contexto para determinar qual botão será
     # destacado na páginação
-    page_request_var = 'page'
-    page = request.GET.get(page_request_var)
+    # page_request_var = 'page'
+    # page = request.GET.get(page_request_var)
 
-    try:
-        # [publications] Se a váriavel 'page'for 'None', levanta uma exceção,
-        # senão 'queryset' recebe os artigos que devem ser exibidos ná pagina
-        # requisitada pelo 'request'
-        queryset = paginator.page(page)
+    # try:
+    #     # [publications] Se a váriavel 'page'for 'None', levanta uma exceção,
+    #     # senão 'queryset' recebe os artigos que devem ser exibidos ná pagina
+    #     # requisitada pelo 'request'
+    #     queryset = paginator.page(page)
 
-    except PageNotAnInteger:
-        # [publications] Se page não é um inteiro, retorna a primeira página
-        queryset = paginator.page(1)
+    # except PageNotAnInteger:
+    #     # [publications] Se page não é um inteiro, retorna a primeira página
+    #     queryset = paginator.page(1)
 
-    except EmptyPage:
-        queryset = paginator.page(paginator.num_pages)
+    # except EmptyPage:
+    #     queryset = paginator.page(paginator.num_pages)
 
     # [publications] Cria uma lista com os anos das publicações. Se algum ano
     # já estiver na lista, não é adicionado novamente a lista.
@@ -246,10 +247,10 @@ def publications(request):
 
     context = {
         'pub_list': queryset,
-        'page_request_var': page_request_var,
-        'list': l,
-        'page': page,
         'years': years,
+        # 'page_request_var': page_request_var,
+        # 'list': l,
+        # 'page': page,
     }
 
     # [publications] Renderiza a página

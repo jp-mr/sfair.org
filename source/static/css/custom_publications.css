@@ -6,6 +6,72 @@ body {
     height: 77%;
 }
 
+.content-navbar-adjust-publications {
+  height: 66px;
+  position:relative;
+  top: 0%;
+}
+
+.year-title {
+  font-size: 22px;
+  margin-top: 30px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+
+.hr-year {
+  margin-top: 12px;
+  margin-bottom: 0px;
+}
+
+.title-publications {
+    font-size: 17px;
+    margin-bottom: 0px!important;
+    margin-top: 30px!important;
+}
+
+#author {
+  margin-bottom: -5px;
+}
+
+#journal {
+  font-style: italic;
+}
+
+#abstract {
+  display: none;
+}
+
+.publications-margin-top {
+    margin-top: 10px !important;
+}
+
+
+.position-pub {
+  position: relative;
+}
+
+.position-paginator {
+  position: absolute;
+  left: 0%;
+  bottom: 0px;
+}
+
+/* Centraliza o conteúdo no centro da página  */
+
+.container-table {
+    display: table;
+    height: 97%;
+}
+
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 
 /* Small devices (smartphones and tablets, 767px and down) */
 @media (max-width: 767px) {
@@ -72,19 +138,6 @@ body {
 }
 
 
-/* Centraliza o conteúdo no centro da página  */
-
-.container-table {
-    display: table;
-    height: 97%;
-}
-
-.vertical-center-row {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-
 /* Aplica a CSS se a altura >= 768 e largura >= 601px 
 
    Ajusta a distância entre os títulos das páginas e a navbar
@@ -98,57 +151,6 @@ body {
     }
 }
 
-
-.content-navbar-adjust-publications {
-    height: 38px;
-    position:relative;
-    top: 0%;
-}
-
-.year-title {
-   margin-top: 50px;
-}
-
-a {
-    text-decoration: none !important;
-}
-
-
-.hr-year {
-  margin-bottom: 0px;
-}
-
-.title-publications {
-    margin-bottom: 0px!important;
-    margin-top: 30px!important;
-}
-
-#author {
-  margin-bottom: -5px;
-}
-
-#journal {
-  font-style: italic;
-}
-
-#abstract {
-  display: none;
-}
-
-.publications-margin-top {
-    margin-top: 10px !important;
-}
-
-
-.position-pub {
-  position: relative;
-}
-
-.position-paginator {
-  position: absolute;
-  left: 0%;
-  bottom: 0px;
-}
 
 /* Sticky footer styles
 -------------------------------------------------- */
