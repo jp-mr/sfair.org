@@ -3,7 +3,7 @@ from pagedown.widgets import AdminPagedownWidget
 import magic
 
 from .models import PageDescription, Publication
-
+from .utils import validate_pdf
 
 class ContactForm(forms.Form):
     """
@@ -72,10 +72,7 @@ class PublicationForm(forms.ModelForm):
         if uploaded_file:
             # [publications] Utilizando uma biblioteca de terceiros, verifica
             # se o arquivo carregado é um PDF
-            supported_types = ['application/pdf',]
-            mime_type = magic.from_buffer(uploaded_file.file.read(1024), mime=True)
-            uploaded_file.file.seek(0)
-            if mime_type not in supported_types:
+            if not validate_pdf(uploaded_file):
                 msg = 'Unsupported file type. Just PDF are allowed.'
                 self.add_error('upload', msg)
         return cleaned_data
