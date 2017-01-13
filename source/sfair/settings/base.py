@@ -33,7 +33,6 @@ except:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
 ALLOWED_HOSTS = []
 
 # Definições para email
@@ -52,6 +51,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party
+    'crispy_forms',
+    'markdown_deux',
+    'pagedown',
+    # local project
+    'core',
+    'teaching'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
