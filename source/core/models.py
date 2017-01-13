@@ -44,8 +44,8 @@ class Publication(models.Model):
 
     # [publications] Definindo os campos no banco de dados
     # para a tabela Publications
-    title = models.CharField(max_length=300)
-    author = models.CharField(max_length=300)
+    title = models.CharField(max_length=500)
+    author = models.CharField(max_length=1000)
     journal = models.CharField(max_length=500)
     year = models.IntegerField(
                 choices=year_choices(),
@@ -54,7 +54,7 @@ class Publication(models.Model):
     upload = models.FileField(
             #validators=[validate_file],
             upload_to='publications',
-            max_length=100,
+            max_length=300,
             blank=True
             )
     download = models.IntegerField(default=0)
