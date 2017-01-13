@@ -181,8 +181,7 @@
           var years = {{ years }};
           
           for (var i = 0; i < years.length; i++) {
-            // var str = "<div class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h3 class='year-title'>"+years[i]+"</h3><hr class='hr-year'/></div></div>";
-            var str = "<div class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h3 class='year-title'>"+years[i]+"</h3></div></div>";
+            var str = "<div class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h3 class='year-title'>"+years[i]+"</h3><hr class='hr-year'/></div></div>";
             $(str).insertBefore("#"+years[i]);
             delete years[i];
           }
