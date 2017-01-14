@@ -137,9 +137,9 @@ def contact(request):
 
 def formation(request):
 
-    obj_qs = PageDescription.objects.filter(title__icontains='Formation')
-    obj = obj_qs.first()
-
+    #obj_qs = PageDescription.objects.filter(title__icontains='Formation')
+    #obj = obj_qs.first()
+    obj = PageDescription.objects.get(title='Formation & CV')
     context = {
         'obj': obj
     }
