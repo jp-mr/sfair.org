@@ -137,7 +137,8 @@ def contact(request):
 
 def formation(request):
 
-    obj = PageDescription.objects.get(title='Formation')
+    obj_qs = PageDescription.objects.filter(title__icontains='Formation')
+    obj = obj_qs.first()
 
     context = {
         'obj': obj
