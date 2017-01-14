@@ -21,7 +21,6 @@ class Class(models.Model):
             on_delete=models.CASCADE,
             limit_choices_to={'is_staff': False, 'is_superuser': False}
             )
-    lecture_notes = models.ManyToManyField('LectureNote', blank=True)
     course_class = models.ForeignKey(
             'Course',
             on_delete=models.SET_NULL,
@@ -34,13 +33,14 @@ class Class(models.Model):
             )
     duration = models.CharField(max_length=10, choices=DURATION, blank=True)
     period = models.CharField(max_length=15, choices=PERIOD, blank=True)
+    lecture_notes = models.ManyToManyField('LectureNote', blank=True)
 
     def __str__(self):
         return self.user.username
 
 
 class LectureNote(models.Model):
-    title = models.CharField(max_length=300)
+    title = models.CharField(max_length=500)
     lecture_note = models.TextField()
     upload = models.FileField(
             upload_to='lectures-notes',
@@ -48,16 +48,21 @@ class LectureNote(models.Model):
             blank=True
             )
     download = models.IntegerField(default=0)
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
 
+    def get_markdown(self):
+        lecture_note = self.lecture_note
+        markdown_text = markdown(lecture_note)
+        return mark_safe(markdown_text)
+
 
 class Date(models.Model):
     class_date = models.ForeignKey(Class, on_delete=models.CASCADE)
-    description = models.CharField(max_length=300, blank=True)
+    description = models.CharField(max_length=500, blank=True)
     date = models.DateField()
 
     def __str__(self):

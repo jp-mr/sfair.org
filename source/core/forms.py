@@ -1,6 +1,5 @@
 from django import forms
 from pagedown.widgets import AdminPagedownWidget
-import magic
 
 from .models import PageDescription, Publication
 from .utils import validate_pdf

@@ -7,10 +7,26 @@ from .models import (
             CourseCode,
             Course,
             )
+from .forms import LectureNoteForm
+
+
+CLASS_INFO_FIELDS = [
+        'user',
+        'course_class',
+        'course_code',
+        'duration',
+        'period'
+        ]
+
+LECTURES_NOTES_FIELDS = ['lecture_notes']
 
 
 class LectureNoteModelAdmin(admin.ModelAdmin):
 
+    form = LectureNoteForm
+
+    search_fields = ['title', 'lecture_note']
+    readonly_fields = ['download', 'timestamp', 'updated']
     actions = ['delete_selected']
     list_display = [
             'title',
@@ -18,9 +34,6 @@ class LectureNoteModelAdmin(admin.ModelAdmin):
             'updated',
             'timestamp'
             ]
-
-    class Meta:
-        model = LectureNote
 
 
 class DateInline(admin.TabularInline):
@@ -59,12 +72,25 @@ class ClassModelAdmin(admin.ModelAdmin):
             DateInline,
             ]
 
-    list_display = [
+    list_display = (
             'user',
             'course_class',
             'course_code',
             'duration',
             'period',
+            )
+
+    filter_horizontal = ['lecture_notes',]
+
+    list_select_related = (
+            'user',
+            'course_class',
+            'course_code',
+            )
+
+    fieldsets = [
+            ('CLASS INFO', {'fields': CLASS_INFO_FIELDS}),
+            ('LECTURES NOTES', {'fields': LECTURES_NOTES_FIELDS}),
             ]
 
     class Meta:
