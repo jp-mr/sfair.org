@@ -38,6 +38,9 @@ class Class(models.Model):
     def __str__(self):
         return self.user.username
 
+    class Meta:
+        verbose_name_plural = "classes"
+
 
 class LectureNote(models.Model):
     title = models.CharField(max_length=500)
