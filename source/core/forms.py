@@ -68,10 +68,7 @@ class PublicationForm(forms.ModelForm):
         # a validação das informações enviadas em um formulário.
         cleaned_data = super(PublicationForm, self).clean()
         uploaded_file = self.cleaned_data["upload"]
-        if uploaded_file:
-            # [publications] Utilizando uma biblioteca de terceiros, verifica
-            # se o arquivo carregado é um PDF
-            if not validate_pdf(uploaded_file):
-                msg = 'Unsupported file type. Just PDF are allowed.'
-                self.add_error('upload', msg)
+        if uploaded_file and not validate_pdf(uploaded_file):
+            msg = 'Unsupported file type. Just PDF are allowed.'
+            self.add_error('upload', msg)
         return cleaned_data

@@ -1,17 +1,22 @@
 from django import forms
 from django.conf import settings
 from django.core import mail
-from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files.uploadedfile import SimpleUploadedFile, UploadedFile
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
-from model_mommy import mommy
+from django.test import TestCase, Client, RequestFactory
 
-from core.forms import ContactForm
+from django.contrib.auth import get_user_model
+from model_mommy import mommy
+from reportlab.pdfgen import canvas
+import os
+
+from core.forms import ContactForm, PublicationForm
 from core.models import PageDescription, Publication
 from core.views import home
 from core.utils import validate_pdf
 
 
+User = get_user_model()
 
 class CoreModelTest(TestCase):
 
@@ -138,15 +143,86 @@ class CoreViewTest(TestCase):
         self.assertEqual(email.reply_to, ['email@teste.com'])
 
 
+# class CoreFormTest(TestCase):
+# 
+#     def test_publication_valid_upload_file(self):
+#         document = canvas.Canvas('example.pdf')
+#         document.drawString(100,100, "Hello World")
+#         document.showPage()
+#         document.save()
+#         uploaded_file =  UploadedFile(
+#                 name="file.pdf",
+#                 content_type='application/pdf',
+#                 file=open('example.pdf', 'rb')
+#                 )
+#         data = {
+#             'title': 'Título',
+#             'author': 'Autor',
+#             'journal': 'Revista',
+#             'year': '2017',
+#             'abstract': 'Loren ipsum',
+#             'download': 0,
+#             'upload': uploaded_file
+#             }
+#         User.objects.create(username='michel', password='senha',
+#                 is_active=True, is_superuser=True)
+#         myClient = Client()
+#         myClient.login(username='michel', password='senha123')
+#         r = myClient.post('/admin/core/publication/add/',
+#                 data=data,
+#                 file=uploaded_file
+#                 )
+#         form = PublicationForm(data=data, files=uploaded_file)
+#         form.is_valid()
+#         os.remove('example.pdf')
+#         self.assertTrue(result)
+# 
+#     def test_publication_invalid_upload_file(self):
+#         uploaded_file = SimpleUploadedFile(
+#                 'text_file.pdf',
+#                 'content need to be encoded'.encode()
+#                 )
+#         data = {
+#             'title': 'Título',
+#             'author': 'Autor',
+#             'journal': 'Revista',
+#             'year': '2017',
+#             'abstract': 'Loren ipsum',
+#             'download': 0,
+#             'upload': uploaded_file
+#             }
+#         request = RequestFactory()
+#         r = request.post('/admin/core/publication/add/', data=data)
+#         print(r.parse_file_upload(META=r.META, post_data=data))
+#         form = PublicationForm(r.POST)
+#         form.clean()
+#         result = form.is_valid()
+#         self.assertFalse(result)
+
+
 class ValidadePdfUploadTest(TestCase):
-    #pb = mommy.make(Publication)
-    #pb.file_field = SimpleUploadedFile('best_file_eva.txt', 'these are the file contents!')
-    #pb.save()
 
     def test_validate_pdf(self):
-        uploaded_file = SimpleUploadedFile(
-                'best_file_eva.txt',
-                'these are the file contents!'
+        document = canvas.Canvas('example.pdf')
+        document.drawString(100,100, "Hello World")
+        document.showPage()
+        document.save()
+        uploaded_file = UploadedFile(
+                name="file.pdf",
+                content_type='application/pdf',
+                file=open('example.pdf', 'rb')
                 )
         func_return = validate_pdf(uploaded_file)
-        self.assertFalse(func_return)
+        self.assertTrue(func_return)
+        os.remove('example.pdf')
+
+    def test_validate_another_type_file(self):
+        """
+            Retorna False porque e validação vai além da extensão do arquivo.
+        """
+        uploaded_file = SimpleUploadedFile(
+                'text_file.pdf',
+                'content need to be encoded'.encode()
+                )
+        output = validate_pdf(uploaded_file)
+        self.assertFalse(output)

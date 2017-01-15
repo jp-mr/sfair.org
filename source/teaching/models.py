@@ -1,5 +1,8 @@
 from django.conf import settings
 from django.db import models
+from django.utils.safestring import mark_safe
+
+from markdown_deux import markdown
 
 
 DURATION = (
