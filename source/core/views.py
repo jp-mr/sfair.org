@@ -203,7 +203,7 @@ def publications(request):
     #    if not p.upload.name:
     #        p.upload.name = 'noFile'
 
-    # [publications] Função que implementa a pagiçãoo
+    # [publications] Classe que implementa a pagiçãoo
     # paginator = Paginator(publications, 6)  # Exibe 6 artigos por página
 
     # [publications] Cria uma lista com os número das páginas.
