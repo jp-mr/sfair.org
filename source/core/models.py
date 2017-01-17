@@ -36,6 +36,9 @@ class PageDescription(models.Model):
 
     def get_markdown(self):
         description = self.description
+        # TODO: escapar os caracteres especiais dentro das tags do TeX
+        # tex_parser = re.compile(r'\$(.*?)\$')
+        # description = tex_parser.finditer(description)
         markdown_text = markdown(description)
         return mark_safe(markdown_text)
 

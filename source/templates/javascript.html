@@ -11,6 +11,17 @@
     <!-- Marked 0.3.6 -->
     <script src="{% static 'js/marked.min.js' %}"></script>
 
+    <!-- Mathjax config -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],
+        ['\\(','\\)']]}});
+      </script>
+
+    <!-- Mathjax -->
+    <script type="text/javascript" async
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
     <script>
 
       $(document).ready(function(){
@@ -188,7 +199,7 @@
 
         {% endif %}
 
-        // Markdown
+        // [publications] Markdown
         // ==================================================
         // Quando a página for carregada (document), executa as funções.
         // Primeira função:
@@ -204,8 +215,9 @@
 
         $(".content-markdown").each(function(){
             var content = $(this).text()
+            var content_tex = MathJax.Hub.Queue(["Typeset",MathJax.Hub, content]);
             //console.log(content)
-            var markedContent = marked(content)
+            var markedContent = marked(content_tex)
             //console.log(markedContent)
             $(this).html(markedContent)
         });
