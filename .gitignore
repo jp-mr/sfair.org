@@ -1,7 +1,11 @@
 ## python files to ignore
 *.pyc                      
 **/__pycache__/*           
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 6d06d22c3d637cec8e371424cab2837e43ba8693
 
 ## developer enviroment
 .htaccess
