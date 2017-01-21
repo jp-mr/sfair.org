@@ -27,7 +27,8 @@
       $(document).ready(function(){
 
         $(function(){
-          $(".dropdown").hover(            
+          $(".dropdown").hover(
+              console.log('OK')
             function() {
               $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
               $(this).toggleClass('open');
