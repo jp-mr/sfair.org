@@ -42,7 +42,9 @@ def home(request):
     if msg_sent:
         context['message_sent'] = 'message_sent'
 
-    return render(request, "home.html", context)
+    template = "home.html"
+
+    return render(request, template, context)
 
 
 def contact(request):
@@ -123,7 +125,7 @@ def contact(request):
 
     # Instancia um formulário em branco
     form = ContactForm()
-
+    template = "forms.html"
     # Contexto que será enviado para o template para exibir um título
     # para a página e o formulário em branco
     context = {
@@ -132,31 +134,31 @@ def contact(request):
     }
 
     # Renderiza a página
-    return render(request, "forms.html", context)
+    return render(request, template, context)
 
 
 def formation(request):
 
-    obj = PageDescription.objects.get(title='Formation')
-
+    obj = PageDescription.objects.get(title='Formation & CV')
+    template = "formation/formation.html"
     context = {
         'obj': obj
     }
 
     # Renderiza a página
-    return render(request, "formation.html", context)
+    return render(request, template, context)
 
 
 def research(request):
 
     obj = PageDescription.objects.get(title='Research')
-
+    template = "research/research.html"
     context = {
         'obj': obj
     }
 
     # Renderiza a página
-    return render(request, "research.html", context)
+    return render(request, template, context)
 
 
 def publications(request):
@@ -245,6 +247,7 @@ def publications(request):
         if not qs.upload.name:
             qs.upload.name = 'noFile'
 
+    template = "research/publications.html"
     context = {
         'pub_list': queryset,
         'years': years,
@@ -255,4 +258,4 @@ def publications(request):
 
     # [publications] Renderiza a página
     # Vá para: templates/publications.html
-    return render(request, "publications.html", context)
+    return render(request, template, context)

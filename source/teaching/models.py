@@ -83,7 +83,8 @@ DEGREES = (
 
 
 class CourseCode(models.Model):
-    code = models.CharField(max_length=20)
+    title = models.CharField(max_length=140)
+    code = models.CharField(max_length=25)
     description = models.TextField()
     degree = models.CharField(max_length=10, choices=DEGREES, blank=True)
 

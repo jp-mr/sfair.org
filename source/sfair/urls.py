@@ -27,6 +27,7 @@ urlpatterns = [
     # [home, contact, formation&CV, research, publications ] Essa linha vai
     # redirecionar para '/core/urls.py'. Abra esse arquivo.
     url(r'^', include('core.urls', namespace='core')),
+    url(r'^teaching/', include('teaching.urls', namespace='teaching')),
 ]
 
 

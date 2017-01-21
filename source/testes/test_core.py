@@ -62,7 +62,7 @@ class CoreViewTest(TestCase):
         response = self.client.get(reverse('core:research'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base.html')
-        self.assertTemplateUsed(response, 'research.html')
+        self.assertTemplateUsed(response, 'research/research.html')
         self.assertTemplateUsed(response, 'javascript.html')
 
     def test_publication(self):
@@ -76,7 +76,7 @@ class CoreViewTest(TestCase):
         pb_context = list(response.context['pub_list'])
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base.html')
-        self.assertTemplateUsed(response, 'publications.html')
+        self.assertTemplateUsed(response, 'research/publications.html')
         self.assertTemplateUsed(response, 'javascript.html')
         self.assertEqual(response.context['years'], [5,4,3,2,1])
         self.assertEqual(pb_context, pb_list)
@@ -96,11 +96,11 @@ class CoreViewTest(TestCase):
         self.assertEqual(pub.download, 1)
 
     def test_formation(self):
-        PageDescription.objects.create(title='Formation')
+        PageDescription.objects.create(title='Formation & CV')
         response = self.client.get(reverse('core:formation&CV'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base.html')
-        self.assertTemplateUsed(response, 'formation.html')
+        self.assertTemplateUsed(response, 'formation/formation.html')
         self.assertTemplateUsed(response, 'javascript.html')
 
     def test_contact(self):

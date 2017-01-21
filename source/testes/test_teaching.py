@@ -1,6 +1,10 @@
+from django.core.urlresolvers import reverse
+from django.contrib.auth import get_user_model
 from django.test import TestCase, Client, RequestFactory
+
 from model_mommy import mommy
 
+from core.models import PageDescription
 from teaching.models import (
             Class,
             LectureNote,
@@ -8,6 +12,9 @@ from teaching.models import (
             CourseCode,
             Course,
             )
+
+
+User = get_user_model()
 
 
 class TeachingModelTest(TestCase):
@@ -41,4 +48,14 @@ class TeachingModelTest(TestCase):
         self.assertIsInstance(obj, Course)
         self.assertEqual(obj.__str__(), obj.course)
 
+
+class TeachingViewTest(TestCase):
+
+    def test_teaching(self):
+        PageDescription.objects.create(title='Teaching')
+        response = self.client.get(reverse('teaching:teaching'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'teaching/teaching.html')
+        self.assertTemplateUsed(response, 'javascript.html')
 
