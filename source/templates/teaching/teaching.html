@@ -24,7 +24,7 @@
         <hr/>
         <p>
         {% if request.user.is_authenticated %}
-          <a href="#redireciona-para-a-pagina">Student Area</a>
+        <a href="{% url 'teaching:student-area' %}">Student Area</a>
         {% else %}
           <a data-toggle="modal"
 				     data-target="#modalLogin" 

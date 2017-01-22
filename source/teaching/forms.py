@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from pagedown.widgets import AdminPagedownWidget
 
 from core.utils import validate_pdf
@@ -35,3 +36,32 @@ class LectureNoteForm(forms.ModelForm):
                 msg = 'Unsupported file type. Just PDF are allowed.'
                 self.add_error('upload', msg)
         return cleaned_data
+
+
+class LoginForm(AuthenticationForm):
+
+    username = forms.CharField(
+            label="Username",
+            max_length=30,
+            widget=forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'text',
+                    'name': 'username',
+                    'placeholder': 'Username',
+                    }
+                )
+            )
+
+    password = forms.CharField(
+            label="Password",
+            max_length=30,
+            widget=forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'password',
+                    'name': 'password',
+                    'placeholder': 'Password',
+                    }
+                )
+            )

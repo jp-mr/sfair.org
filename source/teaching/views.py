@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
 
@@ -30,6 +31,7 @@ def student_login(request):
     return Http404
 
 
+@login_required
 def student_area(request):
 
     template = "teaching/student_area.html"
