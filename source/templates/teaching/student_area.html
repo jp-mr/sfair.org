@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container container-table">
+  <div id="publications" class="content-navbar-adjust"></div>
+  
+  <!-- [publications] Itera sobre pub_list (passado no contexto em view.py) 
+  		 e replica o código para cada artigos -->
+  {% for pub in pub_list %}
+  <div id="{{pub.year}}" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+      <h5 class="title-publications">{{ pub.title }}</h5>
+      <span>
+        <p id="author">{{ pub.author}}</p>
+        <p id="journal">{{ pub.journal}}</p>
+      </span>
+      <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
+      <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
+           o 'id' ta tag <a> será usado no script em 'templates/base.html' 
+           para a requisição AJAX do contador de downloads. -->
+      {% if not pub.upload.name == 'noFile' %}
+      {% csrf_token %}
+        <a id="{{ pub.id }}" href="{{ pub.upload.url }}" target="_blank">[ PDF ]</a>
+      {% endif %}
+      <div id="abstract" class="text-justify publications-margin-top">
+        <p class="content-markdown">
+          {{ pub.get_markdown }}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>   
+
+{% endblock %}

@@ -23,9 +23,17 @@
         </div>
         <hr/>
         <p>
-          <a href="{% url 'core:publications'%}">Publications</a>
-          <br/>
-          <a href="https://ui.adsabs.harvard.edu/#search/q=%20author%3A%22Sfair%2C%20R.%22&sort=date%20desc%2C%20bibcode%20desc" target="_blank">ADS</a>
+        {% if request.user.is_authenticated %}
+          <a href="#redireciona-para-a-pagina">Student Area</a>
+        {% else %}
+          <a data-toggle="modal"
+				     data-target="#modalLogin" 
+				     href="#" 
+				     target="_self">
+				     Student Area
+				   </a>
+        {% endif %}
+        <br/>
         </p>
       </div>
     </div>

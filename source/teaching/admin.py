@@ -48,6 +48,7 @@ class CourseCodeModelAdmin(admin.ModelAdmin):
 
     actions = ['delete_selected']
     list_display = [
+            'title',
             'code',
             'degree',
             ]

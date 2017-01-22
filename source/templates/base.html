@@ -88,7 +88,7 @@
                    aria-haspopup="true"
                    aria-expanded="false">
                    Research 
-                   <span class="caret"></span>
+                   <span id="caret-toggle" class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'core:publications'%}">Publications</a></li>
@@ -106,13 +106,19 @@
                    <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                {% if request.user.is_authenticated %}
-                <li><a href="#{# url 'auth_logout' #}">Logout</a></li>
-                {% else %}
-                  <li><a href="{# url 'auth_login' #}">Login</a></li>
-                {% endif %}
+                  <li>
+                  {% if request.user.is_authenticated %}
+                    <a href="#redireciona-para-a-pagina">Student Area</a>
+                  {% else %}
+                    <a data-toggle="modal"
+									     data-target="#modalLogin" 
+									     href="#" 
+									     target="_self">
+									     Student Area
+								     </a>
+                  {% endif %}
+                  </li>
                 </ul>
-              </li>
               <li>
 								<a data-toggle="modal"
 									 data-target="#modalNoPage" 
@@ -185,6 +191,9 @@
     {% endif %}
     <!-- Fim modalEmailSent -->
 
+    <!-- modalLogin -->
+    {% include 'teaching/modal_login.html' %}
+		<!-- Fim modalLogin -->
 
 		<!-- modalNoPage -->
 		<div class="modal fade" id="modalNoPage" tabindex="-1" role="dialog" aria-labelledby="modalNoPage">

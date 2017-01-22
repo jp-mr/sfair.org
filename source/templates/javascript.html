@@ -26,20 +26,18 @@
 
       $(document).ready(function(){
 
-        $(function(){
-          $(".dropdown").hover(
-              console.log('OK')
-            function() {
-              $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-              $(this).toggleClass('open');
-              //$('b', this).toggleClass("caret caret-up");                
-            },
-            function() {
-              $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-              $(this).toggleClass('open');
-              //$('b', this).toggleClass("caret caret-up");                
-            });
-          });
+        $(".dropdown").hover(            
+          function() {
+            $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+            $(this).toggleClass('open');
+            //$(this).children().children().toggleClass("caret caret-up");                
+          },
+          function() {
+            $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+            $(this).toggleClass('open');
+            //$(this).children().children().toggleClass("caret caret-up");                
+          }
+        );
 
         // Caixa de diálogo ao parar o mouse em cima de um link
         // $(".tip-right").tooltip({
@@ -80,21 +78,6 @@
           
         {% endif %}
 
-        // [publications] Scripts serão implementados se pub_list for passado no contexto
-        {% if pub_list %}
-
-          // [publications] troca a classe da tag com o id 'publications' para ajustar
-          // a distância entre o primeiro artigo e a nav-bar
-          $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
-
-          // [publications] Implementa o botão que será destacado utilizando o valor de 'page',
-          // passado no contexto
-          // {%if page %}
-          //   $("#page{{ page }}").addClass('active')
-          // {% else %}
-          //   $("#page1").addClass('active')
-          // {% endif %}
-
           // [publications] Código copiado da documentação do Django
           // Implementa segurança contra ataque CSRF
           // ## INÍCIO ##
@@ -117,6 +100,22 @@
           }
 
           // ## FIM ##
+
+
+        // [publications] Scripts serão implementados se pub_list for passado no contexto
+        {% if pub_list %}
+
+          // [publications] troca a classe da tag com o id 'publications' para ajustar
+          // a distância entre o primeiro artigo e a nav-bar
+          $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
+
+          // [publications] Implementa o botão que será destacado utilizando o valor de 'page',
+          // passado no contexto
+          // {%if page %}
+          //   $("#page{{ page }}").addClass('active')
+          // {% else %}
+          //   $("#page1").addClass('active')
+          // {% endif %}
 
 
           function counter(pub_id){
@@ -216,16 +215,60 @@
 
         $(".content-markdown").each(function(){
             var content = $(this).text()
-            var content_tex = MathJax.Hub.Queue(["Typeset",MathJax.Hub, content]);
-            //console.log(content)
-            var markedContent = marked(content_tex)
-            //console.log(markedContent)
+            var markedContent = marked(content)
             $(this).html(markedContent)
         });
 
         $("#abstract img").each(function(){
           $(this).addClass("img-responsive")
         });
+        
+        
+        function doLogin(username, password){
+
+          //Prepare csrf token
+          var csrftoken = getCookie('csrftoken');
+
+          function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+          }
+          $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+              }
+            }
+          });
+          // ## FIM ##
+
+          // [publications] Requisição AJAX
+          $.ajax({
+            url : "{% url 'teaching:student-login' %}", // the endpoint,commonly same url
+            type : "POST", // http method
+            data : { 
+              csrfmiddlewaretoken : csrftoken, 
+              username: username,
+              password: password,
+            }, // data sent with the post request
+            // handle a successful response
+            success : function() {
+              window.open("{% url 'teaching:student-area' %}", '_self')
+            },
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+              console.log(xhr.status + ": " + xhr.responseText);
+            }
+          });
+        };
+
+        $("#login").click(function(event) {
+          event.preventDefault();
+          var username = $('#InputUsername').val();
+          var password = $('#InputPassword').val();
+          doLogin(username, password);
+        });
+
 
       })
 
