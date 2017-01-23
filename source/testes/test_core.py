@@ -89,7 +89,7 @@ class CoreViewTest(TestCase):
         cl = Client()
         response = cl.post(
                 reverse('core:publications'),
-                {'pub_id': 1},
+                {'obj_id': 1},
                 HTTP_X_REQUESTED_WITH='XMLHttpRequest'
                 )
         pub = Publication.objects.first()

@@ -170,7 +170,7 @@ def publications(request):
     # Obs: a paǵina não é atualizada.
 
     if request.method == 'POST' and request.is_ajax():
-        publication_id = request.POST.get('pub_id')
+        publication_id = request.POST.get('obj_id')
 
         # [publications] O método filter retorna um objeto Queryset com todos
         # os objetos que batem com a cláusula passada como argumento. Como o

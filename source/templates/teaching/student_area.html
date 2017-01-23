@@ -6,43 +6,25 @@
 <div class="container container-table">
   <div class="content-navbar-adjust"></div>
   <div id="student-content" class="row">
-    <div class="col-md-9">
-      <h4 class="alert alert-info">{{ course_title }}</h4>
-      <p>{{ course_description }}</p>
-      <hr/>
-      <h4 class="alert alert-info">Notice Board</h4>
-      <p>Loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
-         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
-         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
-         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
-         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
-         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
-      </p>
-      <hr/>
-      <h4 class="alert alert-info">Lecture Notes</h4>
-      {% for note in lecture_notes %}
-        <h5>{{ note.title }}</h5> 
-        <p>{{ note.lecture_note }}</p>
-        <hr/>
-      {% endfor %}
-    </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-md-push-9">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title text-center">{{ request.user.username }}</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body panel-content">
+          <p>Class: {{ course_title }}</p>
+          <p>Course: {{ course }}</p>
           <p>Duration: {{ duration }}</p>
           <p>Period: {{ period }}</p>
           <hr/>
-          <a class="pull-right" href="#">Logout</a>
+          <a id="logout" class="pull-right" href="#">Logout</a>
         </div>
       </div>
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title text-center">Schedule</h3>
         </div>
-        <div class="panel-body schedule-content">
+        <div class="panel-body panel-content">
         {% for item in schedule %}
           <p>Date: {{ item.date }}</p>
           <p>Description:</p>
@@ -51,6 +33,29 @@
         {% endfor %}
         </div>
       </div>
+    </div>
+    <div class="col-md-9 col-md-pull-3">
+      <h4 class="alert alert-info alert-class-title">{{ course_title }}</h4>
+      <p class="well">{{ course_description }}</p>
+      <br/>
+      <h4 class="alert alert-info alert-class-title">Notice Board</h4>
+      <div class="well">
+        <p class="content-markdown">{{ class_obj.get_markdown }}</p>
+      </div>
+      <br/>
+      <h4 class="alert alert-info">Lecture Notes</h4>
+      {% for note in lecture_notes %}
+        <h5>{{ note.title }}</h5> 
+        <a class="note-{{note.id}}" href="#">[ Note ]</a>
+        {% if not note.upload.name == 'noFile' %}
+        {% csrf_token %}
+          <a id="note-{{ note.id }}" href="{{ note.upload.url }}" target="_blank">[ PDF ]</a>
+        {% endif %}
+        <div id="note">
+          <p class="content-markdown">{{ note.lecture_note }}</p>
+        </div>
+        <hr/>
+      {% endfor %}
     </div>
   </div>
 </div>   

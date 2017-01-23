@@ -3,7 +3,23 @@ from django.contrib.auth.forms import AuthenticationForm
 from pagedown.widgets import AdminPagedownWidget
 
 from core.utils import validate_pdf
-from .models import LectureNote
+from .models import Class, LectureNote
+
+
+class ClassForm(forms.ModelForm):
+    notice_board = forms.CharField(widget=AdminPagedownWidget())
+
+    class Meta:
+        model = Class
+        fields = [
+            'user',
+            'course_class',
+            'course_code',
+            'duration',
+            'period',
+            'notice_board',
+            'lecture_notes',
+            ]
 
 
 class LectureNoteForm(forms.ModelForm):

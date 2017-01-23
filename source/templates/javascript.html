@@ -100,25 +100,8 @@
           }
 
           // ## FIM ##
-
-
-        // [publications] Scripts serão implementados se pub_list for passado no contexto
-        {% if pub_list %}
-
-          // [publications] troca a classe da tag com o id 'publications' para ajustar
-          // a distância entre o primeiro artigo e a nav-bar
-          $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
-
-          // [publications] Implementa o botão que será destacado utilizando o valor de 'page',
-          // passado no contexto
-          // {%if page %}
-          //   $("#page{{ page }}").addClass('active')
-          // {% else %}
-          //   $("#page1").addClass('active')
-          // {% endif %}
-
-
-          function counter(pub_id){
+          
+          function counter(obj_id, url){
 
             // [publications] Código copiado da documentação do Django
             // Implementa segurança contra ataque CSRF
@@ -142,11 +125,11 @@
 
             // [publications] Requisição AJAX
             $.ajax({
-              url : window.location.href, // the endpoint,commonly same url
+              url : url,
               type : "POST", // http method
               data : { 
                 csrfmiddlewaretoken : csrftoken, 
-                pub_id : pub_id,
+                obj_id : obj_id,
               }, // data sent with the post request
               // handle a successful response
               success : function() {
@@ -162,15 +145,32 @@
             });
           };
 
+
+        // [publications] Scripts serão implementados se pub_list for passado no contexto
+        {% if pub_list %}
+
+          // [publications] troca a classe da tag com o id 'publications' para ajustar
+          // a distância entre o primeiro artigo e a nav-bar
+          $("#publications").toggleClass('content-navbar-adjust content-navbar-adjust-publications');
+
+          // [publications] Implementa o botão que será destacado utilizando o valor de 'page',
+          // passado no contexto
+          // {%if page %}
+          //   $("#page{{ page }}").addClass('active')
+          // {% else %}
+          //   $("#page1").addClass('active')
+          // {% endif %}
+
           // [publications] Itera sobre pub_list e implementa, para cada artigo, o método JQuery
           // que chama a função 'counter', responsavel por disparar a requisição AJAX do 
           // contador de downlods. O método JQuery também abre uma nova aba com o link do artigo.
           {% for pub in pub_list %}
             $("#{{ pub.id }}").click(function( event ) {
               event.preventDefault();
-              counter("{{ pub.id }}");
-              var url = "{{ pub.upload.url }}";
-              window.open(url, '_blank')
+              var url = window.location.href; // the endpoint,commonly same url
+              counter("{{ pub.id }}", url);
+              var url_file = "{{ pub.upload.url }}";
+              window.open(url_file, '_blank')
             });
 
             // [publication] Manipula a vizualização do 'abstract' do artigo
@@ -222,8 +222,7 @@
         $("#abstract img").each(function(){
           $(this).addClass("img-responsive")
         });
-        
-        
+               
         function doLogin(username, password){
 
           //Prepare csrf token
@@ -242,7 +241,6 @@
           });
           // ## FIM ##
 
-          // [publications] Requisição AJAX
           $.ajax({
             url : "{% url 'teaching:student-login' %}", // the endpoint,commonly same url
             type : "POST", // http method
@@ -269,6 +267,66 @@
           doLogin(username, password);
         });
 
+        function doLogout(){
+
+          //Prepare csrf token
+          var csrftoken = getCookie('csrftoken');
+
+          function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+          }
+          $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+              }
+            }
+          });
+          // ## FIM ##
+
+          $.ajax({
+            url : "{% url 'teaching:student-logout' %}", // the endpoint,commonly same url
+            type : "POST", // http method
+            data : { 
+              csrfmiddlewaretoken : csrftoken, 
+            }, // data sent with the post request
+            // handle a successful response
+            success : function() {
+              window.open("{% url 'core:home' %}", '_self')
+            },
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+              console.log(xhr.status + ": " + xhr.responseText);
+            }
+          });
+        };
+
+        $("#logout").click(function(event) {
+          event.preventDefault();
+          doLogout();
+        });
+
+        {% for note in lecture_notes %}
+          $("#note-{{ note.id }}").click(function( event ) {
+            event.preventDefault();
+            var url = "{% url 'teaching:ln-download-counter' %}"
+            counter("{{ note.id }}", url);
+            var url_file = "{{ note.upload.url }}";
+            window.open(url_file, '_blank')
+          });
+
+
+        $(".note-{{ note.id }}").click(function(event){
+          event.preventDefault();
+          if ($(this).next("#note")[0]){
+            $(this).next("#note").fadeToggle();
+          }
+          else {
+            $(this).next().next().next("#note").fadeToggle();
+          }
+        });
+        {% endfor %}
 
       })
 

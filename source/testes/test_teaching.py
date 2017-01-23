@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client, RequestFactory
 
+from django.contrib.auth import authenticate, login
 from model_mommy import mommy
 
 from core.models import PageDescription
@@ -59,3 +60,15 @@ class TeachingViewTest(TestCase):
         self.assertTemplateUsed(response, 'teaching/teaching.html')
         self.assertTemplateUsed(response, 'javascript.html')
 
+    def test_lecture_notes_download_counter(self):
+        ln = mommy.make(LectureNote)
+        ln = LectureNote.objects.first()
+        self.assertEqual(ln.download, 0)
+        cl = Client()
+        response = cl.post(
+                reverse('teaching:ln-download-counter'),
+                {'obj_id': 1},
+                HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+                )
+        ln = LectureNote.objects.first()
+        self.assertEqual(ln.download, 1)

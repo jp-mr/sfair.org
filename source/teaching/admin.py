@@ -7,7 +7,7 @@ from .models import (
             CourseCode,
             Course,
             )
-from .forms import LectureNoteForm
+from .forms import ClassForm, LectureNoteForm
 
 
 CLASS_INFO_FIELDS = [
@@ -18,6 +18,7 @@ CLASS_INFO_FIELDS = [
         'period'
         ]
 
+NOTICE_BOARD_FIELDS = ['notice_board']
 LECTURES_NOTES_FIELDS = ['lecture_notes']
 
 
@@ -67,6 +68,8 @@ class CourseModelAdmin(admin.ModelAdmin):
 
 class ClassModelAdmin(admin.ModelAdmin):
 
+    form = ClassForm
+
     actions = ['delete_selected']
 
     inlines = [
@@ -91,11 +94,12 @@ class ClassModelAdmin(admin.ModelAdmin):
 
     fieldsets = [
             ('CLASS INFO', {'fields': CLASS_INFO_FIELDS}),
+            ('NOTICE BOARD', {'fields': NOTICE_BOARD_FIELDS}),
             ('LECTURES NOTES', {'fields': LECTURES_NOTES_FIELDS}),
             ]
 
-    class Meta:
-        model = Class
+    #class Meta:
+    #    model = Class
 
 
 admin.site.register(Class, ClassModelAdmin)

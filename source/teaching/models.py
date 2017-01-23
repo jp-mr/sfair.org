@@ -34,15 +34,21 @@ class Class(models.Model):
             on_delete=models.SET_NULL,
             null=True,
             )
+    notice_board = models.TextField()
     duration = models.CharField(max_length=10, choices=DURATION, blank=True)
     period = models.CharField(max_length=15, choices=PERIOD, blank=True)
     lecture_notes = models.ManyToManyField('LectureNote', blank=True)
 
+    class Meta:
+        verbose_name_plural = "classes"
+
     def __str__(self):
         return self.user.username
 
-    class Meta:
-        verbose_name_plural = "classes"
+    def get_markdown(self):
+        notice_board = self.notice_board
+        markdown_text = markdown(notice_board)
+        return mark_safe(markdown_text)
 
 
 class LectureNote(models.Model):
@@ -73,6 +79,9 @@ class Date(models.Model):
 
     def __str__(self):
         return self.description
+
+    class Meta:
+        ordering = ['date']
 
 
 DEGREES = (
