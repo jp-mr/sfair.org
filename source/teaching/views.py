@@ -43,8 +43,10 @@ def student_logout(request):
 def student_area(request):
 
     user_id = request.user.id
-    # TODO: usar prefetch_related
-    class_obj = Class.objects.get(user=user_id)
+    class_obj = Class.objects.select_related(
+            'course_class',
+            'course_code'
+            ).get(user=user_id)
     lecture_notes = class_obj.lecture_notes.all()
     schedule = class_obj.date_set.all()
     course = class_obj.course_class

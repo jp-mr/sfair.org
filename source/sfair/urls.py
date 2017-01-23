@@ -26,10 +26,12 @@ from teaching.forms import LoginForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$',
+    url(
+        r'^accounts/login/$',
         auth_views.login,
         {'authentication_form': LoginForm },
-        name='login'),
+        name='login'
+        ),
 
     # [home, contact, formation&CV, research, publications ] Essa linha vai
     # redirecionar para '/core/urls.py'. Abra esse arquivo.
