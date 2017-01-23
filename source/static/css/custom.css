@@ -269,3 +269,23 @@ textarea.form-control {
 #note {
   display: none;
 }
+
+.user-not-allowed-error {
+  display: none;
+}
+
+.user-pwd-dont-match {
+  display: none;
+}
+
+.user-empty-error {
+  display: none;
+}
+
+.pwd-empty-error {
+  display: none;
+}
+
+.user-dont-exist-error {
+  display: none;
+}

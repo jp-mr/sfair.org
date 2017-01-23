@@ -250,8 +250,55 @@
               password: password,
             }, // data sent with the post request
             // handle a successful response
-            success : function() {
-              window.open("{% url 'teaching:student-area' %}", '_self')
+            success : function(data) {
+              if (data == "userNotAllowed") {
+                $('#password-field').removeClass("has-error");
+                $('#username-field').addClass("has-error");
+                $('.user-pwd-dont-match').fadeOut();
+                $('.user-empty-error').fadeOut();
+                $('.pwd-empty-error').fadeOut();
+                $('.user-dont-exist-error').fadeOut();
+                $('.user-not-allowed-error').fadeIn();
+              } 
+              else if (data == "userPwdDontMatch"){
+                $('#username-field').addClass("has-error");
+                $('#password-field').addClass("has-error");
+                $('.user-not-allowed-error').fadeOut();
+                $('.user-empty-error').fadeOut();
+                $('.pwd-empty-error').fadeOut();
+                $('.user-dont-exist-error').fadeOut();
+                $('.user-pwd-dont-match').fadeIn();
+              }
+              else if (data == "userEmptyError"){
+                $('#password-field').removeClass("has-error");
+                $('#username-field').addClass("has-error");
+                $('.user-not-allowed-error').fadeOut();
+                $('.user-pwd-dont-match').fadeOut();
+                $('.pwd-empty-error').fadeOut();
+                $('.user-dont-exist-error').fadeOut();
+                $('.user-empty-error').fadeIn();
+              }
+              else if (data == "pwdEmptyError"){
+                $('#username-field').removeClass("has-error");
+                $('#password-field').addClass("has-error");
+                $('.user-not-allowed-error').fadeOut();
+                $('.user-pwd-dont-match').fadeOut();
+                $('.user-empty-error').fadeOut();
+                $('.user-dont-exist-error').fadeOut();
+                $('.pwd-empty-error').fadeIn();
+              }
+              else if (data == "userDontExistError"){
+                $('#password-field').removeClass("has-error");
+                $('#username-field').addClass("has-error");
+                $('.user-not-allowed-error').fadeOut();
+                $('.user-pwd-dont-match').fadeOut();
+                $('.user-empty-error').fadeOut();
+                $('.pwd-empty-error').fadeOut();
+                $('.user-dont-exist-error').fadeIn();
+              }
+              else {
+                window.open("{% url 'teaching:student-area' %}", '_self')
+              }
             },
             // handle a non-successful response
             error : function(xhr,errmsg,err) {

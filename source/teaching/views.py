@@ -1,11 +1,16 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.db.models import F
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
 
 from core.models import PageDescription
 from .models import Class, LectureNote
+
+
+User = get_user_model()
 
 
 def teaching(request):
@@ -24,12 +29,22 @@ def student_login(request):
     if request.method == 'POST' and request.is_ajax():
         username = request.POST['username']
         password = request.POST['password']
+        if username == "":
+            return HttpResponse('userEmptyError')
+        if password == "":
+            return HttpResponse('pwdEmptyError')
+        user_qs = User.objects.filter(username=username)
+        if not user_qs.exists():
+            return HttpResponse('userDontExistError')
         user = authenticate(username=username, password=password)
         if user is not None:
+            user_obj= User.objects.get(username=username)
+            if user_obj.is_superuser or user_obj.is_staff:
+                return HttpResponse('userNotAllowed')
             login(request=request, user=user)
             return HttpResponse(True)
-        return Http404
-    return Http404
+        return HttpResponse('userPwdDontMatch')
+    raise PermissionDenied
 
 
 def student_logout(request):
