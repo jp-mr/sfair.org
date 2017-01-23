@@ -4,34 +4,55 @@
 {% block content %}
 
 <div class="container container-table">
-  <div id="publications" class="content-navbar-adjust"></div>
-  
-  <!-- [publications] Itera sobre pub_list (passado no contexto em view.py) 
-  		 e replica o código para cada artigos -->
-  {% for pub in pub_list %}
-  <div id="{{pub.year}}" class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-      <h5 class="title-publications">{{ pub.title }}</h5>
-      <span>
-        <p id="author">{{ pub.author}}</p>
-        <p id="journal">{{ pub.journal}}</p>
-      </span>
-      <a class="abstract-{{pub.id}}" href="#">[ Abstract ]</a>
-      <!-- [publications ]'pub.id' fornece o ID de cada artigo e 
-           o 'id' ta tag <a> será usado no script em 'templates/base.html' 
-           para a requisição AJAX do contador de downloads. -->
-      {% if not pub.upload.name == 'noFile' %}
-      {% csrf_token %}
-        <a id="{{ pub.id }}" href="{{ pub.upload.url }}" target="_blank">[ PDF ]</a>
-      {% endif %}
-      <div id="abstract" class="text-justify publications-margin-top">
-        <p class="content-markdown">
-          {{ pub.get_markdown }}
-        </p>
+  <div class="content-navbar-adjust"></div>
+  <div id="student-content" class="row">
+    <div class="col-md-9">
+      <h4 class="alert alert-info">{{ course_title }}</h4>
+      <p>{{ course_description }}</p>
+      <hr/>
+      <h4 class="alert alert-info">Notice Board</h4>
+      <p>Loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
+         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
+         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
+         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum 
+         loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+      </p>
+      <hr/>
+      <h4 class="alert alert-info">Lecture Notes</h4>
+      {% for note in lecture_notes %}
+        <h5>{{ note.title }}</h5> 
+        <p>{{ note.lecture_note }}</p>
+        <hr/>
+      {% endfor %}
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">{{ request.user.username }}</h3>
+        </div>
+        <div class="panel-body">
+          <p>Duration: {{ duration }}</p>
+          <p>Period: {{ period }}</p>
+          <hr/>
+          <a class="pull-right" href="#">Logout</a>
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">Schedule</h3>
+        </div>
+        <div class="panel-body schedule-content">
+        {% for item in schedule %}
+          <p>Date: {{ item.date }}</p>
+          <p>Description:</p>
+          <p>{{ item.description }}</p>
+          <hr/>
+        {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-  {% endfor %}
 </div>   
 
 {% endblock %}

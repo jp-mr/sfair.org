@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
 
-
 from core.models import PageDescription
+from .models import Class
 
 
 def teaching(request):
@@ -34,8 +34,24 @@ def student_login(request):
 @login_required
 def student_area(request):
 
+    user_id = request.user.id
+    # TODO: usar prefetch_related
+    class_obj = Class.objects.get(user=user_id)
+    lecture_notes = class_obj.lecture_notes.all()
+    schedule = class_obj.date_set.all()
+    course_title = class_obj.course_code.title
+    course_description = class_obj.course_code.description
+    duration = class_obj.duration
+    period = class_obj.period
     template = "teaching/student_area.html"
-    context = {}
+    context = {
+            'lecture_notes': lecture_notes,
+            'schedule': schedule,
+            'course_title': course_title,
+            'course_description': course_description,
+            'duration': duration.capitalize(),
+            'period': period.capitalize(),
+            }
 
     # Renderiza a página
     return render(request, template, context)
