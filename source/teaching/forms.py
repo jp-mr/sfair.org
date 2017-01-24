@@ -1,9 +1,13 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from pagedown.widgets import AdminPagedownWidget
 
 from core.utils import validate_pdf
 from .models import Class, LectureNote
+
+
+User = get_user_model()
 
 
 class ClassForm(forms.ModelForm):
@@ -81,3 +85,14 @@ class LoginForm(AuthenticationForm):
                     }
                 )
             )
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        user_qs = User.objects.filter(username=username)
+        if user_qs.exists() and user_qs.count() == 1:
+            user = user_qs.first()
+            if user.is_superuser or user.is_staff:
+                raise forms.ValidationError("This user not allowed")
+            else:
+                return username
+        raise forms.ValidationError("This user don't exist.")

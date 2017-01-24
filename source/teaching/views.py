@@ -1,12 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
 from django.db.models import F
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
 
 from core.models import PageDescription
+from core.utils import check_student_user
 from .models import Class, LectureNote
 
 
@@ -55,6 +57,11 @@ def student_logout(request):
 
 
 @login_required
+@user_passes_test(
+        check_student_user,
+        login_url="teaching:unauthorized",
+        redirect_field_name=''
+        )
 def student_area(request):
 
     user_id = request.user.id
@@ -90,6 +97,11 @@ def student_area(request):
 
     # Renderiza a página
     return render(request, template, context)
+
+
+def unauthorized401(request):
+    template = "teaching/status_401.html"
+    return render(request, template, {})
 
 
 def lecture_notes_download_couter(request):

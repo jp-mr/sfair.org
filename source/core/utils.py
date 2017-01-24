@@ -8,3 +8,7 @@ def validate_pdf(uploaded_file):
     if mime_type not in supported_types:
         return False
     return True
+
+
+def check_student_user(user):
+    return not any([user.is_superuser, user.is_staff])

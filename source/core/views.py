@@ -235,17 +235,18 @@ def publications(request):
     # except EmptyPage:
     #     queryset = paginator.page(paginator.num_pages)
 
-    # [publications] Cria uma lista com os anos das publicações. Se algum ano
-    # já estiver na lista, não é adicionado novamente a lista.
+    # [publications]
     # Verifica se cada publicação tem um arquivo PDF associado, caso não
     # tenha, atribui uma string que será usada em 'publications.html' num
     # bloco 'if' para não exibir o link de download
-    years = []
     for qs in queryset:
-        if not qs.year in years:
-            years.append(qs.year)
         if not qs.upload.name:
             qs.upload.name = 'noFile'
+
+    # [publications]
+    # Itera sobre as publicações e cria uma lista sem repetições com os anos
+    # das publicações.
+    years = sorted(set([qs.year for qs in queryset]), reverse=True)
 
     template = "research/publications.html"
     context = {
