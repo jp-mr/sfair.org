@@ -50,8 +50,7 @@ class ClassLectureNote(models.Model):
     class_user = models.ForeignKey(Class, on_delete=models.CASCADE)
     lecture_note = models.ForeignKey(
             'LectureNote',
-            on_delete=models.SET_NULL,
-            null=True,
+            on_delete=models.CASCADE,
             )
     position = models.PositiveSmallIntegerField()
     download = models.PositiveSmallIntegerField(default=0)
