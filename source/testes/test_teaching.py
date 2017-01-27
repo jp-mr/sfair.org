@@ -9,6 +9,7 @@ from core.models import PageDescription
 from teaching.models import (
             Class,
             LectureNote,
+            ClassLectureNote,
             Date,
             CourseCode,
             Course,
@@ -21,7 +22,7 @@ User = get_user_model()
 class TeachingModelTests(TestCase):
 
     def test_class_create(self):
-        obj = mommy.make(Class)
+        obj = mommy.make(Class, notice_board="Texto de teste.")
         self.assertIsInstance(obj, Class)
         self.assertEqual(obj.__str__(), obj.user.username)
         self.assertEqual(
@@ -38,6 +39,17 @@ class TeachingModelTests(TestCase):
                 "<p>" + obj.lecture_note + "</p>\n"
                 )
 
+    def test_class_lecture_note_create(self):
+        class_obj = mommy.make(Class)
+        lecture_note = mommy.make(LectureNote)
+        cln = mommy.make(
+                ClassLectureNote,
+                class_user=class_obj,
+                lecture_note=lecture_note
+                )
+        self.assertIsInstance(cln, ClassLectureNote)
+        self.assertEqual(cln.__str__(), cln.lecture_note.title)
+
     def test_date_create(self):
         obj = mommy.make(Date)
         self.assertIsInstance(obj, Date)
@@ -47,6 +59,10 @@ class TeachingModelTests(TestCase):
         obj = mommy.make(CourseCode)
         self.assertIsInstance(obj, CourseCode)
         self.assertEqual(obj.__str__(), obj.code)
+        self.assertEqual(
+                obj.get_markdown(),
+                "<p>" + obj.description + "</p>\n"
+                )
 
     def test_course_create(self):
         obj = mommy.make(Course)
@@ -60,6 +76,7 @@ class TeachingViewTests(TestCase):
         self.user = mommy.make(User, username='usuario', password='senha123')
         self.course_code = mommy.make(CourseCode)
         self.class_obj = mommy.make(Class, user=self.user, course_code=self.course_code)
+        self.lecture_note = mommy.make(LectureNote)
         self.client = Client()
 
     def test_teaching(self):
@@ -95,14 +112,46 @@ class TeachingViewTests(TestCase):
         self.assertRedirects(response, redirected_url)
 
     def test_lecture_notes_download_counter(self):
-        ln = mommy.make(LectureNote)
-        ln = LectureNote.objects.first()
-        self.assertEqual(ln.download, 0)
+        mommy.make(
+                ClassLectureNote,
+                lecture_note=self.lecture_note,
+                class_user=self.class_obj
+                )
+        class_ln1 = ClassLectureNote.objects.first()
+        data1 = {
+            'cln_id': class_ln1.id,
+            'ln_id': class_ln1.lecture_note.id,
+            }
+        self.assertEqual(self.lecture_note.download, 0)
+        self.assertEqual(class_ln1.download, 0)
         cl = Client()
         response = cl.post(
                 reverse('teaching:ln-download-counter'),
-                {'obj_id': 1},
+                data1,
                 HTTP_X_REQUESTED_WITH='XMLHttpRequest'
                 )
-        ln = LectureNote.objects.first()
-        self.assertEqual(ln.download, 1)
+        class_ln1 = ClassLectureNote.objects.first()
+        self.assertEqual(class_ln1.download, 1)
+        self.assertEqual(class_ln1.lecture_note.download, 1)
+
+        mommy.make(
+                ClassLectureNote,
+                lecture_note=self.lecture_note,
+                class_user=self.class_obj,
+                )
+        class_ln2 = ClassLectureNote.objects.get(id=2)
+        data2 = {
+            'cln_id': class_ln2.id,
+            'ln_id': class_ln2.lecture_note.id,
+            }
+        self.assertEqual(class_ln2.lecture_note.download, 1)
+        self.assertEqual(class_ln2.download, 0)
+        cl = Client()
+        response = cl.post(
+                reverse('teaching:ln-download-counter'),
+                data2,
+                HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+                )
+        class_ln2 = ClassLectureNote.objects.get(id=2)
+        self.assertEqual(class_ln2.download, 1)
+        self.assertEqual(class_ln2.lecture_note.download, 2)

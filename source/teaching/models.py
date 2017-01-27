@@ -6,15 +6,9 @@ from markdown_deux import markdown
 
 
 DURATION = (
-        ('sem1', '1º Semester'),
-        ('sem2', '2º Semester'),
+        ('sem1', 'S1'),
+        ('sem2', 'S2'),
         ('annual','Annual')
-        )
-
-PERIOD = (
-        ('morning', 'Morning'),
-        ('afternoon', 'Afternoon'),
-        ('nocturnal', 'Nocturnal'),
         )
 
 
@@ -34,10 +28,11 @@ class Class(models.Model):
             on_delete=models.SET_NULL,
             null=True,
             )
-    notice_board = models.TextField()
-    duration = models.CharField(max_length=10, choices=DURATION, blank=True)
-    period = models.CharField(max_length=15, choices=PERIOD, blank=True)
-    lecture_notes = models.ManyToManyField('LectureNote', blank=True)
+    notice_board = models.TextField(blank=True)
+    infobox_title = models.CharField(max_length=50)
+    classroom = models.CharField(max_length=50)
+    class_time = models.TimeField(max_length=50)
+    duration = models.CharField(max_length=10, choices=DURATION)
 
     class Meta:
         verbose_name_plural = "classes"
@@ -51,6 +46,23 @@ class Class(models.Model):
         return mark_safe(markdown_text)
 
 
+class ClassLectureNote(models.Model):
+    class_user = models.ForeignKey(Class, on_delete=models.CASCADE)
+    lecture_note = models.ForeignKey(
+            'LectureNote',
+            on_delete=models.SET_NULL,
+            null=True,
+            )
+    position = models.PositiveSmallIntegerField()
+    download = models.PositiveSmallIntegerField(default=0)
+
+    def __str__(self):
+        return self.lecture_note.title
+
+    class Meta:
+        ordering = ['position']
+
+
 class LectureNote(models.Model):
     title = models.CharField(max_length=500)
     lecture_note = models.TextField()
@@ -59,7 +71,7 @@ class LectureNote(models.Model):
             max_length=100,
             blank=True
             )
-    download = models.IntegerField(default=0)
+    download = models.PositiveSmallIntegerField(default=0)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -85,9 +97,8 @@ class Date(models.Model):
 
 
 DEGREES = (
-        ('graduation','Graduation'),
-        ('master','Master'),
-        ('doctoral','Doctoral'),
+        ('undergraduate','Undergraduate'),
+        ('graduate','Graduate'),
         )
 
 
@@ -99,6 +110,11 @@ class CourseCode(models.Model):
 
     def __str__(self):
         return self.code
+
+    def get_markdown(self):
+        description = self.description
+        markdown_text = markdown(description)
+        return mark_safe(markdown_text)
 
 
 class Course(models.Model):

@@ -1,5 +1,10 @@
 {% load staticfiles %}
 
+
+    <!-- TODO: Refatorar e organizar o código!!! -->
+
+
+
     <!-- ############### [ Script  ] ###############  -->
 
     <!-- jQuery -->
@@ -101,7 +106,7 @@
 
           // ## FIM ##
           
-          function counter(obj_id, url){
+          function counter(pub_id, url){
 
             // [publications] Código copiado da documentação do Django
             // Implementa segurança contra ataque CSRF
@@ -129,8 +134,9 @@
               type : "POST", // http method
               data : { 
                 csrfmiddlewaretoken : csrftoken, 
-                obj_id : obj_id,
-              }, // data sent with the post request
+                pub_id: pub_id
+              },
+              // data sent with the post request
               // handle a successful response
               success : function() {
                 console.log("OK"); // another sanity check
@@ -204,7 +210,7 @@
         // Quando a página for carregada (document), executa as funções.
         // Primeira função:
         //     $(".content-markdown") se refere a uma classe dentro de uma 
-        //     tag <p> em 'post_detail.html'.
+        //     tag <p> em 'publications.html'.
         //     '.this' se refere a '.content-markdown'
         //     '.each()' executa uma iteração
         //     'marked()' é chamada do script 'Markdown' acima.
@@ -317,26 +323,26 @@
         function doLogout(){
 
           //Prepare csrf token
-          var csrftoken = getCookie('csrftoken');
+          //var csrftoken = getCookie('csrftoken');
 
-          function csrfSafeMethod(method) {
-          // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-          }
-          $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-              }
-            }
-          });
+          //function csrfSafeMethod(method) {
+          //// these HTTP methods do not require CSRF protection
+          //  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+          //}
+          //$.ajaxSetup({
+          //  beforeSend: function(xhr, settings) {
+          //    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          //      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          //    }
+          //  }
+          //});
           // ## FIM ##
 
           $.ajax({
             url : "{% url 'teaching:student-logout' %}", // the endpoint,commonly same url
-            type : "POST", // http method
+            type : "GET", // http method
             data : { 
-              csrfmiddlewaretoken : csrftoken, 
+              //csrfmiddlewaretoken : csrftoken, 
             }, // data sent with the post request
             // handle a successful response
             success : function() {
@@ -354,46 +360,76 @@
           doLogout();
         });
 
-        {% for note in lecture_notes %}
-          $("#note-{{ note.id }}").click(function( event ) {
+
+        function counter(cln_id, ln_id, url){
+
+          // [publications] Código copiado da documentação do Django
+          // Implementa segurança contra ataque CSRF
+          // ## INÍCIO ##
+
+          //Prepare csrf token
+          var csrftoken = getCookie('csrftoken');
+
+          function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+          }
+          $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+              }
+            }
+          });
+          // ## FIM ##
+
+          // [publications] Requisição AJAX
+          $.ajax({
+            url : url,
+            type : "POST", // http method
+            data : { 
+              csrfmiddlewaretoken : csrftoken, 
+              cln_id: cln_id,
+              ln_id: ln_id
+            },
+            // data sent with the post request
+            // handle a successful response
+            success : function() {
+              console.log("OK"); // another sanity check
+            },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+              console.log(xhr.status + ": " + xhr.responseText); // provide a bit more 
+                                                         // info about the error 
+                                                         // to the console
+            }
+          });
+        };
+
+        {% for clnote in class_lecture_notes %}
+          $("#note-{{ clnote.id }}").click(function( event ) {
             event.preventDefault();
-            var url = "{% url 'teaching:ln-download-counter' %}"
-            counter("{{ note.id }}", url);
-            var url_file = "{{ note.upload.url }}";
+            var url = "{% url 'teaching:ln-download-counter' %}";
+            var cln_id = "{{ clnote.id }}";
+            var ln_id = "{{ clnote.lecture_note.id }}";
+            counter(cln_id, ln_id, url);
+            var url_file = "{{ clnote.lecture_note.upload.url }}";
             window.open(url_file, '_blank')
           });
 
 
-        $(".note-{{ note.id }}").click(function(event){
-          event.preventDefault();
-          if ($(this).next("#note")[0]){
-            $(this).next("#note").fadeToggle();
-          }
-          else {
-            $(this).next().next().next("#note").fadeToggle();
-          }
-        });
+          $(".note-{{ note.lecture_note.id }}").click(function(event){
+            event.preventDefault();
+            if ($(this).next("#note")[0]){
+              $(this).next("#note").fadeToggle();
+            }
+            else {
+              $(this).next().next().next("#note").fadeToggle();
+            }
+          });
         {% endfor %}
 
       })
 
   </script>
-
-  <!--- #XXX: Era pra retirar a classe 'img-background' de todas as tags
-              com o id 'img-home', mas não funciona e eu não sei o motivo.
-              'img-background' só é usado na home.
-              A classe agora é ativada pelo contexto passado na 'views.py'.
-  
-  <script>
-
-    $(document).ready(function(){
-      $("#img-home").each(function(){
-        $(this).removeClass("img-background");
-          console.log("OK")
-        })
-    })
-  
-  </script>
-  
-  -->
-

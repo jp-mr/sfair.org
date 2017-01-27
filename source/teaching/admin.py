@@ -3,23 +3,25 @@ from django.contrib import admin
 from .models import (
             Class,
             LectureNote,
+            ClassLectureNote,
             Date,
             CourseCode,
             Course,
             )
-from .forms import ClassForm, LectureNoteForm
+from .forms import ClassForm, LectureNoteForm, CourseCodeForm
 
 
 CLASS_INFO_FIELDS = [
         'user',
         'course_class',
         'course_code',
+        'classroom',
+        'class_time',
         'duration',
-        'period'
+        'infobox_title',
         ]
 
 NOTICE_BOARD_FIELDS = ['notice_board']
-LECTURES_NOTES_FIELDS = ['lecture_notes']
 
 
 class LectureNoteModelAdmin(admin.ModelAdmin):
@@ -27,7 +29,7 @@ class LectureNoteModelAdmin(admin.ModelAdmin):
     form = LectureNoteForm
 
     search_fields = ['title', 'lecture_note']
-    readonly_fields = ['download', 'timestamp', 'updated']
+    readonly_fields = ['timestamp', 'updated']
     actions = ['delete_selected']
     list_display = [
             'title',
@@ -35,6 +37,13 @@ class LectureNoteModelAdmin(admin.ModelAdmin):
             'updated',
             'timestamp'
             ]
+
+
+class ClassLectureNoteInline(admin.TabularInline):
+
+    actions = ['delete_selected']
+    model = ClassLectureNote
+    extra = 0
 
 
 class DateInline(admin.TabularInline):
@@ -47,15 +56,13 @@ class DateInline(admin.TabularInline):
 
 class CourseCodeModelAdmin(admin.ModelAdmin):
 
+    form = CourseCodeForm
     actions = ['delete_selected']
     list_display = [
             'title',
             'code',
             'degree',
             ]
-
-    class Meta:
-        model = CourseCode
 
 
 class CourseModelAdmin(admin.ModelAdmin):
@@ -73,6 +80,7 @@ class ClassModelAdmin(admin.ModelAdmin):
     actions = ['delete_selected']
 
     inlines = [
+            ClassLectureNoteInline,
             DateInline,
             ]
 
@@ -80,11 +88,9 @@ class ClassModelAdmin(admin.ModelAdmin):
             'user',
             'course_class',
             'course_code',
-            'duration',
-            'period',
+            'classroom',
+            'class_time',
             )
-
-    filter_horizontal = ['lecture_notes',]
 
     list_select_related = (
             'user',
@@ -95,11 +101,7 @@ class ClassModelAdmin(admin.ModelAdmin):
     fieldsets = [
             ('CLASS INFO', {'fields': CLASS_INFO_FIELDS}),
             ('NOTICE BOARD', {'fields': NOTICE_BOARD_FIELDS}),
-            ('LECTURES NOTES', {'fields': LECTURES_NOTES_FIELDS}),
             ]
-
-    #class Meta:
-    #    model = Class
 
 
 admin.site.register(Class, ClassModelAdmin)

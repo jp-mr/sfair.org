@@ -9,13 +9,15 @@
     <div class="col-md-3 col-md-push-9">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title text-center">{{ request.user.username }}</h3>
+          <h3 class="panel-title text-center">{{ infobox_title }}</h3>
         </div>
         <div class="panel-body panel-content">
+          <p>User: {{ request.user.username }}</p>
           <p>Class: {{ course_title }}</p>
+          <p>Classroom: {{ classroom }}</p>
+          <p>Time: {{ class_time }}</p>
           <p>Course: {{ course }}</p>
           <p>Duration: {{ duration }}</p>
-          <p>Period: {{ period }}</p>
           <hr/>
           <a id="logout" class="pull-right" href="#">Logout</a>
         </div>
@@ -44,15 +46,15 @@
       </div>
       <br/>
       <h4 class="alert alert-info">Lecture Notes</h4>
-      {% for note in lecture_notes %}
-        <h5>{{ note.title }}</h5> 
-        <a class="note-{{note.id}}" href="#">[ Note ]</a>
-        {% if not note.upload.name == 'noFile' %}
+      {% for clnote in class_lecture_notes %}
+        <h5>{{ clnote.lecture_note.title }}</h5> 
+        <a class="note-{{clnote.id}}" href="#">[ Note ]</a>
+        {% if not clnote.lecture_note.upload.name == 'noFile' %}
         {% csrf_token %}
-          <a id="note-{{ note.id }}" href="{{ note.upload.url }}" target="_blank">[ PDF ]</a>
+          <a id="note-{{ clnote.id }}" href="{{ clnote.lecture_note.upload.url }}" target="_blank">[ PDF ]</a>
         {% endif %}
-        <div id="note">
-          <p class="content-markdown">{{ note.lecture_note }}</p>
+        <div id="note" class="text-justify">
+          <p class="content-markdown">{{ clnote.lecture_note.lecture_note }}</p>
         </div>
         <hr/>
       {% endfor %}

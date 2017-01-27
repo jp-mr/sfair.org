@@ -9,7 +9,7 @@ from django.shortcuts import render
 
 from core.models import PageDescription
 from core.utils import check_student_user
-from .models import Class, LectureNote
+from .models import Class, LectureNote, ClassLectureNote
 
 
 User = get_user_model()
@@ -29,8 +29,9 @@ def teaching(request):
 
 def student_login(request):
     if request.method == 'POST' and request.is_ajax():
-        username = request.POST['username']
-        password = request.POST['password']
+        print(request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         if username == "":
             return HttpResponse('userEmptyError')
         if password == "":
@@ -50,10 +51,10 @@ def student_login(request):
 
 
 def student_logout(request):
-    if request.method == 'POST' and request.is_ajax():
-        logout(request=request)
-        return HttpResponse(True)
-    return Http404
+    #if request.method == 'POST' and request.is_ajax():
+    logout(request=request)
+    return HttpResponse(True)
+    #return Http404
 
 
 @login_required
@@ -69,33 +70,36 @@ def student_area(request):
             'course_class',
             'course_code'
             ).get(user=user_id)
-    lecture_notes = class_obj.lecture_notes.all()
+    class_lecture_notes = class_obj.classlecturenote_set.all()
     schedule = class_obj.date_set.all()
     course = class_obj.course_class
     course_title = class_obj.course_code.title
     course_description = class_obj.course_code.description
     duration = class_obj.duration
-    period = class_obj.period
+    infobox_title = class_obj.infobox_title
+    classroom = class_obj.classroom
+    class_time = class_obj.class_time
     notice_board = class_obj.notice_board
 
-    for note in lecture_notes:
-        if not note.upload.name:
-            note.upload.name = 'noFile'
+    for note in class_lecture_notes:
+        if not note.lecture_note.upload.name:
+            note.lecture_note.upload.name = 'noFile'
 
     template = "teaching/student_area.html"
     context = {
-            'class_obj':class_obj,
-            'lecture_notes': lecture_notes,
+            'class_obj': class_obj,
+            'class_lecture_notes': class_lecture_notes,
             'schedule': schedule,
             'course_title': course_title,
             'course_description': course_description,
             'duration': duration.capitalize(),
-            'period': period.capitalize(),
             'course': course,
             'notice_board': notice_board,
+            'infobox_title': infobox_title,
+            'classroom': classroom,
+            'class_time': class_time,
             }
 
-    # Renderiza a página
     return render(request, template, context)
 
 
@@ -106,7 +110,8 @@ def unauthorized401(request):
 
 def lecture_notes_download_couter(request):
     if request.method == 'POST' and request.is_ajax():
-        lecture_note_id = request.POST.get('obj_id')
-        lecture_note = LectureNote.objects.filter(id=lecture_note_id)
-        lecture_note.update(download=F('download') + 1)
+        cln_id = request.POST.get('cln_id')
+        ln_id = request.POST.get('ln_id')
+        ClassLectureNote.objects.filter(id=cln_id).update(download = F('download') + 1)
+        LectureNote.objects.filter(id=ln_id).update(download = F('download') + 1)
         return HttpResponse(True)
