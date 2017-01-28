@@ -105,7 +105,7 @@ class CourseCode(models.Model):
     title = models.CharField(max_length=140)
     code = models.CharField(max_length=25)
     description = models.TextField()
-    degree = models.CharField(max_length=10, choices=DEGREES, blank=True)
+    degree = models.CharField(max_length=15, choices=DEGREES, blank=True)
 
     def __str__(self):
         return self.code
