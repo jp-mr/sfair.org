@@ -419,7 +419,7 @@
           });
 
 
-          $(".note-{{ note.lecture_note.id }}").click(function(event){
+          $(".note-{{ clnote.id }}").click(function(event){
             event.preventDefault();
             if ($(this).next("#note")[0]){
               $(this).next("#note").fadeToggle();

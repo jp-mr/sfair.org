@@ -38,7 +38,9 @@
     </div>
     <div class="col-md-9 col-md-pull-3">
       <h4 class="alert alert-info alert-class-title">{{ course_title }}</h4>
-      <p class="well">{{ course_description }}</p>
+      <div class="well">
+        <p class="content-markdown">{{ course_description.get_markdown}}</p>
+      </div>
       <br/>
       <h4 class="alert alert-info alert-class-title">Notice Board</h4>
       <div class="well">

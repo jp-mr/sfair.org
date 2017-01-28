@@ -74,7 +74,7 @@ def student_area(request):
     schedule = class_obj.date_set.all()
     course = class_obj.course_class
     course_title = class_obj.course_code.title
-    course_description = class_obj.course_code.description
+    course_description = class_obj.course_code
     duration = class_obj.duration
     infobox_title = class_obj.infobox_title
     classroom = class_obj.classroom
