@@ -42,15 +42,17 @@
         <p class="content-markdown">{{ course_description.get_markdown}}</p>
       </div>
       <br/>
-      <h4 class="alert alert-info alert-class-title">Notice Board</h4>
-      <div class="well">
-        <p class="content-markdown">{{ class_obj.get_markdown }}</p>
-      </div>
-      <br/>
+      {% if class_obj.notice_board %}
+        <h4 class="alert alert-info alert-class-title">Notice Board</h4>
+        <div class="well">
+          <p class="content-markdown">{{ class_obj.get_markdown }}</p>
+        </div>
+        <br/>
+      {% endif %}
       <h4 class="alert alert-info">Lecture Notes</h4>
       {% for clnote in class_lecture_notes %}
         <h5>{{ clnote.lecture_note.title }}</h5> 
-        <a class="note-{{clnote.id}}" href="#">[ Note ]</a>
+        <a class="note-{{ clnote.id }}" href="#">[ Note ]</a>
         {% if not clnote.lecture_note.upload.name == 'noFile' %}
         {% csrf_token %}
           <a id="note-{{ clnote.id }}" href="{{ clnote.lecture_note.upload.url }}" target="_blank">[ PDF ]</a>

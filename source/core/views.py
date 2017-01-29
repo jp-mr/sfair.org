@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 
 from .forms import ContactForm
 from .models import Publication, PageDescription
+from .utils import assign_attr_no_file
 
 import os
 
@@ -184,7 +185,7 @@ def publications(request):
         publication = Publication.objects.filter(id=publication_id)
         publication.update(download=F('download') + 1)
 
-        # [publications](Esse bloco de código foi subtítuido pela 
+        # [publications](Esse bloco de código foi subtítuido pela
         # linha acima.)
         # O método 'get' busca no banco de dados objeto com
         # o ID passado pela requisição e retorna esse objeto.
@@ -198,7 +199,7 @@ def publications(request):
 
     # [publications] Captura todos os artigos do banco de dados
     # publications = Publication.objects.all()
-    queryset = Publication.objects.all()
+    pub_qs = Publication.objects.all()
 
     #for p in publications:
     #    if not p.upload.name:
@@ -238,18 +239,16 @@ def publications(request):
     # Verifica se cada publicação tem um arquivo PDF associado, caso não
     # tenha, atribui uma string que será usada em 'publications.html' num
     # bloco 'if' para não exibir o link de download
-    for qs in queryset:
-        if not qs.upload.name:
-            qs.upload.name = 'noFile'
+    pub_list = [assign_attr_no_file(pub) for pub in pub_qs]
 
     # [publications]
     # Itera sobre as publicações e cria uma lista sem repetições com os anos
     # das publicações.
-    years = sorted(set([qs.year for qs in queryset]), reverse=True)
+    years = sorted(set([pub.year for pub in pub_qs]), reverse=True)
 
     template = "research/publications.html"
     context = {
-        'pub_list': queryset,
+        'pub_list': pub_list,
         'years': years,
         # 'page_request_var': page_request_var,
         # 'list': l,

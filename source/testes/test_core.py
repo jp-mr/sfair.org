@@ -67,9 +67,7 @@ class CoreViewTest(TestCase):
 
     def test_publication(self):
         for num in [1,1,2,3,4,4,5]:
-            pb = mommy.make(Publication)
-            pb.year = num
-            pb.save()
+            mommy.make(Publication, year=num)
         pb_qs = Publication.objects.all()
         pb_list = list(pb_qs)
         response = self.client.get(reverse('core:publications'))
@@ -80,7 +78,9 @@ class CoreViewTest(TestCase):
         self.assertTemplateUsed(response, 'javascript.html')
         self.assertEqual(response.context['years'], [5,4,3,2,1])
         self.assertEqual(pb_context, pb_list)
-        self.assertEqual(pb_context[0].upload.name, 'noFile')
+        self.assertEqual(len(pb_context), 7)
+        for pb in pb_context:
+            self.assertEqual(pb.upload.name, 'noFile')
 
     def test_publication_download_counter(self):
         pb = mommy.make(Publication)
@@ -143,8 +143,13 @@ class CoreViewTest(TestCase):
         self.assertEqual(email.reply_to, ['email@teste.com'])
 
 
+# TODO: Tentar usar o Selenium
+#
 # class CoreFormTest(TestCase):
-# 
+#
+#     def setUp(self):
+#         self.client = Client()
+#
 #     def test_publication_valid_upload_file(self):
 #         document = canvas.Canvas('example.pdf')
 #         document.drawString(100,100, "Hello World")
@@ -164,40 +169,40 @@ class CoreViewTest(TestCase):
 #             'download': 0,
 #             'upload': uploaded_file
 #             }
-#         User.objects.create(username='michel', password='senha',
-#                 is_active=True, is_superuser=True)
-#         myClient = Client()
-#         myClient.login(username='michel', password='senha123')
-#         r = myClient.post('/admin/core/publication/add/',
-#                 data=data,
-#                 file=uploaded_file
-#                 )
+#         #User.objects.create(username='michel', password='senha',
+#         #        is_active=True, is_superuser=True)
+#         #self.client.force_login(User.objects.get_or_create(username='michel')[0])
+#         #url = '/admin/login/?next=/admin/core/publication/add/'
+#         #response = self.client.get(url)
+#         #r = self.client.post('/admin/core/publication/add/',
+#         #        data=data,
+#         #        file=uploaded_file
+#         #        )
 #         form = PublicationForm(data=data, files=uploaded_file)
-#         form.is_valid()
+#         #form.is_valid()
 #         os.remove('example.pdf')
-#         self.assertTrue(result)
-# 
-#     def test_publication_invalid_upload_file(self):
-#         uploaded_file = SimpleUploadedFile(
-#                 'text_file.pdf',
-#                 'content need to be encoded'.encode()
-#                 )
-#         data = {
-#             'title': 'Título',
-#             'author': 'Autor',
-#             'journal': 'Revista',
-#             'year': '2017',
-#             'abstract': 'Loren ipsum',
-#             'download': 0,
-#             'upload': uploaded_file
-#             }
-#         request = RequestFactory()
-#         r = request.post('/admin/core/publication/add/', data=data)
-#         print(r.parse_file_upload(META=r.META, post_data=data))
-#         form = PublicationForm(r.POST)
-#         form.clean()
-#         result = form.is_valid()
-#         self.assertFalse(result)
+#
+#      def test_publication_invalid_upload_file(self):
+#          uploaded_file = SimpleUploadedFile(
+#                  'text_file.pdf',
+#                  'content need to be encoded'.encode()
+#                  )
+#          data = {
+#              'title': 'Título',
+#              'author': 'Autor',
+#              'journal': 'Revista',
+#              'year': '2017',
+#              'abstract': 'Loren ipsum',
+#              'download': 0,
+#              'upload': uploaded_file
+#              }
+#          request = RequestFactory()
+#          r = request.post('/admin/core/publication/add/', data=data)
+#          print(r.parse_file_upload(META=r.META, post_data=data))
+#          form = PublicationForm(r.POST)
+#          form.clean()
+#          result = form.is_valid()
+#          self.assertFalse(result)
 
 
 class ValidadePdfUploadTest(TestCase):

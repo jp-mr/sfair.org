@@ -8,7 +8,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import render
 
 from core.models import PageDescription
-from core.utils import check_student_user
+from core.utils import check_student_user, assign_attr_no_file
 from .models import Class, LectureNote, ClassLectureNote
 
 
@@ -29,7 +29,6 @@ def teaching(request):
 
 def student_login(request):
     if request.method == 'POST' and request.is_ajax():
-        print(request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password')
         if username == "":
@@ -51,10 +50,8 @@ def student_login(request):
 
 
 def student_logout(request):
-    #if request.method == 'POST' and request.is_ajax():
     logout(request=request)
-    return HttpResponse(True)
-    #return Http404
+    return HttpResponse(request.user)
 
 
 @login_required
@@ -81,14 +78,12 @@ def student_area(request):
     class_time = class_obj.class_time
     notice_board = class_obj.notice_board
 
-    for note in class_lecture_notes:
-        if not note.lecture_note.upload.name:
-            note.lecture_note.upload.name = 'noFile'
+    cln = [assign_attr_no_file(note) for note in class_lecture_notes]
 
     template = "teaching/student_area.html"
     context = {
             'class_obj': class_obj,
-            'class_lecture_notes': class_lecture_notes,
+            'class_lecture_notes': cln,
             'schedule': schedule,
             'course_title': course_title,
             'course_description': course_description,

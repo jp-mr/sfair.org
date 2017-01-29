@@ -14,7 +14,7 @@ from teaching.models import (
             CourseCode,
             Course,
             )
-
+from teaching.views import assign_attr_no_file
 
 User = get_user_model()
 
@@ -87,6 +87,17 @@ class TeachingViewTests(TestCase):
         self.assertTemplateUsed(response, 'teaching/teaching.html')
         self.assertTemplateUsed(response, 'javascript.html')
 
+    def test_lecture_note_assign_attr_no_file(self):
+        mommy.make(
+                ClassLectureNote,
+                lecture_note=self.lecture_note,
+                class_user=self.class_obj
+                )
+        cln = ClassLectureNote.objects.first()
+        self.assertEqual(cln.lecture_note.upload.name, '')
+        cln_parsed = assign_attr_no_file(cln)
+        self.assertEqual(cln_parsed.lecture_note.upload.name, 'noFile')
+
     # def test_student_modal_ajax_login(self):
     #     response = self.client.post(
     #             reverse('teaching:student-login'),
@@ -155,3 +166,15 @@ class TeachingViewTests(TestCase):
         class_ln2 = ClassLectureNote.objects.get(id=2)
         self.assertEqual(class_ln2.download, 1)
         self.assertEqual(class_ln2.lecture_note.download, 2)
+
+    def test_unauthorized401(self):
+        response = self.client.get(reverse('teaching:unauthorized'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'teaching/status_401.html')
+        self.assertTemplateUsed(response, 'javascript.html')
+
+    def test_student_logout(self):
+        self.client.force_login(User.objects.get_or_create(username=self.user.username)[0])
+        response = self.client.get(reverse('teaching:student-logout'))
+        self.assertEqual(response.status_code, 200)
