@@ -15,9 +15,9 @@ CLASS_INFO_FIELDS = [
         'user',
         'course_class',
         'course_code',
-        'classroom',
-        'class_time',
-        'duration',
+        # 'classroom',
+        # 'class_time',
+        # 'duration',
         'infobox_title',
         ]
 
@@ -88,8 +88,8 @@ class ClassModelAdmin(admin.ModelAdmin):
             'user',
             'course_class',
             'course_code',
-            'classroom',
-            'class_time',
+            # 'classroom',
+            # 'class_time',
             )
 
     list_select_related = (

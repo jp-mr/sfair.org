@@ -72,10 +72,10 @@ def student_area(request):
     course = class_obj.course_class
     course_title = class_obj.course_code.title
     course_description = class_obj.course_code
-    duration = class_obj.duration
+    # duration = class_obj.duration
     infobox_title = class_obj.infobox_title
-    classroom = class_obj.classroom
-    class_time = class_obj.class_time
+    # classroom = class_obj.classroom
+    # class_time = class_obj.class_time
     notice_board = class_obj.notice_board
 
     cln = [assign_attr_no_file(note) for note in class_lecture_notes]
@@ -87,12 +87,12 @@ def student_area(request):
             'schedule': schedule,
             'course_title': course_title,
             'course_description': course_description,
-            'duration': duration.capitalize(),
+            # 'duration': duration.capitalize(),
             'course': course,
             'notice_board': notice_board,
             'infobox_title': infobox_title,
-            'classroom': classroom,
-            'class_time': class_time,
+            # 'classroom': classroom,
+            # 'class_time': class_time,
             }
 
     return render(request, template, context)

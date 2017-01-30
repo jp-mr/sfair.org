@@ -12,12 +12,12 @@
           <h3 class="panel-title text-center">{{ infobox_title }}</h3>
         </div>
         <div class="panel-body panel-content">
-          <p>User: {{ request.user.username }}</p>
           <p>Class: {{ course_title }}</p>
+          <p>Course: {{ course }}</p>
+          <!-- {# <p>User: {{ request.user.username }}</p>
           <p>Classroom: {{ classroom }}</p>
           <p>Time: {{ class_time }}</p>
-          <p>Course: {{ course }}</p>
-          <p>Duration: {{ duration }}</p>
+          <p>Duration: {{ duration }}</p> #}-->
           <hr/>
           <a id="logout" class="pull-right" href="#">Logout</a>
         </div>

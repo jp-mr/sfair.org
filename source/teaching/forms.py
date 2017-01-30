@@ -23,10 +23,10 @@ class ClassForm(forms.ModelForm):
             'course_class',
             'course_code',
             'notice_board',
-            'classroom',
-            'class_time',
+            # 'classroom',
+            # 'class_time',
             'infobox_title',
-            'duration',
+            # 'duration',
             ]
 
 
