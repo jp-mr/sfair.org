@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'pagedown',
     # local project
     'core',
-    # 'teaching'
+    'teaching',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

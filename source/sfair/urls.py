@@ -17,16 +17,26 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+
+from teaching.forms import LoginForm
 
 # [home, contact, formation&CV, research, publications] Quando o navegador
 # pedir um endereço, o django virá buscá-lo aqui.
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(
+        r'^accounts/login/$',
+        auth_views.login,
+        {'authentication_form': LoginForm },
+        name='login'
+        ),
 
     # [home, contact, formation&CV, research, publications ] Essa linha vai
     # redirecionar para '/core/urls.py'. Abra esse arquivo.
     url(r'^', include('core.urls', namespace='core')),
+    url(r'^teaching/', include('teaching.urls', namespace='teaching')),
 ]
 
 

@@ -8,3 +8,17 @@ def validate_pdf(uploaded_file):
     if mime_type not in supported_types:
         return False
     return True
+
+
+def check_student_user(user):
+    return not any([user.is_superuser, user.is_staff])
+
+
+def assign_attr_no_file(obj):
+    try:
+        if not obj.lecture_note.upload.name:
+            obj.lecture_note.upload.name = 'noFile'
+    except:
+        if not obj.upload.name:
+            obj.upload.name = 'noFile'
+    return obj

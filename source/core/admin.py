@@ -7,7 +7,6 @@ from .models import Publication, PageDescription
 
 AdminSite.site_header = "Sfair.org"
 AdminSite.site_title = "Sfair.org"
-
 admin.site.disable_action('delete_selected')
 
 

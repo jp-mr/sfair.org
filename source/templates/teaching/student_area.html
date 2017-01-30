@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container container-table">
+  <div class="content-navbar-adjust"></div>
+  <div id="student-content" class="row">
+    <div class="col-md-3 col-md-push-9">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">{{ infobox_title }}</h3>
+        </div>
+        <div class="panel-body panel-content">
+          <p>Class: {{ course_title }}</p>
+          <p>Course: {{ course }}</p>
+          <!-- {# <p>User: {{ request.user.username }}</p>
+          <p>Classroom: {{ classroom }}</p>
+          <p>Time: {{ class_time }}</p>
+          <p>Duration: {{ duration }}</p> #}-->
+          <hr/>
+          <a id="logout" class="pull-right" href="#">Logout</a>
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">Schedule</h3>
+        </div>
+        <div class="panel-body panel-content">
+        {% for item in schedule %}
+          <p>Date: {{ item.date }}</p>
+          <p>Description:</p>
+          <p>{{ item.description }}</p>
+          <hr/>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 col-md-pull-3">
+      <h4 class="alert alert-info alert-class-title">{{ course_title }}</h4>
+      <div class="well">
+        <p class="content-markdown">{{ course_description.get_markdown}}</p>
+      </div>
+      <br/>
+      {% if class_obj.notice_board %}
+        <h4 class="alert alert-info alert-class-title">Notice Board</h4>
+        <div class="well">
+          <p class="content-markdown">{{ class_obj.get_markdown }}</p>
+        </div>
+        <br/>
+      {% endif %}
+      <h4 class="alert alert-info">Lecture Notes</h4>
+      {% for clnote in class_lecture_notes %}
+        <h5>{{ clnote.lecture_note.title }}</h5> 
+        <a class="note-{{ clnote.id }}" href="#">[ Note ]</a>
+        {% if not clnote.lecture_note.upload.name == 'noFile' %}
+        {% csrf_token %}
+          <a id="note-{{ clnote.id }}" href="{{ clnote.lecture_note.upload.url }}" target="_blank">[ PDF ]</a>
+        {% endif %}
+        <div id="note" class="text-justify">
+          <p class="content-markdown">{{ clnote.lecture_note.lecture_note }}</p>
+        </div>
+        <hr/>
+      {% endfor %}
+    </div>
+  </div>
+</div>   
+
+{% endblock %}

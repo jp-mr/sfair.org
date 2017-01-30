@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 
 from .forms import ContactForm
 from .models import Publication, PageDescription
+from .utils import assign_attr_no_file
 
 import os
 
@@ -42,7 +43,9 @@ def home(request):
     if msg_sent:
         context['message_sent'] = 'message_sent'
 
-    return render(request, "home.html", context)
+    template = "home.html"
+
+    return render(request, template, context)
 
 
 def contact(request):
@@ -123,7 +126,7 @@ def contact(request):
 
     # Instancia um formulário em branco
     form = ContactForm()
-
+    template = "forms.html"
     # Contexto que será enviado para o template para exibir um título
     # para a página e o formulário em branco
     context = {
@@ -132,32 +135,31 @@ def contact(request):
     }
 
     # Renderiza a página
-    return render(request, "forms.html", context)
+    return render(request, template, context)
 
 
 def formation(request):
 
-    #obj_qs = PageDescription.objects.filter(title__icontains='Formation')
-    #obj = obj_qs.first()
     obj = PageDescription.objects.get(title='Formation & CV')
+    template = "formation/formation.html"
     context = {
         'obj': obj
     }
 
     # Renderiza a página
-    return render(request, "formation.html", context)
+    return render(request, template, context)
 
 
 def research(request):
 
     obj = PageDescription.objects.get(title='Research')
-
+    template = "research/research.html"
     context = {
         'obj': obj
     }
 
     # Renderiza a página
-    return render(request, "research.html", context)
+    return render(request, template, context)
 
 
 def publications(request):
@@ -170,7 +172,6 @@ def publications(request):
 
     if request.method == 'POST' and request.is_ajax():
         publication_id = request.POST.get('pub_id')
-
         # [publications] O método filter retorna um objeto Queryset com todos
         # os objetos que batem com a cláusula passada como argumento. Como o
         # campo 'id' gerado automaticamento pelo Django é sempre único,
@@ -184,7 +185,7 @@ def publications(request):
         publication = Publication.objects.filter(id=publication_id)
         publication.update(download=F('download') + 1)
 
-        # [publications](Esse bloco de código foi subtítuido pela 
+        # [publications](Esse bloco de código foi subtítuido pela
         # linha acima.)
         # O método 'get' busca no banco de dados objeto com
         # o ID passado pela requisição e retorna esse objeto.
@@ -198,13 +199,13 @@ def publications(request):
 
     # [publications] Captura todos os artigos do banco de dados
     # publications = Publication.objects.all()
-    queryset = Publication.objects.all()
+    pub_qs = Publication.objects.all()
 
     #for p in publications:
     #    if not p.upload.name:
     #        p.upload.name = 'noFile'
 
-    # [publications] Função que implementa a pagiçãoo
+    # [publications] Classe que implementa a pagiçãoo
     # paginator = Paginator(publications, 6)  # Exibe 6 artigos por página
 
     # [publications] Cria uma lista com os número das páginas.
@@ -234,20 +235,20 @@ def publications(request):
     # except EmptyPage:
     #     queryset = paginator.page(paginator.num_pages)
 
-    # [publications] Cria uma lista com os anos das publicações. Se algum ano
-    # já estiver na lista, não é adicionado novamente a lista.
+    # [publications]
     # Verifica se cada publicação tem um arquivo PDF associado, caso não
     # tenha, atribui uma string que será usada em 'publications.html' num
     # bloco 'if' para não exibir o link de download
-    years = []
-    for qs in queryset:
-        if not qs.year in years:
-            years.append(qs.year)
-        if not qs.upload.name:
-            qs.upload.name = 'noFile'
+    pub_list = [assign_attr_no_file(pub) for pub in pub_qs]
 
+    # [publications]
+    # Itera sobre as publicações e cria uma lista sem repetições com os anos
+    # das publicações.
+    years = sorted(set([pub.year for pub in pub_qs]), reverse=True)
+
+    template = "research/publications.html"
     context = {
-        'pub_list': queryset,
+        'pub_list': pub_list,
         'years': years,
         # 'page_request_var': page_request_var,
         # 'list': l,
@@ -256,4 +257,4 @@ def publications(request):
 
     # [publications] Renderiza a página
     # Vá para: templates/publications.html
-    return render(request, "publications.html", context)
+    return render(request, template, context)
