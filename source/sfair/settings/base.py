@@ -44,21 +44,28 @@ EMAIL_USE_TSL = True
 
 # Application definition
 
-INSTALLED_APPS = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # third party
+    ]
+
+THIRD_PARTY_APPS = [
     'crispy_forms',
     'markdown_deux',
     'pagedown',
-    # local project
+    ]
+
+PROJECT_APPS = [
     'core',
     'teaching',
-]
+    ]
+
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 

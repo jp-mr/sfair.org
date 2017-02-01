@@ -198,7 +198,6 @@ def publications(request):
     # serão trazidos do banco de dados e separados em grupos pelo paginador
 
     # [publications] Captura todos os artigos do banco de dados
-    # publications = Publication.objects.all()
     pub_qs = Publication.objects.all()
 
     #for p in publications:
