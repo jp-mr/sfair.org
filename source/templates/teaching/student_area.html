@@ -28,8 +28,7 @@
         </div>
         <div class="panel-body panel-content">
         {% for item in schedule %}
-          <p>Date: {{ item.date }}</p>
-          <p>Description:</p>
+          <p>{{ item.date|date:"F t, Y"}}</p>
           <p>{{ item.description }}</p>
           <hr/>
         {% endfor %}
@@ -51,7 +50,7 @@
       {% endif %}
       <h4 class="alert alert-info">Lecture Notes</h4>
       {% for clnote in class_lecture_notes %}
-        <h5>{{ clnote.lecture_note.title }}</h5> 
+        <p class="lecture-note-title">{{ clnote.lecture_note.title }}</p> 
         <a class="note-{{ clnote.id }}" href="#">[ Note ]</a>
         {% if not clnote.lecture_note.upload.name == 'noFile' %}
         {% csrf_token %}
