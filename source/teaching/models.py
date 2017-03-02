@@ -59,7 +59,7 @@ class ClassLectureNote(models.Model):
         return self.lecture_note.title
 
     class Meta:
-        ordering = ['position']
+        ordering = ['-position']
 
 
 class LectureNote(models.Model):
