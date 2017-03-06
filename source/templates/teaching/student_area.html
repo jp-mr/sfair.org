@@ -28,7 +28,7 @@
         </div>
         <div class="panel-body panel-content">
         {% for item in schedule %}
-          <p>{{ item.date|date:"F t, Y"}}</p>
+          <p>{{ item.date|date:"F j, Y" }}</p>
           <p>{{ item.description }}</p>
           <hr/>
         {% endfor %}
