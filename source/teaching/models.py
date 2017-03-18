@@ -92,7 +92,7 @@ class Date(models.Model):
         return self.description
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
 
 
 DEGREES = (
