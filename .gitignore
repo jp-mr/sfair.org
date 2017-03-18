@@ -12,6 +12,7 @@ secret_key_dev
 .cache/
 htmlcov/
 /source/.coverage
+sfair.org/ # virtualenv
 
 ## generic files to ignore
 *~
