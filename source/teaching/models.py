@@ -5,13 +5,6 @@ from django.utils.safestring import mark_safe
 from markdown_deux import markdown
 
 
-# DURATION = (
-#         ('sem1', 'S1'),
-#         ('sem2', 'S2'),
-#         ('annual','Annual')
-#         )
-
-
 class Class(models.Model):
     user = models.OneToOneField(
             settings.AUTH_USER_MODEL,
@@ -30,9 +23,6 @@ class Class(models.Model):
             )
     notice_board = models.TextField(blank=True)
     infobox_title = models.CharField(max_length=50)
-    # classroom = models.CharField(max_length=50)
-    # class_time = models.TimeField(max_length=50)
-    # duration = models.CharField(max_length=10, choices=DURATION)
 
     class Meta:
         verbose_name_plural = "classes"

@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -68,17 +69,19 @@ def student_area(request):
             'course_code'
             ).get(user=user_id)
     class_lecture_notes = class_obj.classlecturenote_set.all()
-    schedule = class_obj.date_set.all()
     course = class_obj.course_class
     course_title = class_obj.course_code.title
     course_description = class_obj.course_code
-    # duration = class_obj.duration
     infobox_title = class_obj.infobox_title
-    # classroom = class_obj.classroom
-    # class_time = class_obj.class_time
     notice_board = class_obj.notice_board
 
     cln = [assign_attr_no_file(note) for note in class_lecture_notes]
+
+    # TODO: criar um teste para esse bloco
+    schedule = class_obj.date_set.all()
+    for item in schedule:
+        if item.date < date.today():
+            item.last_date = "last_date"
 
     template = "teaching/student_area.html"
     context = {
@@ -87,12 +90,9 @@ def student_area(request):
             'schedule': schedule,
             'course_title': course_title,
             'course_description': course_description,
-            # 'duration': duration.capitalize(),
             'course': course,
             'notice_board': notice_board,
             'infobox_title': infobox_title,
-            # 'classroom': classroom,
-            # 'class_time': class_time,
             }
 
     return render(request, template, context)

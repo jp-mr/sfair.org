@@ -299,3 +299,7 @@ textarea.form-control {
   font-size: 14px;
   margin: 0px;
 }
+
+.last_date {
+  color: #bbbbbb;
+}
