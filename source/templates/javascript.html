@@ -1,9 +1,6 @@
 {% load staticfiles %}
 
-
     <!-- TODO: Refatorar e organizar o código!!! -->
-
-
 
     <!-- ############### [ Script  ] ###############  -->
 
@@ -31,6 +28,8 @@
 
       $(document).ready(function(){
 
+        // Comportamento de clique para exibir os elementos dos links na barra
+        // de navegação
         $(".dropdown").hover(            
           function() {
             $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
@@ -54,16 +53,12 @@
 					$("#footer-link-dev").toggleClass('footer-link footer-link-home');
 				{% endif %}
 
-
 				// Controla o modalNoPage
-
 				var modalNoPage = document.getElementById("modalNoPage");
-
 				modalNoPage.click = function(e){
 					e.preventDefault();
           $('#modalNoPage').modal('show');
 				};
-
 
         // [contact] JQuery que ativa o Small Modal
         // Se 'message_sent' for passado pelo contexto, o código do Small Modal será
@@ -72,19 +67,17 @@
         // com o id 'modalEmailSent' será exibido [ .modal('show') ]
         // 'shown.bs.modal' executa uma ação após o modal abrir.
         {% if message_sent %}
-
           $('#modalEmailSent').modal('show');
-
           $('#modalEmailSent').on('shown.bs.modal', function(e){
             setTimeout(function(){
 							$('#modalEmailSent').modal('hide'); }, 3000
             );
           });
-          
         {% endif %}
 
           // [publications] Código copiado da documentação do Django
           // Implementa segurança contra ataque CSRF
+          
           // ## INÍCIO ##
 
           //For getting CSRF token
@@ -106,6 +99,8 @@
 
           // ## FIM ##
           
+          // Envia um ajax para o incremento no contador de downloads das
+          // publicações
           function counter(pub_id, url){
 
             // [publications] Código copiado da documentação do Django
@@ -192,11 +187,8 @@
 
           {% endfor %}
 
-
           // [publication] Insere os anos que dividem os artigos
-
           var years = {{ years }};
-          
           for (var i = 0; i < years.length; i++) {
             var str = "<div class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h3 class='year-title'>"+years[i]+"</h3><hr class='hr-year'/></div></div>";
             $(str).insertBefore("#"+years[i]);
@@ -228,7 +220,8 @@
         $("#abstract img").each(function(){
           $(this).addClass("img-responsive")
         });
-               
+        
+        // Ajax para realizar login no modal de login
         function doLogin(username, password){
 
           //Prepare csrf token
@@ -313,6 +306,7 @@
           });
         };
 
+        // Chama a função para fazer login
         $("#login").click(function(event) {
           event.preventDefault();
           var username = $('#InputUsername').val();
@@ -320,24 +314,8 @@
           doLogin(username, password);
         });
 
+        // Ajax para realizar logout na área do estudante
         function doLogout(){
-
-          //Prepare csrf token
-          //var csrftoken = getCookie('csrftoken');
-
-          //function csrfSafeMethod(method) {
-          //// these HTTP methods do not require CSRF protection
-          //  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-          //}
-          //$.ajaxSetup({
-          //  beforeSend: function(xhr, settings) {
-          //    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-          //      xhr.setRequestHeader("X-CSRFToken", csrftoken);
-          //    }
-          //  }
-          //});
-          // ## FIM ##
-
           $.ajax({
             url : "{% url 'teaching:student-logout' %}", // the endpoint,commonly same url
             type : "GET", // http method
@@ -355,12 +333,14 @@
           });
         };
 
+        // Chama a função para fazer logout
         $("#logout").click(function(event) {
           event.preventDefault();
           doLogout();
         });
 
-
+        // Envia um ajax para incrementar o contador de downloads das notas de
+        // aulas
         function counter(cln_id, ln_id, url){
 
           // [publications] Código copiado da documentação do Django
@@ -383,7 +363,6 @@
           });
           // ## FIM ##
 
-          // [publications] Requisição AJAX
           $.ajax({
             url : url,
             type : "POST", // http method
@@ -408,6 +387,7 @@
         };
 
         {% for clnote in class_lecture_notes %}
+          // Chama a função do contador de downloads das notas de aulas
           $("#note-{{ clnote.id }}").click(function( event ) {
             event.preventDefault();
             var url = "{% url 'teaching:ln-download-counter' %}";
@@ -417,8 +397,8 @@
             var url_file = "{{ clnote.lecture_note.upload.url }}";
             window.open(url_file, '_blank')
           });
-
-
+          // Implementa o controle da visualização da descrição das notas de
+          // aulas
           $(".note-{{ clnote.id }}").click(function(event){
             event.preventDefault();
             if ($(this).next("#note")[0]){
@@ -430,6 +410,13 @@
           });
         {% endfor %}
 
-      })
+        // Goggle Analytcs
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-96441488-1', 'auto');
+        ga('send', 'pageview');
 
+      })
   </script>
